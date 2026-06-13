@@ -300,6 +300,94 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .fade-in{animation:fadeInUp .35s ease forwards}
 @keyframes heartPop{0%{transform:scale(1)}30%{transform:scale(1.35)}60%{transform:scale(.9)}100%{transform:scale(1)}}
 .heart-pop{animation:heartPop .45s ease;display:inline-block}
+
+/* ============ PULL TO REFRESH ============ */
+.pull-indicator{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;transition:height .25s;color:var(--c-primary);font-size:13px;font-weight:600;gap:6px}
+.pull-indicator.active{height:44px}
+.pull-indicator .pull-spin{width:16px;height:16px;border:2px solid var(--c-border);border-top-color:var(--c-primary);border-radius:50%;display:none}
+.pull-indicator.refreshing .pull-spin{display:block;animation:pullSpin .6s linear infinite}
+.pull-indicator.refreshing .pull-text::after{content:'正在刷新...'}
+@keyframes pullSpin{to{transform:rotate(360deg)}}
+
+/* ============ INFINITE SCROLL ============ */
+.load-more{padding:16px;text-align:center}
+.load-more-btn{width:100%;padding:12px;border-radius:var(--radius-xl);background:var(--c-card);color:var(--c-primary);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--c-border);font-family:var(--font);transition:all var(--transition)}
+.load-more-btn:active{background:#FFF5EC;border-color:var(--c-primary)}
+.load-more-btn.loading{opacity:.6;pointer-events:none}
+
+/* ============ HOME PAGE V2 ============ */
+.home-clock{text-align:center;padding:16px 16px 8px}
+.home-clock .hc-time{font-size:42px;font-weight:800;color:var(--c-text);letter-spacing:-1px}
+.home-clock .hc-date{font-size:12px;color:var(--c-text-light);margin-top:2px}
+.home-clock .hc-greeting{font-size:14px;color:var(--c-primary);font-weight:700;margin-top:4px}
+.home-stats-row{display:flex;gap:8px;padding:8px 16px}
+.home-stat-card{flex:1;background:var(--c-card);border-radius:var(--radius-lg);padding:12px;text-align:center;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition);border:none;font-family:var(--font)}
+.home-stat-card:active{transform:scale(0.96)}
+.home-stat-card .hs-icon{font-size:28px;display:block;margin-bottom:4px}
+.home-stat-card .hs-num{font-size:20px;font-weight:800;color:var(--c-primary);display:block}
+.home-stat-card .hs-label{font-size:11px;color:var(--c-text-light)}
+/* Featured pets strip */
+.featured-strip{margin:8px 16px;overflow:hidden}
+.featured-strip .fs-title{font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.featured-row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:4px}
+.featured-row::-webkit-scrollbar{display:none}
+.featured-pet{flex-shrink:0;width:120px;background:var(--c-card);border-radius:var(--radius-lg);padding:14px 10px;text-align:center;box-shadow:var(--c-shadow);scroll-snap-align:start;cursor:pointer;transition:all var(--transition);border:none;font-family:var(--font)}
+.featured-pet:active{transform:scale(0.95)}
+.featured-pet .fp-img{width:56px;height:56px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 6px}
+.featured-pet .fp-name{font-size:13px;font-weight:700;color:var(--c-text)}
+.featured-pet .fp-desc{font-size:10px;color:var(--c-text-light);margin-top:2px}
+/* Activity feed */
+.activity-feed{margin:0 16px 100px}
+.activity-feed .af-title{font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.activity-item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--c-card);border-radius:var(--radius-md);margin-bottom:6px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition);border:none;font-family:var(--font);width:100%;text-align:left}
+.activity-item:active{background:#FFF8F0}
+.activity-item .ai-icon{font-size:20px;flex-shrink:0;width:32px;text-align:center}
+.activity-item .ai-text{font-size:12px;color:var(--c-text);flex:1;line-height:1.5}
+.activity-item .ai-time{font-size:10px;color:var(--c-text-light);flex-shrink:0}
+
+/* ============ NOTIFICATIONS ============ */
+.notif-bell{position:relative;cursor:pointer;font-size:18px;padding:0 4px;border:none;background:none;font-family:var(--font)}
+.notif-badge{position:absolute;top:-4px;right:-2px;width:16px;height:16px;border-radius:50%;background:var(--c-heart);color:#FFF;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;display:none}
+.notif-badge.show{display:flex;animation:heartPop .4s ease}
+.notif-overlay{position:absolute;inset:0;z-index:90;background:#FFF;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.notif-overlay.open{transform:translateX(0)}
+.notif-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0}
+.notif-header .nf-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.notif-header .nf-title{font-size:16px;font-weight:700}
+.notif-header .nf-clear{font-size:12px;color:var(--c-primary);cursor:pointer;margin-left:auto;border:none;background:none;font-family:var(--font);font-weight:600}
+.notif-tabs{display:flex;padding:0 16px;border-bottom:1px solid var(--c-border);flex-shrink:0}
+.notif-tab{flex:1;padding:10px;font-size:13px;font-weight:600;color:var(--c-text-light);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--font);transition:all var(--transition);position:relative}
+.notif-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.notif-tab .nt-count{font-size:9px;background:var(--c-heart);color:#FFF;padding:1px 5px;border-radius:8px;margin-left:4px;display:none}
+.notif-tab .nt-count.show{display:inline}
+.notif-list{flex:1;overflow-y:auto;padding:8px 16px}
+.notif-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:var(--radius-md);margin-bottom:4px;transition:all var(--transition);cursor:pointer;border:none;background:none;font-family:var(--font);width:100%;text-align:left}
+.notif-item:active{background:#FFF8F0}
+.notif-item.unread{background:#FFF5EC}
+.notif-item .ni-avatar{width:36px;height:36px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.notif-item .ni-body{flex:1;min-width:0}
+.notif-item .ni-text{font-size:13px;color:var(--c-text);line-height:1.5}
+.notif-item .ni-text b{color:var(--c-primary)}
+.notif-item .ni-meta{font-size:10px;color:var(--c-text-light);margin-top:3px}
+.notif-item .ni-dot{width:6px;height:6px;border-radius:50%;background:var(--c-heart);flex-shrink:0;margin-top:6px}
+
+/* ============ DIARY CHARTS ============ */
+.weight-section{margin:12px 16px 0;background:var(--c-card);border-radius:var(--radius-lg);padding:14px;box-shadow:var(--c-shadow)}
+.weight-section .ws-title{font-size:13px;font-weight:700;color:var(--c-text);margin-bottom:8px}
+.weight-chart{display:flex;align-items:flex-end;gap:10px;height:80px;padding:4px 0}
+.weight-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.weight-bar{width:100%;max-width:36px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--c-primary),var(--c-primary-light));transition:height .6s cubic-bezier(0.34,1.56,0.64,1);min-height:4px}
+.weight-bar-label{font-size:10px;color:var(--c-text-light);margin-top:4px}
+.weight-bar-val{font-size:10px;font-weight:700;color:var(--c-primary);margin-bottom:4px}
+.countdown-row{display:flex;gap:8px;margin:12px 16px 0}
+.countdown-card{flex:1;background:var(--c-card);border-radius:var(--radius-lg);padding:14px;box-shadow:var(--c-shadow);text-align:center}
+.countdown-card .cd-emoji{font-size:28px;display:block;margin-bottom:4px}
+.countdown-card .cd-num{font-size:24px;font-weight:800;color:var(--c-primary)}
+.countdown-card .cd-label{font-size:11px;color:var(--c-text-light);margin-top:2px}
+
+/* ============ Notification toast (in-app) ============ */
+@keyframes slideInRight{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.slide-in-right{animation:slideInRight .35s cubic-bezier(0.32,0.72,0,1) forwards}
 </style>
 </head>
 <body>
@@ -309,28 +397,38 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
   <div class="status-bar">
     <span class="time" id="statusTime">9:41</span>
-    <span class="status-icons">📶 🔋 <span id="batteryLevel">85</span>%</span>
+    <span class="status-icons"><button class="notif-bell" onclick="openNotifications()" id="notifBell">🔔<span class="notif-badge" id="notifBadge">0</span></button> 📶 🔋 <span id="batteryLevel">85</span>%</span>
   </div>
   <div class="toast" id="toast"></div>
 
   <!-- Main Content -->
   <div class="main-content" id="mainContent">
+    <!-- Pull to refresh -->
+    <div class="pull-indicator" id="pullIndicator">
+      <div class="pull-spin"></div><span class="pull-text"></span>
+    </div>
 
     <!-- HOME -->
     <div class="page active" id="page-home">
-      <div class="home-hero">
-        <span class="hero-emoji">🐾</span>
-        <div class="hero-title">欢迎来到萌宠星球</div>
-        <div class="hero-sub">和千万铲屎官一起<br>记录毛孩子的每一个珍贵瞬间</div>
+      <div class="home-clock">
+        <div class="hc-time" id="homeClock">--:--</div>
+        <div class="hc-date" id="homeDate"></div>
+        <div class="hc-greeting" id="homeGreeting"></div>
       </div>
-      <div class="home-cards">
-        <button class="home-card" onclick="navigateTo('square')"><span class="hc-icon">🌍</span><div class="hc-title">动态广场</div><div class="hc-desc">发现萌宠的可爱日常</div></button>
-        <button class="home-card" onclick="navigateTo('diary')"><span class="hc-icon">📖</span><div class="hc-title">成长日记</div><div class="hc-desc">记录毛孩子成长点滴</div></button>
-        <button class="home-card" onclick="openPublish('post')"><span class="hc-icon">📢</span><div class="hc-title">发布动态</div><div class="hc-desc">分享此刻的美好</div></button>
-        <button class="home-card" onclick="openPublish('diary')"><span class="hc-icon">✏️</span><div class="hc-title">写日记</div><div class="hc-desc">专属成长手账</div></button>
-        <button class="home-card" onclick="openRankings()"><span class="hc-icon">🏆</span><div class="hc-title">萌宠榜单</div><div class="hc-desc">人气·颜值·趣味榜</div></button>
-        <button class="home-card" onclick="navigateTo('square');document.getElementById('searchInput').focus()"><span class="hc-icon">🔍</span><div class="hc-title">探索发现</div><div class="hc-desc">话题·用户·萌宠</div></button>
+      <div class="home-stats-row">
+        <button class="home-stat-card" onclick="navigateTo('square')"><span class="hs-icon">🌍</span><span class="hs-num" id="hsPosts">0</span><span class="hs-label">今日动态</span></button>
+        <button class="home-stat-card" onclick="navigateTo('diary')"><span class="hs-icon">📖</span><span class="hs-num" id="hsDiaries">0</span><span class="hs-label">成长日记</span></button>
+        <button class="home-stat-card" onclick="openRankings()"><span class="hs-icon">🏆</span><span class="hs-num" id="hsRanked">0</span><span class="hs-label">上榜萌宠</span></button>
       </div>
+      <div class="featured-strip">
+        <div class="fs-title">🌟 今日推荐铲屎官</div>
+        <div class="featured-row" id="featuredRow"></div>
+      </div>
+      <div class="activity-feed">
+        <div class="af-title">📡 最新动态</div>
+        <div id="activityList"></div>
+      </div>
+      <div style="height:80px"></div>
     </div>
 
     <!-- SQUARE -->
@@ -408,6 +506,22 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
 </div><!-- /phone-frame -->
 </div><!-- /app-wrapper -->
+
+<!-- ============ NOTIFICATIONS ============ -->
+<div class="notif-overlay" id="notifOverlay">
+  <div class="notif-header">
+    <button class="nf-back" onclick="closeNotifications()">←</button>
+    <span class="nf-title">🔔 消息通知</span>
+    <button class="nf-clear" onclick="clearAllNotifs()">全部已读</button>
+  </div>
+  <div class="notif-tabs">
+    <button class="notif-tab active" data-nt="all" onclick="switchNotifTab('all')">全部</button>
+    <button class="notif-tab" data-nt="like" onclick="switchNotifTab('like')">❤️ 赞<span class="nt-count" id="ntLikeCount"></span></button>
+    <button class="notif-tab" data-nt="comment" onclick="switchNotifTab('comment')">💬 评论<span class="nt-count" id="ntCommentCount"></span></button>
+    <button class="notif-tab" data-nt="system" onclick="switchNotifTab('system')">📢 系统<span class="nt-count" id="ntSystemCount"></span></button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
 
 <!-- ============ LIGHTBOX ============ -->
 <div class="lightbox-overlay" id="lightbox">
@@ -614,6 +728,7 @@ function navigateTo(name) {
   const page = $('#page-'+name); if (page) page.classList.add('active');
   const nav = document.querySelector(`.nav-item[data-page="${name}"]`); if (nav) nav.classList.add('active');
   mainContent.scrollTop = 0;
+  if (name === 'home') updateHomePage();
   if (name === 'square') renderFeeds(getChannel());
   if (name === 'diary') { renderPetSwitcher(); renderTimeline(S.currentPet); }
   if (name === 'profile') updateProfileStats();
@@ -1069,19 +1184,329 @@ function updateProfileStats() {
   $('#myPostCount').textContent = postCount; $('#myDiaryCount').textContent = diaryCount;
 }
 
+// ==================== PULL TO REFRESH ====================
+let pullStartY=0, pulling=false, pullDist=0;
+const mainEl = document.getElementById('mainContent');
+mainEl.addEventListener('touchstart', function(e) {
+  if (mainEl.scrollTop <= 0) { pullStartY = e.touches[0].clientY; pulling = true; }
+});
+mainEl.addEventListener('touchmove', function(e) {
+  if (!pulling) return;
+  pullDist = e.touches[0].clientY - pullStartY;
+  if (pullDist > 0) {
+    const indicator = $('#pullIndicator');
+    indicator.classList.add('active');
+    indicator.classList.toggle('refreshing', pullDist > 50);
+    if (pullDist < 50) {
+      indicator.querySelector('.pull-text').textContent = '下拉刷新...';
+    } else {
+      indicator.querySelector('.pull-text').textContent = '释放刷新 ✨';
+    }
+  }
+});
+mainEl.addEventListener('touchend', function() {
+  if (!pulling) return;
+  const indicator = $('#pullIndicator');
+  if (pullDist > 50) {
+    indicator.querySelector('.pull-text').textContent = '正在刷新...';
+    indicator.classList.add('refreshing');
+    // Refresh current page
+    const activePage = document.querySelector('.page.active');
+    if (activePage) {
+      const pageId = activePage.id;
+      if (pageId === 'page-square') renderFeeds(getChannel());
+      if (pageId === 'page-diary') { renderPetSwitcher(); renderTimeline(S.currentPet); }
+      if (pageId === 'page-home') updateHomePage();
+    }
+    setTimeout(() => {
+      indicator.classList.remove('active','refreshing');
+      pullDist = 0;
+      showToast('✅ 刷新完成');
+    }, 600);
+  } else {
+    indicator.classList.remove('active','refreshing');
+  }
+  pulling = false; pullDist = 0;
+});
+
+// ==================== INFINITE SCROLL ====================
+function addLoadMoreButton() {
+  const feedList = $('#feedList');
+  if (!feedList) return;
+  // Remove existing load more
+  const existing = feedList.querySelector('.load-more');
+  if (existing) existing.remove();
+  const btn = document.createElement('div');
+  btn.className = 'load-more';
+  btn.innerHTML = '<button class="load-more-btn" onclick="loadMoreFeeds()">📜 加载更多动态...</button>';
+  feedList.appendChild(btn);
+}
+function loadMoreFeeds() {
+  const btn = document.querySelector('.load-more-btn');
+  if (btn) { btn.textContent = '⏳ 正在加载...'; btn.classList.add('loading'); }
+  setTimeout(() => {
+    // Generate new mock feeds
+    const newFeeds = [
+      { id:Date.now()+1, user:{name:'金毛乐乐',avatar:'🐕',avClass:'avatar-dog'}, time:'1小时前',location:'南京', text:'今日份金毛笑容已送达！治愈力MAX ☀️ 带乐乐去了紫金山，山里的空气真好～', images:[DOG_IMG(8),DOG_IMG(9)], tags:['金毛','户外探险'], category:'dog', likes:234,comments:15,collects:67, liked:false,collected:false, commentList:[{user:'狗狗爱好者',text:'金毛的笑容太治愈了！',time:'30分钟前',replies:[]}] },
+      { id:Date.now()+2, user:{name:'英短蓝猫',avatar:'🐱',avClass:'avatar-cat'}, time:'3小时前',location:'深圳', text:'蓝猫的日常：睡→吃→睡→吃→偶尔舔一下毛→继续睡。这大概就是猫生赢家吧 😴', images:[CAT_IMG(20)], tags:['英短','猫生赢家'], category:'cat', likes:567,comments:45,collects:123, liked:false,collected:false, commentList:[{user:'铲屎官日常',text:'我家猫也是哈哈哈哈',time:'2小时前',replies:[]}] },
+      { id:Date.now()+3, user:{name:'龙猫糖糖',avatar:'🐭',avClass:'avatar-small'}, time:'6小时前',location:'成都', text:'糖糖今天第一次做沙浴！在浴沙里滚来滚去停不下来，太可爱了～龙猫真的是世界上最会享受的小动物 🛁', images:[PICSUM(500),PICSUM(501)], tags:['龙猫','沙浴','小宠'], category:'small', likes:198,comments:23,collects:56, liked:false,collected:false, commentList:[{user:'小宠达人',text:'龙猫沙浴的样子真的太萌了！',time:'4小时前',replies:[]}] },
+    ];
+    newFeeds.forEach(f => S.feeds.push(f));
+    renderFeeds(getChannel());
+    saveState();
+    showToast('📜 加载了3条新动态');
+  }, 800);
+}
+// Override renderFeeds to add load more button for 'all' channel
+const origRenderFeeds = renderFeeds;
+renderFeeds = function(channel) {
+  origRenderFeeds(channel);
+  if (channel === 'all' || channel === 'cat' || channel === 'dog') {
+    addLoadMoreButton();
+  }
+};
+
+// ==================== NOTIFICATIONS ====================
+function generateNotifs() {
+  if (!S._notifs) {
+    S._notifs = [
+      {id:1,type:'like',unread:true,user:'铲屎官小王',avatar:'🐾',text:'赞了你的动态',detail:'「今天给主子换了新猫抓板...」',time:'3分钟前'},
+      {id:2,type:'comment',unread:true,user:'猫奴日记',avatar:'🐱',text:'评论了你的动态',detail:'「橘座太可爱了吧！每天必看你的动态～」',time:'10分钟前'},
+      {id:3,type:'like',unread:true,user:'爬友小李',avatar:'🦎',text:'赞了你的日记',detail:'「爬宠小屋的守宫蜕皮记录」',time:'25分钟前'},
+      {id:4,type:'comment',unread:true,user:'草缸爱好者',avatar:'🐠',text:'回复了你的评论',detail:'「趴地矮珍珠爬得真不错！光照用的什么灯？」',time:'1小时前'},
+      {id:5,type:'system',unread:true,user:'萌宠星球',avatar:'🐾',text:'你的动态被推荐到热门',detail:'「橘座今天学会了握手...」已进入热门推荐',time:'2小时前'},
+      {id:6,type:'like',unread:false,user:'柴友阿花',avatar:'🐶',text:'赞了你的动态',detail:'「今日遛狗打卡！西湖边的荷花开了...」',time:'3小时前'},
+      {id:7,type:'system',unread:false,user:'萌宠星球',avatar:'🐾',text:'🎂 橘座的生日快到了',detail:'还有7天就是橘座的5岁生日，记得准备礼物哦～',time:'昨天'},
+      {id:8,type:'comment',unread:false,user:'宠物医生老张',avatar:'🐾',text:'评论了你的日记',detail:'「生日快乐！橘座一定要健健康康的～」',time:'2天前'},
+    ];
+  }
+  return S._notifs;
+}
+function getUnreadCount() {
+  return generateNotifs().filter(n => n.unread).length;
+}
+function updateNotifBadge() {
+  const count = getUnreadCount();
+  const badge = $('#notifBadge');
+  badge.textContent = count;
+  if (count > 0) { badge.classList.add('show'); }
+  else { badge.classList.remove('show'); }
+}
+function openNotifications() {
+  S._notifTab = 'all';
+  $$('.notif-tab').forEach(b => b.classList.toggle('active', b.dataset.nt === 'all'));
+  renderNotifs('all');
+  $('#notifOverlay').classList.add('open');
+  if (notifOverlay.parentElement !== app) app.appendChild(notifOverlay);
+}
+function closeNotifications() {
+  $('#notifOverlay').classList.remove('open');
+  updateNotifBadge();
+}
+function switchNotifTab(tab) {
+  S._notifTab = tab;
+  $$('.notif-tab').forEach(b => b.classList.toggle('active', b.dataset.nt === tab));
+  renderNotifs(tab);
+}
+function renderNotifs(tab) {
+  let list = generateNotifs();
+  if (tab === 'like') list = list.filter(n => n.type === 'like');
+  if (tab === 'comment') list = list.filter(n => n.type === 'comment');
+  if (tab === 'system') list = list.filter(n => n.type === 'system');
+
+  // Update tab counts
+  const allCount = generateNotifs().filter(n=>n.unread).length;
+  const likeCount = generateNotifs().filter(n=>n.type==='like'&&n.unread).length;
+  const commentCount = generateNotifs().filter(n=>n.type==='comment'&&n.unread).length;
+  const systemCount = generateNotifs().filter(n=>n.type==='system'&&n.unread).length;
+  const showCt = (el, c) => { if (el) { if(c>0){el.textContent=c;el.classList.add('show');}else{el.classList.remove('show');} } };
+  showCt($('#ntLikeCount'), likeCount);
+  showCt($('#ntCommentCount'), commentCount);
+  showCt($('#ntSystemCount'), systemCount);
+
+  $('#notifList').innerHTML = list.length ? list.map(n => `
+    <button class="notif-item ${n.unread?'unread':''}" onclick="markNotifRead(${n.id})">
+      <div class="ni-avatar" style="background:linear-gradient(135deg,#FFD4A8,#FFA86B)">${n.avatar}</div>
+      <div class="ni-body">
+        <div class="ni-text"><b>${n.user}</b> ${n.text}</div>
+        <div class="ni-text" style="font-size:12px;color:var(--c-text-mid);margin-top:2px">${n.detail}</div>
+        <div class="ni-meta">${n.time}</div>
+      </div>
+      ${n.unread?'<div class="ni-dot"></div>':''}
+    </button>
+  `).join('') : '<div class="empty-wrap" style="padding:40px"><div class="empty-emoji">📭</div><div class="empty-text">暂无此类通知</div></div>';
+}
+function markNotifRead(id) {
+  const n = generateNotifs().find(x => x.id === id);
+  if (n) { n.unread = false; renderNotifs(S._notifTab || 'all'); updateNotifBadge(); }
+  navigateTo('square');
+  closeNotifications();
+}
+function clearAllNotifs() {
+  generateNotifs().forEach(n => n.unread = false);
+  renderNotifs(S._notifTab || 'all');
+  updateNotifBadge();
+  showToast('✅ 全部已读');
+}
+
+// ==================== HOME PAGE V2 ====================
+function updateHomeClock() {
+  const now = new Date();
+  const h = now.getHours().toString().padStart(2,'0');
+  const m = now.getMinutes().toString().padStart(2,'0');
+  const s = now.getSeconds().toString().padStart(2,'0');
+  const el = document.getElementById('homeClock');
+  if (el) el.innerHTML = h + '<span style="animation:pulse 1s infinite">:</span>' + m;
+  const dateEl = document.getElementById('homeDate');
+  if (dateEl) {
+    const days = ['日','一','二','三','四','五','六'];
+    dateEl.textContent = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 星期${days[now.getDay()]}`;
+  }
+  const greetEl = document.getElementById('homeGreeting');
+  if (greetEl) {
+    let g = '早上好 ☀️'; if (h>=12&&h<18) g = '下午好 🌤️'; else if (h>=18) g = '晚上好 🌙';
+    greetEl.textContent = g + ' 铲屎官';
+  }
+}
+function updateHomeStats() {
+  // Count today's feeds (mock: count feeds with '刚刚' or '小时前')
+  const todayFeeds = S.feeds.filter(f => f.time.includes('刚刚') || f.time.includes('小时前') || f.time.includes('分钟前')).length;
+  let diaryCount = 0; Object.values(S.diaries).forEach(p => { diaryCount += p.entries.length; });
+  const rankedCount = 10; // from rankings data
+  const hsPosts = document.getElementById('hsPosts'); if (hsPosts) hsPosts.textContent = todayFeeds;
+  const hsDiaries = document.getElementById('hsDiaries'); if (hsDiaries) hsDiaries.textContent = diaryCount;
+  const hsRanked = document.getElementById('hsRanked'); if (hsRanked) hsRanked.textContent = rankedCount;
+}
+function renderFeaturedPets() {
+  const featured = [
+    {emoji:'🐱',name:'橘座大人',desc:'4岁 · 橘猫',bg:'linear-gradient(135deg,#FFD4A8,#FFA86B)',action:()=>{navigateTo('square');showToast('🐱 查看橘座大人的动态～')}},
+    {emoji:'🐶',name:'柴犬小丸',desc:'2岁 · 柴犬',bg:'linear-gradient(135deg,#FFE0B2,#FFAB40)',action:()=>{navigateTo('square');showToast('🐶 查看柴犬小丸的动态～')}},
+    {emoji:'🦎',name:'爬宠小屋',desc:'豹纹守宫',bg:'linear-gradient(135deg,#A5D6A7,#66BB6A)',action:()=>{navigateTo('square');showToast('🦎 查看爬宠小屋的动态～')}},
+    {emoji:'🐠',name:'海底小纵队',desc:'草缸玩家',bg:'linear-gradient(135deg,#81D4FA,#29B6F6)',action:()=>{navigateTo('square');showToast('🐠 查看海底小纵队的动态～')}},
+    {emoji:'🐦',name:'啾啾的日常',desc:'玄凤鹦鹉',bg:'linear-gradient(135deg,#CE93D8,#AB47BC)',action:()=>{navigateTo('square');showToast('🐦 查看啾啾的日常～')}},
+  ];
+  const row = document.getElementById('featuredRow');
+  if (!row) return;
+  row.innerHTML = featured.map(f => `
+    <button class="featured-pet" onclick="(${f.action.toString()})()">
+      <div class="fp-img" style="background:${f.bg}">${f.emoji}</div>
+      <div class="fp-name">${f.name}</div>
+      <div class="fp-desc">${f.desc}</div>
+    </button>
+  `).join('');
+}
+function renderActivityFeed() {
+  const activities = [
+    {icon:'❤️',text:'<b>铲屎官小王</b> 赞了你的动态',time:'3分钟前',action:()=>navigateTo('square')},
+    {icon:'💬',text:'<b>猫奴日记</b> 评论了你的动态：「橘座太可爱了吧！」',time:'10分钟前',action:()=>navigateTo('square')},
+    {icon:'📢',text:'<b>爬宠小屋</b> 发布了新动态：守宫蜕皮记录',time:'25分钟前',action:()=>navigateTo('square')},
+    {icon:'📖',text:'<b>你</b> 更新了橘座的成长日记',time:'1小时前',action:()=>navigateTo('diary')},
+    {icon:'⭐',text:'<b>柴友阿花</b> 收藏了你的动态',time:'2小时前',action:()=>navigateTo('square')},
+  ];
+  const list = document.getElementById('activityList');
+  if (!list) return;
+  list.innerHTML = activities.map(a => `
+    <button class="activity-item" onclick="(${a.action.toString()})()">
+      <span class="ai-icon">${a.icon}</span><span class="ai-text">${a.text}</span><span class="ai-time">${a.time}</span>
+    </button>
+  `).join('');
+}
+function updateHomePage() {
+  updateHomeClock(); updateHomeStats(); renderFeaturedPets(); renderActivityFeed();
+}
+// Periodic clock update
+let homeClockTimer;
+function startHomeClock() { updateHomeClock(); homeClockTimer = setInterval(updateHomeClock, 1000); }
+
+// ==================== DIARY ENHANCEMENTS ====================
+function getWeightData(petKey) {
+  const mockWeights = {
+    orange: [{date:'1月',kg:5.2},{date:'2月',kg:5.5},{date:'3月',kg:5.8},{date:'4月',kg:6.0},{date:'5月',kg:6.2},{date:'6月',kg:6.2}],
+    wangcai: [{date:'1月',kg:8.0},{date:'2月',kg:8.5},{date:'3月',kg:9.2},{date:'4月',kg:9.8},{date:'5月',kg:10.2},{date:'6月',kg:10.5}],
+    tuantuan: [{date:'3月',kg:0.8},{date:'4月',kg:1.0},{date:'5月',kg:1.2},{date:'6月',kg:1.4}],
+  };
+  return mockWeights[petKey] || [];
+}
+function renderWeightChart(petKey) {
+  const data = getWeightData(petKey);
+  if (!data.length) return '';
+  const maxKg = Math.max(...data.map(d=>d.kg));
+  return `
+    <div class="weight-section">
+      <div class="ws-title">⚖️ 体重变化记录 (kg)</div>
+      <div class="weight-chart">
+        ${data.map(d => `
+          <div class="weight-bar-wrap">
+            <div class="weight-bar-val">${d.kg}</div>
+            <div class="weight-bar" style="height:${(d.kg/maxKg)*60}px"></div>
+            <div class="weight-bar-label">${d.date}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+}
+function getPetJoinInfo(petKey) {
+  const info = {
+    orange: {joined:'2020-05-20',birthday:'2020-05-20',nextMilestone:'🎂 5岁生日',daysTo:7},
+    wangcai: {joined:'2022-03-15',birthday:'2022-01-10',nextMilestone:'🏥 年度体检',daysTo:14},
+    tuantuan: {joined:'2024-06-01',birthday:'2024-02-28',nextMilestone:'💉 疫苗加强',daysTo:21},
+  };
+  return info[petKey] || {joined:'2024-01-01',birthday:'2024-01-01',nextMilestone:'📝 待设置',daysTo:30};
+}
+function renderCountdownCards(petKey) {
+  const info = getPetJoinInfo(petKey);
+  const joined = new Date(info.joined);
+  const now = new Date();
+  const daysSince = Math.floor((now - joined) / (1000*60*60*24));
+  return `
+    <div class="countdown-row">
+      <div class="countdown-card">
+        <span class="cd-emoji">🏠</span>
+        <div class="cd-num">${daysSince}</div>
+        <div class="cd-label">到家天数</div>
+      </div>
+      <div class="countdown-card">
+        <span class="cd-emoji">📅</span>
+        <div class="cd-num">${info.daysTo}</div>
+        <div class="cd-label">距${info.nextMilestone}</div>
+      </div>
+    </div>`;
+}
+
+// Override renderTimeline to add weight chart and countdown
+const origRenderTimeline = renderTimeline;
+renderTimeline = function(petKey) {
+  origRenderTimeline(petKey);
+  // Insert weight chart and countdown at the top of timeline
+  const wrap = $('#timelineWrap');
+  if (wrap && S.diaries[petKey]) {
+    const chartHTML = renderWeightChart(petKey) + renderCountdownCards(petKey);
+    const existing = wrap.querySelector('.weight-section');
+    if (!existing) {
+      wrap.insertAdjacentHTML('afterbegin', chartHTML);
+    }
+  }
+};
+
 // ==================== INIT ====================
 function init() {
   loadState();
-  [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail].forEach(el => {
+  [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail, notifOverlay].forEach(el => {
     if (el && el.parentElement !== app) app.appendChild(el);
   });
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
   navigateTo('square'); updateProfileStats();
-  console.log('🐾 萌宠星球 v2.0 已就绪！');
+  updateNotifBadge(); updateHomePage(); startHomeClock();
+  console.log('🐾 萌宠星球 v3.0 已就绪！');
   console.log('  🖼️ 图片灯箱 — 点击查看大图 · 左右滑动');
   console.log('  📝 发布面板 — 宠物选择 · 话题选择 · 可见范围');
   console.log('  📄 动态详情 — 大图模式 · 完整评论区');
   console.log('  🏆 萌宠榜单 — 人气榜 · 颜值榜 · 趣味榜');
+  console.log('  ⬇️ 下拉刷新 — 滑动刷新内容');
+  console.log('  📜 无限滚动 — 加载更多动态');
+  console.log('  🔔 消息通知 — 点赞/评论/系统通知');
+  console.log('  🏠 首页时钟 — 动态时间+推荐+活跃动态');
+  console.log('  📊 日记图表 — 体重曲线+纪念日倒计时');
 }
 init();
 
