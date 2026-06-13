@@ -445,6 +445,86 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .quick-tools-bar{display:flex;gap:6px;padding:4px 16px;margin-bottom:6px;overflow-x:auto}
 .quick-tool-btn{flex-shrink:0;padding:7px 14px;border-radius:var(--radius-xl);background:var(--c-card);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-border);font-family:var(--font);white-space:nowrap;transition:all var(--transition)}
 .quick-tool-btn:active{background:var(--c-primary);color:#FFF;border-color:var(--c-primary)}
+
+/* ============ DARK MODE ============ */
+.phone-frame.dark{--c-primary:#FF8C42;--c-primary-dark:#E6732A;--c-primary-light:#FFA86B;--c-accent:#5C3A20;--c-bg:#1E1814;--c-bg-warm:#2A2018;--c-card:#2C2420;--c-text:#F0E0D0;--c-text-mid:#B8A090;--c-text-light:#8B7355;--c-text-lighter:#5C4A3A;--c-border:#3A2E24;--c-shadow:0 2px 12px rgba(0,0,0,0.3);--c-shadow-md:0 4px 20px rgba(0,0,0,0.4);--c-shadow-lg:0 8px 32px rgba(0,0,0,0.5)}
+.phone-frame.dark .status-bar{background:var(--c-bg)}
+.phone-frame.dark .bottom-nav{background:#2C2420;border-color:#3A2E24}
+.phone-frame.dark .search-input,.phone-frame.dark .modal-sheet,.phone-frame.dark .picker-sheet{background:#2C2420;color:var(--c-text)}
+.phone-frame.dark .notif-overlay,.phone-frame.dark .pet-profile-overlay,.phone-frame.dark .topic-overlay,.phone-frame.dark .collections-overlay,.phone-frame.dark .tools-overlay,.phone-frame.dark .post-detail-overlay,.phone-frame.dark .rank-overlay{background:var(--c-bg)}
+.phone-frame.dark .modal-sheet .ms-header,.phone-frame.dark .picker-sheet .pk-header,.phone-frame.dark .notif-header,.phone-frame.dark .topic-header,.phone-frame.dark .collections-header,.phone-frame.dark .tools-header{background:#2C2420;border-color:#3A2E24}
+.phone-frame.dark .hot-topics-bar{background:linear-gradient(135deg,#2A2018,#3A2A18)}
+.phone-frame.dark .card-actions,.phone-frame.dark .diary-actions{border-color:#3A2E24}
+.phone-frame.dark .pub-opt{border-color:#3A2E24}
+.phone-frame.dark .comment-input-row{border-color:#3A2E24;background:#2C2420}
+.phone-frame.dark .ms-header .ms-cancel,.phone-frame.dark .pk-done{color:var(--c-text-light)}
+.phone-frame.dark input,.phone-frame.dark textarea,.phone-frame.dark select{background:#3A2E24!important;color:var(--c-text)!important;border-color:#4A3A2E!important}
+.phone-frame.dark .toast{background:#F0E0D0;color:#1E1814}
+.phone-frame.dark .featured-pet,.phone-frame.dark .activity-item,.phone-frame.dark .home-stat-card,.phone-frame.dark .tool-card,.phone-frame.dark .pp-info-card,.phone-frame.dark .pp-med-item,.phone-frame.dark .rank-item-row,.phone-frame.dark .countdown-card,.phone-frame.dark .weight-section,.phone-frame.dark .profile-stats{background:var(--c-card)}
+.phone-frame.dark .rank-item-row.top-1{background:linear-gradient(135deg,#3A2A10,#4A3A18)}.phone-frame.dark .rank-item-row.top-2{background:linear-gradient(135deg,#2A2A2A,#353535)}.phone-frame.dark .rank-item-row.top-3{background:linear-gradient(135deg,#3A2A18,#4A3520)}
+.phone-frame.dark .diary-fab{background:linear-gradient(180deg,transparent,var(--c-bg) 40%)}
+.phone-frame.dark .pet-profile-hero{background:linear-gradient(180deg,#2A2018 0%,var(--c-bg) 100%)}
+.phone-frame.dark .comment-input-row{background:#2C2420}
+.phone-frame.dark .tool-card .tc-result{background:#3A2A18}
+
+/* ============ ENCYCLOPEDIA ============ */
+.encyc-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.encyc-overlay.open{transform:translateX(0)}
+.encyc-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
+.encyc-header .ec-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.encyc-search{margin:10px 16px}
+.encyc-cats{display:flex;gap:6px;padding:6px 16px;overflow-x:auto;flex-shrink:0;-ms-overflow-style:none;scrollbar-width:none}
+.encyc-cats::-webkit-scrollbar{display:none}
+.encyc-cat-tab{flex-shrink:0;padding:6px 14px;border-radius:var(--radius-xl);font-size:12px;font-weight:600;color:var(--c-text-light);background:var(--c-card);cursor:pointer;border:1.5px solid var(--c-border);font-family:var(--font);transition:all var(--transition)}
+.encyc-cat-tab.active{background:var(--c-primary);color:#FFF;border-color:var(--c-primary)}
+.encyc-body{flex:1;overflow-y:auto;padding:12px 16px 60px}
+.breed-card{display:flex;gap:12px;padding:14px;background:var(--c-card);border-radius:var(--radius-lg);margin-bottom:8px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition)}
+.breed-card:active{transform:scale(0.98)}
+.breed-card .bc-emoji{font-size:40px;flex-shrink:0;width:48px;text-align:center}
+.breed-card .bc-info{flex:1;min-width:0}
+.breed-card .bc-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.breed-card .bc-origin{font-size:11px;color:var(--c-text-light);margin-top:1px}
+.breed-card .bc-desc{font-size:12px;color:var(--c-text-mid);margin-top:4px;line-height:1.5}
+.breed-card .bc-meta{display:flex;gap:8px;margin-top:6px}
+.breed-tag{font-size:10px;padding:2px 8px;border-radius:var(--radius-xl);background:var(--c-bg-warm);color:var(--c-primary);font-weight:600}
+.breed-detail-overlay{position:absolute;inset:0;z-index:95;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.breed-detail-overlay.open{transform:translateX(0)}
+.breed-detail-body{flex:1;overflow-y:auto;padding:16px}
+
+/* ============ PLACES ============ */
+.places-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.places-overlay.open{transform:translateX(0)}
+.places-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
+.places-header .pl-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.place-card{display:flex;gap:12px;padding:14px;background:var(--c-card);border-radius:var(--radius-lg);margin:0 16px 8px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition)}
+.place-card:active{transform:scale(0.98)}
+.place-card .pl-icon{font-size:36px;flex-shrink:0;width:48px;text-align:center}
+.place-card .pl-info{flex:1;min-width:0}
+.place-card .pl-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.place-card .pl-addr{font-size:11px;color:var(--c-text-light);margin-top:2px}
+.place-card .pl-features{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.place-feat{font-size:10px;padding:2px 8px;border-radius:var(--radius-xl);background:#E8F5E9;color:#43A047;font-weight:600}
+.phone-frame.dark .place-feat{background:#1B3A1B;color:#6BCB77}
+.place-card .pl-rating{font-size:12px;color:var(--c-star);margin-top:4px}
+
+/* ============ LOST & FOUND ============ */
+.lf-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.lf-overlay.open{transform:translateX(0)}
+.lf-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
+.lf-header .lf-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.lf-tabs{display:flex;padding:0 16px;border-bottom:1px solid var(--c-border);flex-shrink:0}
+.lf-tab{flex:1;padding:10px;font-size:13px;font-weight:600;color:var(--c-text-light);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--font);transition:all var(--transition)}
+.lf-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.lf-body{flex:1;overflow-y:auto;padding:12px 16px 60px}
+.lf-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;box-shadow:var(--c-shadow);transition:all var(--transition)}
+.lf-card .lf-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.lf-card .lf-badge{font-size:11px;padding:4px 10px;border-radius:var(--radius-xl);font-weight:700;flex-shrink:0}
+.lf-badge.lost{background:#FFEBEE;color:#E53935}.phone-frame.dark .lf-badge.lost{background:#3A1A1A;color:#FF6B6B}
+.lf-badge.found{background:#E8F5E9;color:#43A047}.phone-frame.dark .lf-badge.found{background:#1B3A1B;color:#6BCB77}
+.lf-badge.adopt{background:#E3F2FD;color:#1E88E5}.phone-frame.dark .lf-badge.adopt{background:#1A2A3A;color:#64B5F6}
+.lf-card .lf-title{font-size:14px;font-weight:700;color:var(--c-text)}
+.lf-card .lf-info{font-size:12px;color:var(--c-text-light);margin:4px 0;line-height:1.6}
+.lf-card .lf-contact{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--c-bg-warm);border-radius:var(--radius-md);margin-top:8px;font-size:12px;cursor:pointer;border:none;font-family:var(--font);width:100%;text-align:left;color:var(--c-primary);font-weight:600}
 </style>
 </head>
 <body>
@@ -454,7 +534,7 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
   <div class="status-bar">
     <span class="time" id="statusTime">9:41</span>
-    <span class="status-icons"><button class="notif-bell" onclick="openNotifications()" id="notifBell">🔔<span class="notif-badge" id="notifBadge">0</span></button> 📶 🔋 <span id="batteryLevel">85</span>%</span>
+    <span class="status-icons"><button class="notif-bell" onclick="toggleDarkMode()" title="切换暗色模式" style="font-size:16px;cursor:pointer;border:none;background:none;padding:0 2px" id="darkToggle">🌙</button><button class="notif-bell" onclick="openNotifications()" id="notifBell">🔔<span class="notif-badge" id="notifBadge">0</span></button> 📶 🔋 <span id="batteryLevel">85</span>%</span>
   </div>
   <div class="toast" id="toast"></div>
 
@@ -483,6 +563,9 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
         <button class="quick-tool-btn" onclick="openPetProfile('wangcai')">🐶 旺财档案</button>
         <button class="quick-tool-btn" onclick="openPetProfile('tuantuan')">🐰 团团档案</button>
         <button class="quick-tool-btn" onclick="openCollections()">⭐ 我的收藏</button>
+        <button class="quick-tool-btn" onclick="openEncyc()">📚 品种百科</button>
+        <button class="quick-tool-btn" onclick="openPlaces()">📍 友好场所</button>
+        <button class="quick-tool-btn" onclick="openLF()">🔍 寻宠领养</button>
       </div>
       <div class="featured-strip">
         <div class="fs-title">🌟 今日推荐铲屎官</div>
@@ -571,6 +654,41 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
 </div><!-- /phone-frame -->
 </div><!-- /app-wrapper -->
+
+<!-- ============ ENCYCLOPEDIA ============ -->
+<div class="encyc-overlay" id="encycOverlay">
+  <div class="encyc-header">
+    <button class="ec-back" onclick="closeEncyc()">←</button>
+    <span class="nf-title">📚 萌宠品种百科</span>
+  </div>
+  <div class="search-wrap encyc-search"><input class="search-input" id="encycSearch" placeholder="🔍 搜索品种名称..." autocomplete="off"></div>
+  <div class="encyc-cats" id="encycCats"></div>
+  <div class="encyc-body" id="encycBody"></div>
+</div>
+<!-- Breed Detail -->
+<div class="breed-detail-overlay" id="breedDetailOverlay">
+  <div class="encyc-header"><button class="ec-back" onclick="closeBreedDetail()">←</button><span class="nf-title" id="breedDetailTitle"></span></div>
+  <div class="breed-detail-body" id="breedDetailBody"></div>
+</div>
+
+<!-- ============ PLACES ============ -->
+<div class="places-overlay" id="placesOverlay">
+  <div class="places-header"><button class="pl-back" onclick="closePlaces()">←</button><span class="nf-title">📍 宠物友好场所</span></div>
+  <div class="encyc-cats" id="placeCats" style="margin:8px 0"></div>
+  <div style="flex:1;overflow-y:auto;padding-top:8px" id="placesBody"></div>
+</div>
+
+<!-- ============ LOST & FOUND ============ -->
+<div class="lf-overlay" id="lfOverlay">
+  <div class="lf-header"><button class="lf-back" onclick="closeLF()">←</button><span class="nf-title">🔍 寻宠&领养</span></div>
+  <div class="lf-tabs">
+    <button class="lf-tab active" data-lf="all" onclick="switchLFTab('all')">全部</button>
+    <button class="lf-tab" data-lf="lost" onclick="switchLFTab('lost')">🔴 走失</button>
+    <button class="lf-tab" data-lf="found" onclick="switchLFTab('found')">🟢 捡到</button>
+    <button class="lf-tab" data-lf="adopt" onclick="switchLFTab('adopt')">🔵 领养</button>
+  </div>
+  <div class="lf-body" id="lfBody"></div>
+</div>
 
 <!-- ============ PET PROFILE ============ -->
 <div class="pet-profile-overlay" id="petProfileOverlay">
@@ -1846,22 +1964,221 @@ function calcAge() {
   $('#ageResult').innerHTML = `🧬 相当于人类的 <b>${Math.round(humanAge)} 岁</b><br><span style="font-size:11px;color:var(--c-text-light)">实际年龄：${years} 岁</span>`;
 }
 
+// ==================== DARK MODE ====================
+function toggleDarkMode() {
+  const frame = document.querySelector('.phone-frame');
+  frame.classList.toggle('dark');
+  const isDark = frame.classList.contains('dark');
+  $('#darkToggle').textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('petplanet_dark', isDark ? '1' : '0');
+}
+function initDarkMode() {
+  if (localStorage.getItem('petplanet_dark') === '1') {
+    document.querySelector('.phone-frame').classList.add('dark');
+    $('#darkToggle').textContent = '☀️';
+  }
+}
+
+// ==================== ENCYCLOPEDIA ====================
+const BREEDS = [
+  // Cats
+  {cat:'cat',name:'英国短毛猫',emoji:'🐱',origin:'英国',desc:'体态圆胖，被毛短密，性格温和安静，是理想的家庭宠物。',care:'短毛易打理，每周梳毛1次即可。注意控制饮食防肥胖。',life:'12-17年',size:'中大型',temp:'温和'},
+  {cat:'cat',name:'布偶猫',emoji:'😺',origin:'美国',desc:'体型大而优雅，蓝色大眼睛，性格温顺亲人，被称为"小狗猫"。',care:'长毛需每日梳理。肠胃敏感需注意饮食质量。',life:'12-15年',size:'大型',temp:'温柔'},
+  {cat:'cat',name:'暹罗猫',emoji:'🐱',origin:'泰国',desc:'修长优雅，蓝重点色，性格聪明活泼，非常爱叫爱交流。',care:'短毛易于打理。精力旺盛需多互动玩耍。',life:'12-20年',size:'中型',temp:'活泼'},
+  {cat:'cat',name:'缅因猫',emoji:'🦁',origin:'美国',desc:'体型最大的家猫品种之一，被毛丰厚，性格温和友善。',care:'长毛需每日梳理。食量大，需充足营养。',life:'10-13年',size:'超大型',temp:'温柔'},
+  {cat:'cat',name:'苏格兰折耳猫',emoji:'🐱',origin:'英国',desc:'独特的向前折叠耳朵，圆脸圆眼，性格安静温柔。',care:'注意耳部健康检查。有遗传性骨骼疾病风险。',life:'12-15年',size:'中型',temp:'安静'},
+  {cat:'cat',name:'中华田园猫',emoji:'🐱',origin:'中国',desc:'本土品种，体质强健适应力强，花色多样，性格各异。',care:'短毛易打理。定期体检驱虫。非常好养。',life:'12-18年',size:'中型',temp:'多样'},
+  // Dogs
+  {cat:'dog',name:'柴犬',emoji:'🐶',origin:'日本',desc:'中型犬，立耳卷尾，忠诚机敏，独立性强，表情丰富。',care:'双层被毛换季大量掉毛。每日需充足运动。',life:'12-15年',size:'中型',temp:'独立'},
+  {cat:'dog',name:'金毛寻回犬',emoji:'🐕',origin:'英国',desc:'性格温顺友善，智商高，是优秀的家庭犬和工作犬。',care:'长毛需定期梳理。髋关节需关注。食量大。',life:'10-12年',size:'大型',temp:'友善'},
+  {cat:'dog',name:'法国斗牛犬',emoji:'🐶',origin:'法国',desc:'体型小但结实，蝙蝠耳，性格温和幽默，适合公寓。',care:'短鼻品种注意防暑。皮肤褶皱需清洁。',life:'10-12年',size:'小型',temp:'温和'},
+  {cat:'dog',name:'边境牧羊犬',emoji:'🐕',origin:'英国',desc:'智商排名第一的犬种，精力充沛，牧羊本能强。',care:'长毛需定期梳理。需要大量运动和精神刺激。',life:'12-15年',size:'中型',temp:'聪明'},
+  {cat:'dog',name:'柯基犬',emoji:'🐶',origin:'英国',desc:'短腿长身，大耳朵，性格活泼快乐，是优秀的伴侣犬。',care:'注意腰椎健康，控制体重。换季大量掉毛。',life:'12-15年',size:'小型',temp:'活泼'},
+  {cat:'dog',name:'拉布拉多',emoji:'🐕',origin:'加拿大',desc:'最受欢迎的犬种之一，性格友好温顺，导盲犬首选。',care:'容易发胖需控制饮食。髋肘关节需关注。',life:'10-14年',size:'大型',temp:'友善'},
+  // Birds
+  {cat:'bird',name:'玄凤鹦鹉',emoji:'🐦',origin:'澳大利亚',desc:'头顶羽冠，脸颊有橙色斑，性格温顺亲人，可学口哨。',care:'需大笼子和每日放飞时间。提供多样化玩具。',life:'15-25年',size:'中小型',temp:'温顺'},
+  {cat:'bird',name:'虎皮鹦鹉',emoji:'🦜',origin:'澳大利亚',desc:'体型小巧色彩丰富，聪明好学，是最受欢迎的宠物鸟。',care:'提供墨鱼骨补充钙质。喜欢社交，建议成对饲养。',life:'5-10年',size:'小型',temp:'活泼'},
+  // Fish
+  {cat:'fish',name:'斗鱼',emoji:'🐠',origin:'泰国',desc:'色彩绚丽鳍形优美，生命力强，适合新手入门。',care:'单养为佳（好斗）。水温24-28°C。每周换水30%。',life:'2-4年',size:'小型',temp:'好斗'},
+  {cat:'fish',name:'锦鲤',emoji:'🐟',origin:'日本',desc:'观赏鱼之王，体色华丽寿命极长，池养为佳。',care:'需大型水池。水质管理要求高。冬季减少喂食。',life:'25-35年+',size:'大型',temp:'温顺'},
+  // Reptiles
+  {cat:'reptile',name:'豹纹守宫',emoji:'🦎',origin:'中亚',desc:'体型小巧颜色多变，性格温顺，最受欢迎的入门爬宠。',care:'需加热垫保持28-32°C。食虫性，喂蟋蟀和面包虫。',life:'10-20年',size:'小型',temp:'温顺'},
+  {cat:'reptile',name:'红耳龟',emoji:'🐢',origin:'北美',desc:'最常见的宠物龟，头部有红色条纹，适应力强。',care:'需水陆两栖环境+UVB灯。水质清洁很重要。',life:'20-30年',size:'中型',temp:'活泼'},
+  // Small pets
+  {cat:'small',name:'荷兰垂耳兔',emoji:'🐰',origin:'荷兰',desc:'耳朵下垂，体型小巧圆润，性格温顺亲人。',care:'主食提摩西草。每日需放风运动。注意牙齿健康。',life:'7-10年',size:'小型',temp:'温顺'},
+  {cat:'small',name:'龙猫',emoji:'🐭',origin:'南美',desc:'毛质极其柔软浓密，大眼睛长尾巴，夜间活跃。',care:'需沙浴保持皮毛健康。怕热需空调。寿命较长。',life:'10-20年',size:'小型',temp:'活泼'},
+  {cat:'small',name:'金丝熊',emoji:'🐹',origin:'叙利亚',desc:'体型较大的仓鼠品种，独居，性格温顺适合上手。',care:'笼养需足够空间。跑轮必备。注意勤换垫料。',life:'2-3年',size:'小型',temp:'温顺'},
+];
+const ENCYC_CATS = [
+  {key:'all',label:'全部',emoji:'📋'},
+  {key:'cat',label:'猫',emoji:'🐱'},{key:'dog',label:'狗',emoji:'🐶'},
+  {key:'bird',label:'鸟',emoji:'🐦'},{key:'fish',label:'鱼',emoji:'🐠'},
+  {key:'reptile',label:'爬宠',emoji:'🦎'},{key:'small',label:'小宠',emoji:'🐹'},
+];
+
+function openEncyc(cat) {
+  S._encycCat = cat || 'all';
+  renderEncycCats();
+  renderEncycBreeds(S._encycCat);
+  $('#encycOverlay').classList.add('open');
+  if (encycOverlay.parentElement !== app) app.appendChild(encycOverlay);
+}
+function closeEncyc() { $('#encycOverlay').classList.remove('open'); }
+function renderEncycCats() {
+  $('#encycCats').innerHTML = ENCYC_CATS.map(c => `
+    <button class="encyc-cat-tab ${S._encycCat===c.key?'active':''}" onclick="S._encycCat='${c.key}';renderEncycCats();renderEncycBreeds('${c.key}')">${c.emoji} ${c.label}</button>
+  `).join('');
+}
+function renderEncycBreeds(cat) {
+  let breeds = BREEDS;
+  if (cat && cat !== 'all') breeds = breeds.filter(b => b.cat === cat);
+  const q = ($('#encycSearch').value || '').toLowerCase();
+  if (q) breeds = breeds.filter(b => b.name.toLowerCase().includes(q));
+  $('#encycBody').innerHTML = breeds.length ? breeds.map(b => `
+    <div class="breed-card" onclick="openBreedDetail('${b.name}')">
+      <div class="bc-emoji">${b.emoji}</div>
+      <div class="bc-info">
+        <div class="bc-name">${b.name}</div>
+        <div class="bc-origin">📍 ${b.origin} · ${b.size}</div>
+        <div class="bc-desc">${b.desc}</div>
+        <div class="bc-meta">
+          <span class="breed-tag">⏱️ ${b.life}</span>
+          <span class="breed-tag">🧬 ${b.temp}</span>
+        </div>
+      </div>
+    </div>
+  `).join('') : '<div class="empty-wrap" style="padding:40px"><div class="empty-emoji">🔍</div><div class="empty-text">没有找到相关品种</div></div>';
+}
+$('#encycSearch').addEventListener('input', function() { renderEncycBreeds(S._encycCat || 'all'); });
+
+function openBreedDetail(name) {
+  const b = BREEDS.find(x => x.name === name);
+  if (!b) return;
+  $('#breedDetailTitle').textContent = b.emoji + ' ' + b.name;
+  $('#breedDetailBody').innerHTML = `
+    <div class="pet-profile-hero" style="padding:20px">
+      <div style="font-size:72px">${b.emoji}</div>
+      <div class="pp-name">${b.name}</div>
+      <div class="pp-breed">📍 ${b.origin} · ${b.size} · ⏱️ ${b.life}</div>
+      <div class="pet-profile-tags"><span class="pp-tag">🧬 ${b.temp}</span><span class="pp-tag">${b.size}</span></div>
+    </div>
+    <div style="padding:16px">
+      <div class="pet-profile-section"><div class="pps-title">📝 品种介绍</div><div style="font-size:14px;line-height:1.8;color:var(--c-text)">${b.desc}</div></div>
+      <div class="pet-profile-section"><div class="pps-title">🧰 饲养要点</div><div style="font-size:14px;line-height:1.8;color:var(--c-text)">${b.care}</div></div>
+    </div>
+  `;
+  $('#breedDetailOverlay').classList.add('open');
+  if (breedDetailOverlay.parentElement !== app) app.appendChild(breedDetailOverlay);
+}
+function closeBreedDetail() { $('#breedDetailOverlay').classList.remove('open'); }
+
+// ==================== PLACES ====================
+const PLACES = [
+  {cat:'park',name:'徐汇滨江狗狗乐园',emoji:'🏞️',addr:'上海市徐汇区龙腾大道',rating:'4.8⭐(326评)',feats:['狗狗专区','围栏安全','饮水点','停车场']},
+  {cat:'park',name:'朝阳公园宠物乐园',emoji:'🌳',addr:'北京市朝阳区朝阳公园南路',rating:'4.6⭐(218评)',feats:['大型草坪','宠物泳池','休息区']},
+  {cat:'park',name:'二沙岛宠物公园',emoji:'🏝️',addr:'广州市越秀区二沙岛',rating:'4.7⭐(187评)',feats:['江边步道','草坪','免费']},
+  {cat:'cafe',name:'猫十八·猫咪咖啡馆',emoji:'☕',addr:'上海市静安区愚园路338号',rating:'4.9⭐(512评)',feats:['20+只猫','甜品饮品','撸猫区','需预约']},
+  {cat:'cafe',name:'柴犬咖啡厅 DOG CAFE',emoji:'☕',addr:'成都市锦江区太古里旁',rating:'4.7⭐(398评)',feats:['柴犬互动','宠物友好','户外座位']},
+  {cat:'cafe',name:'兔兔乐园咖啡馆',emoji:'☕',addr:'杭州市西湖区龙井路',rating:'4.5⭐(156评)',feats:['垂耳兔','亲子友好','下午茶']},
+  {cat:'hotel',name:'宠物友好·花间堂',emoji:'🏨',addr:'苏州市姑苏区平江路',rating:'4.8⭐(203评)',feats:['携宠入住','宠物床','宠物餐','无额外费']},
+  {cat:'hotel',name:'崇明金茂凯悦酒店',emoji:'🏨',addr:'上海市崇明区陈家镇',rating:'4.6⭐(178评)',feats:['宠物房型','大草坪','宠物礼包']},
+  {cat:'hospital',name:'瑞鹏宠物医院(总院)',emoji:'🏥',addr:'深圳市南山区科技园',rating:'4.7⭐(1024评)',feats:['24小时急诊','全科','手术','美容']},
+  {cat:'hospital',name:'芭比堂宠物医院',emoji:'🏥',addr:'北京市海淀区中关村',rating:'4.8⭐(892评)',feats:['眼科专科','牙科','体检','中医']},
+];
+const PLACE_CATS = [
+  {key:'all',label:'全部',emoji:'📍'},
+  {key:'park',label:'公园',emoji:'🏞️'},{key:'cafe',label:'咖啡馆',emoji:'☕'},
+  {key:'hotel',label:'酒店',emoji:'🏨'},{key:'hospital',label:'医院',emoji:'🏥'},
+];
+
+function openPlaces(cat) {
+  S._placeCat = cat || 'all';
+  renderPlaceCats();
+  renderPlaces(S._placeCat);
+  $('#placesOverlay').classList.add('open');
+  if (placesOverlay.parentElement !== app) app.appendChild(placesOverlay);
+}
+function closePlaces() { $('#placesOverlay').classList.remove('open'); }
+function renderPlaceCats() {
+  $('#placeCats').innerHTML = PLACE_CATS.map(c => `
+    <button class="encyc-cat-tab ${S._placeCat===c.key?'active':''}" onclick="S._placeCat='${c.key}';renderPlaceCats();renderPlaces('${c.key}')">${c.emoji} ${c.label}</button>
+  `).join('');
+}
+function renderPlaces(cat) {
+  let places = PLACES;
+  if (cat && cat !== 'all') places = places.filter(p => p.cat === cat);
+  $('#placesBody').innerHTML = places.map(p => `
+    <div class="place-card">
+      <div class="pl-icon">${p.emoji}</div>
+      <div class="pl-info">
+        <div class="pl-name">${p.name}</div>
+        <div class="pl-addr">📌 ${p.addr}</div>
+        <div class="pl-features">${p.feats.map(f=>`<span class="place-feat">${f}</span>`).join(' ')}</div>
+        <div class="pl-rating">${p.rating}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ==================== LOST & FOUND ====================
+const LF_DATA = [
+  {type:'lost',title:'橘猫走失 — 橘座',emoji:'🐱',info:'品种：中华田园橘猫<br>特征：橘白相间，戴红色项圈，已绝育<br>走失地点：上海市徐汇区漕溪北路<br>走失时间：2024年6月10日',contact:'📞 联系铲屎官：138****6789',reward:'💰 重金酬谢'},
+  {type:'lost',title:'柴犬走失 — 小丸',emoji:'🐶',info:'品种：赤色柴犬<br>特征：立耳卷尾，戴蓝色胸背带<br>走失地点：杭州市西湖区龙井路<br>走失时间：2024年6月8日',contact:'📞 联系主人：139****8901',reward:'💰 重金酬谢'},
+  {type:'found',title:'捡到蓝猫一只',emoji:'🐱',info:'品种：英国短毛猫（蓝猫）<br>特征：灰蓝色被毛，橙色眼睛<br>发现地点：北京市朝阳区望京SOHO<br>发现时间：2024年6月12日',contact:'📞 发现人：186****3456',reward:'🏠 暂养中'},
+  {type:'found',title:'捡到虎皮鹦鹉',emoji:'🦜',info:'品种：虎皮鹦鹉（绿色）<br>特征：右腿有脚环，编号已记录<br>发现地点：广州市天河区体育西路<br>发现时间：2024年6月11日',contact:'📞 发现人：135****7890',reward:'🏠 暂养中'},
+  {type:'adopt',title:'2只小猫待领养',emoji:'🐱',info:'品种：中华田园猫（橘猫+奶牛猫）<br>年龄：约3个月<br>健康状况：已驱虫，会用猫砂<br>领养要求：上海本地，接受回访',contact:'📞 救助人：177****2345',reward:'🎁 送猫粮+猫砂盆'},
+  {type:'adopt',title:'垂耳兔找新家',emoji:'🐰',info:'品种：荷兰垂耳兔<br>年龄：8个月，母，已绝育<br>健康状况：健康，性格温顺<br>领养要求：有养兔经验者优先',contact:'📞 救助人：188****5678',reward:'🎁 送兔笼+粮草'},
+  {type:'lost',title:'金毛走失 — 乐乐',emoji:'🐕',info:'品种：金毛寻回犬<br>特征：金色被毛，戴皮质项圈<br>走失地点：深圳市南山区深圳湾公园<br>走失时间：2024年6月9日',contact:'📞 联系主人：136****0123',reward:'💰 酬谢5000元'},
+];
+
+function openLF(tab) {
+  S._lfTab = tab || 'all';
+  $$('.lf-tab').forEach(b => b.classList.toggle('active', b.dataset.lf === S._lfTab));
+  renderLF(S._lfTab);
+  $('#lfOverlay').classList.add('open');
+  if (lfOverlay.parentElement !== app) app.appendChild(lfOverlay);
+}
+function closeLF() { $('#lfOverlay').classList.remove('open'); }
+function switchLFTab(tab) {
+  S._lfTab = tab;
+  $$('.lf-tab').forEach(b => b.classList.toggle('active', b.dataset.lf === tab));
+  renderLF(tab);
+}
+function renderLF(tab) {
+  let items = LF_DATA;
+  const badgeClass = {lost:'lost',found:'found',adopt:'adopt'};
+  const badgeLabel = {lost:'🔴 走失',found:'🟢 捡到',adopt:'🔵 领养'};
+  if (tab && tab !== 'all') items = items.filter(i => i.type === tab);
+  $('#lfBody').innerHTML = items.length ? items.map(i => `
+    <div class="lf-card">
+      <div class="lf-top">
+        <div class="lf-title">${i.emoji} ${i.title}</div>
+        <span class="lf-badge ${badgeClass[i.type]}">${badgeLabel[i.type]}</span>
+      </div>
+      <div class="lf-info">${i.info}</div>
+      ${i.reward ? `<div style="font-size:12px;color:var(--c-heart);font-weight:700;margin-top:4px">${i.reward}</div>` : ''}
+      <button class="lf-contact" onclick="showToast('📞 联系方式已复制：${i.contact.replace(/📞 /,'')}')">${i.contact}</button>
+    </div>
+  `).join('') : '<div class="empty-wrap"><div class="empty-emoji">🐾</div><div class="empty-text">暂无相关信息</div></div>';
+}
+
 // ==================== INIT ====================
 function init() {
   loadState();
+  initDarkMode();
   [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail, notifOverlay,
-   petProfileOverlay, topicOverlay, collectionsOverlay, toolsOverlay].forEach(el => {
+   petProfileOverlay, topicOverlay, collectionsOverlay, toolsOverlay,
+   encycOverlay, breedDetailOverlay, placesOverlay, lfOverlay].forEach(el => {
     if (el && el.parentElement !== app) app.appendChild(el);
   });
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
   navigateTo('square'); updateProfileStats();
   updateNotifBadge(); updateHomePage(); startHomeClock();
-  console.log('🐾 萌宠星球 v4.0 已就绪！');
-  console.log('  🐾 宠物档案 — 品种/体重/医疗/性格标签');
-  console.log('  🏷️ 话题聚合 — 点击#标签浏览话题动态');
-  console.log('  🧰 养护工具 — 喂食/饮水/年龄换算/疫苗表');
-  console.log('  ⭐ 收藏页面 — 已收藏动态+日记集中查看');
-  console.log('  🏆 +前三版本全部功能');
+  console.log('🐾 萌宠星球 v5.0 已就绪！');
+  console.log('  📚 品种百科 — 20个品种/类别筛选/搜索/养护知识');
+  console.log('  📍 友好场所 — 公园/咖啡馆/酒店/医院分类');
+  console.log('  🌙 暗色模式 — 一键切换暖夜主题');
+  console.log('  🔍 寻宠领养 — 走失/捡到/领养信息墙');
 }
 init();
 
