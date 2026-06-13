@@ -575,6 +575,40 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .coupon-chip{flex-shrink:0;padding:6px 14px;border-radius:var(--radius-xl);background:linear-gradient(135deg,#FFF5EC,#FFE8D6);color:var(--c-primary);font-size:11px;font-weight:700;cursor:pointer;border:1px dashed var(--c-primary);font-family:var(--font);white-space:nowrap;transition:all var(--transition)}
 .coupon-chip:active{opacity:.7}
 
+/* ============ LOCAL SERVICES ============ */
+.local-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.local-overlay.open{transform:translateX(0)}
+.service-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin:0 16px 8px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition);display:flex;gap:10px}
+.service-card:active{transform:scale(0.98)}
+.service-card .sv-icon{font-size:36px;flex-shrink:0;width:48px;text-align:center}
+.service-card .sv-info{flex:1;min-width:0}
+.service-card .sv-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.service-card .sv-addr{font-size:11px;color:var(--c-text-light);margin:2px 0}
+.service-card .sv-price{font-size:12px;color:var(--c-primary);font-weight:600}
+.service-card .sv-rating{font-size:11px;color:var(--c-star)}
+.service-card .sv-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.sv-tag{font-size:10px;padding:2px 8px;border-radius:var(--radius-xl);background:var(--c-bg-warm);color:var(--c-text-mid);font-weight:600}
+/* Service detail */
+.service-detail-overlay{position:absolute;inset:0;z-index:95;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.service-detail-overlay.open{transform:translateX(0)}
+.sd-hero{text-align:center;padding:24px 16px;background:linear-gradient(180deg,var(--c-bg-warm),var(--c-bg))}
+.sd-hero .sd-icon{font-size:64px;display:block;margin-bottom:8px}
+.sd-hero .sd-name{font-size:20px;font-weight:800;color:var(--c-text)}
+.sd-info{padding:16px}
+.service-item-row{display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--c-card);border-radius:var(--radius-md);margin-bottom:6px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition)}
+.service-item-row:active{background:#FFF5EC}
+.service-item-row .sr-name{font-size:13px;font-weight:600;color:var(--c-text)}
+.service-item-row .sr-desc{font-size:11px;color:var(--c-text-light);margin-top:1px}
+.service-item-row .sr-price{font-size:14px;font-weight:700;color:var(--c-primary);flex-shrink:0}
+/* Review */
+.review-item{display:flex;gap:10px;padding:12px;background:var(--c-card);border-radius:var(--radius-md);margin-bottom:6px;box-shadow:var(--c-shadow)}
+.review-item .rv-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--c-bg-warm)}
+.review-item .rv-body{flex:1;min-width:0}
+.review-item .rv-user{font-size:12px;font-weight:700;color:var(--c-text)}
+.review-item .rv-stars{color:var(--c-star);font-size:12px}
+.review-item .rv-text{font-size:12px;color:var(--c-text-mid);margin-top:4px;line-height:1.5}
+.review-item .rv-date{font-size:10px;color:var(--c-text-light);margin-top:2px}
+
 /* Quick tool buttons on home */
 .quick-tools-bar{display:flex;gap:6px;padding:4px 16px;margin-bottom:6px;overflow-x:auto}
 .quick-tool-btn{flex-shrink:0;padding:7px 14px;border-radius:var(--radius-xl);background:var(--c-card);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-border);font-family:var(--font);white-space:nowrap;transition:all var(--transition)}
@@ -832,6 +866,7 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
         <button class="quick-tool-btn" onclick="openStats()">📊 社区数据</button>
         <button class="quick-tool-btn" onclick="openMedical()">🏥 医疗健康</button>
         <button class="quick-tool-btn" onclick="openShop()">🛒 萌宠商城</button>
+        <button class="quick-tool-btn" onclick="openLocal()">📍 本地服务</button>
       </div>
       <div class="featured-strip">
         <div class="fs-title">🌟 今日推荐铲屎官</div>
@@ -1077,6 +1112,18 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
     <span class="nf-title">⭐ 我的收藏</span>
   </div>
   <div class="collections-body" id="collectionsBody"></div>
+</div>
+
+<!-- ============ LOCAL SERVICES ============ -->
+<div class="local-overlay" id="localOverlay">
+  <div class="tools-header"><button class="tl-back" onclick="closeLocal()">←</button><span class="nf-title">📍 本地生活服务</span></div>
+  <div class="shop-cats" id="localCats"></div>
+  <div style="flex:1;overflow-y:auto;padding-top:8px" id="localBody"></div>
+</div>
+<!-- Service Detail -->
+<div class="service-detail-overlay" id="serviceDetailOverlay">
+  <div class="tools-header"><button class="tl-back" onclick="closeServiceDetail()">←</button><span class="nf-title">商家详情</span></div>
+  <div style="flex:1;overflow-y:auto" id="serviceDetailBody"></div>
 </div>
 
 <!-- ============ SHOP ============ -->
@@ -3336,6 +3383,99 @@ function renderOrders() {
 function confirmReceive(oid) {
   const orders = getOrders(); const o = orders.find(x => x.id === oid);
   if (o) { o.status = 'done'; saveOrders(orders); renderOrders(); showToast('✅ 已确认收货'); }
+}
+
+// ==================== LOCAL SERVICES ====================
+const SERVICES = [
+  {id:1,cat:'groom',icon:'🛁',name:'泡泡宠物美容沙龙',addr:'上海市徐汇区天钥桥路168号',rating:'4.8⭐(326评)',price:'¥128起',desc:'韩国宠物美容师驻店，提供精致洗护、创意造型、SPA水疗。进口洗护产品，猫咪独立美容间。',tags:['猫咪友好','进口产品','独立猫间'],
+    items:[{n:'基础洗护',d:'清洗+吹干+指甲+清洁耳道',p:128},{n:'精致美容',d:'洗护+全身造型修剪+SPA',p:288},{n:'猫咪专护',d:'猫咪专用洗护+去底绒+安抚',p:198}],
+    reviews:[{u:'橘座大人',a:'🐱',s:5,t:'美容师特别温柔，橘座全程没闹！洗完蓬松了好多，推荐～',d:'2024-06-10'},{u:'养猫达人',a:'🐱',s:5,t:'猫咪独立美容间这点太贴心了，不用怕狗叫吓到猫',d:'2024-05-28'}]},
+  {id:2,cat:'groom',icon:'✂️',name:'PetCare 宠物造型馆',addr:'北京市朝阳区三里屯太古里B1',rating:'4.7⭐(218评)',price:'¥158起',desc:'日式宠物美容，擅长贵宾/比熊/博美等造型犬。纯手工精剪，拒绝粗暴操作。',tags:['日式精剪','造型犬专长','可视玻璃'],
+    items:[{n:'标准造型',d:'按品种标准造型修剪',p:158},{n:'创意造型',d:'个性化创意染色+造型设计',p:358},{n:'毛发护理',d:'深层清洁+柔顺护理+护毛素',p:198}],
+    reviews:[{u:'柴犬小丸',a:'🐶',s:4,t:'剪得很细致，小丸全程配合。就是等的时间有点长',d:'2024-06-05'}]},
+  {id:3,cat:'boarding',icon:'🏨',name:'汪星人宠物酒店',addr:'杭州市西湖区梅灵南路8号',rating:'4.9⭐(452评)',price:'¥88/天起',desc:'5000㎡花园式宠物寄养酒店。独立套房+24小时监控+每日遛弯+健康监测。',tags:['花园式','24h监控','每日遛弯','健康监测'],
+    items:[{n:'标准套房',d:'独立小间+每日2次遛弯+基础护理',p:88},{n:'豪华套房',d:'大空间+全景窗+每日3次遛弯+鲜食',p:188},{n:'VIP别墅',d:'独栋小屋+私人草坪+24h专属管家',p:388}],
+    reviews:[{u:'金毛主人',a:'🐕',s:5,t:'出差一周把金毛寄养在这，每天都能视频看狗狗，太安心了！',d:'2024-06-08'},{u:'宠物达人',a:'🐶',s:5,t:'花园超级大，狗狗回来都不想走了哈哈哈',d:'2024-05-20'}]},
+  {id:4,cat:'boarding',icon:'🐱',name:'喵星人猫舍寄养',addr:'广州市天河区珠江新城花城大道',rating:'4.6⭐(189评)',price:'¥68/天起',desc:'猫咪专属寄养酒店。独立猫别墅+猫爬架+猫玩具+每日互动玩耍。狗狗不得入内。',tags:['猫咪专属','无狗环境','独立别墅'],
+    items:[{n:'标准猫房',d:'独立隔间+猫爬架+每日互动',p:68},{n:'阳光猫房',d:'大窗采光+豪华猫树+鲜食+每日视频',p:128}],
+    reviews:[{u:'猫奴日记',a:'🐱',s:5,t:'没有狗的环境让猫咪很放松，环境也很干净',d:'2024-06-12'}]},
+  {id:5,cat:'training',icon:'🎓',name:'汪汪队宠物训练学校',addr:'成都市双流区牧华路99号',rating:'4.7⭐(276评)',price:'¥200/课时起',desc:'正向训练法，拒绝暴力训犬。提供幼犬社会化、服从训练、行为矫正、敏捷课程。',tags:['正向训练','幼犬课程','行为矫正'],
+    items:[{n:'幼犬启蒙课',d:'3-6月龄社会化+基础口令',p:200},{n:'服从训练课',d:'坐/卧/等/来/随行等10项指令',p:280},{n:'行为矫正课',d:'针对攻击/分离焦虑/乱叫等问题',p:350}],
+    reviews:[{u:'柴友阿花',a:'🐶',s:5,t:'正向训练效果很好！柴柴现在不乱叫也不扑人了',d:'2024-06-01'}]},
+  {id:6,cat:'training',icon:'🐱',name:'猫咪行为工作室',addr:'上海市静安区巨鹿路',rating:'4.5⭐(98评)',price:'¥300/次起',desc:'猫咪行为问题咨询与矫正。解决乱抓、乱尿、攻击、多猫冲突等问题。',tags:['猫咪行为','上门服务','在线咨询'],
+    items:[{n:'行为咨询',d:'1小时到店咨询+行为评估',p:300},{n:'上门指导',d:'上门观察+环境改造建议',p:500},{n:'在线咨询',d:'视频连线1小时',p:200}],
+    reviews:[{u:'养猫小能手',a:'🐱',s:4,t:'老师分析得很专业，按照建议改了猫砂盆位置果然不乱尿了',d:'2024-05-15'}]},
+  {id:7,cat:'photo',icon:'📸',name:'萌宠映像摄影工作室',addr:'深圳市南山区华侨城创意园',rating:'4.9⭐(534评)',price:'¥599/套起',desc:'专注宠物摄影5年。室内/户外/家庭纪实多种风格。提供服装道具+精修底片全送。',tags:['室内/户外','服装道具','底片全送'],
+    items:[{n:'萌宠写真',d:'2小时拍摄+3组造型+50张精修',p:599},{n:'人宠合影',d:'主人+宠物全家福+户外取景',p:899},{n:'宠物婚纱',d:'宠物专属婚纱照+定制相册',p:1299}],
+    reviews:[{u:'橘座大人',a:'🐱',s:5,t:'拍得太好了！把橘座的可爱全拍出来了，朋友圈点赞爆了',d:'2024-06-03'}]},
+  {id:8,cat:'aquascape',icon:'🌿',name:'水景坊·专业水族造景',addr:'广州市荔湾区花地湾花鸟市场',rating:'4.8⭐(312评)',price:'¥500/缸起',desc:'资深造景师设计，提供草缸/石景/沉木景定制。含设备安装+水草种植+后期维护。',tags:['定制造景','设备安装','后期维护'],
+    items:[{n:'入门造景',d:'60cm以下缸+基础造景+水草种植',p:500},{n:'精品造景',d:'60-120cm缸+复杂景观+名贵水草',p:1500},{n:'定期维护',d:'每月上门修剪水草+换水+检测水质',p:200}],
+    reviews:[{u:'海底小纵队',a:'🐠',s:5,t:'造景师水平很高，开缸一个月状态还很好，强烈推荐！',d:'2024-05-22'}]},
+];
+const LOCAL_CATS = [
+  {k:'all',n:'全部',e:'📍'},{k:'groom',n:'洗护美容',e:'🛁'},{k:'boarding',n:'寄养托管',e:'🏨'},
+  {k:'training',n:'训练学校',e:'🎓'},{k:'photo',n:'宠物摄影',e:'📸'},{k:'aquascape',n:'水族造景',e:'🌿'},
+];
+
+function openLocal(cat) {
+  S._localCat = cat || 'all';
+  renderLocalCats(); renderLocalList();
+  $('#localOverlay').classList.add('open');
+  if (localOverlay.parentElement !== app) app.appendChild(localOverlay);
+}
+function closeLocal() { $('#localOverlay').classList.remove('open'); }
+function renderLocalCats() {
+  $('#localCats').innerHTML = LOCAL_CATS.map(c => `<button class="shop-cat-btn ${S._localCat===c.k?'active':''}" onclick="S._localCat='${c.k}';renderLocalCats();renderLocalList()">${c.e} ${c.n}</button>`).join('');
+}
+function renderLocalList() {
+  let list = SERVICES;
+  if (S._localCat !== 'all') list = list.filter(s => s.cat === S._localCat);
+  $('#localBody').innerHTML = list.length ? list.map(s => `
+    <div class="service-card" onclick="openServiceDetail(${s.id})">
+      <span class="sv-icon">${s.icon}</span>
+      <div class="sv-info">
+        <div class="sv-name">${s.name}</div>
+        <div class="sv-addr">📍 ${s.addr}</div>
+        <div class="sv-tags">${s.tags.map(t=>`<span class="sv-tag">${t}</span>`).join(' ')}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+          <span class="sv-price">${s.price}</span><span class="sv-rating">${s.rating}</span>
+        </div>
+      </div>
+    </div>`).join('') : '<div class="empty-wrap"><div class="empty-emoji">📍</div><div class="empty-text">该分类暂无商家</div></div>';
+}
+
+function openServiceDetail(id) {
+  const s = SERVICES.find(x => x.id === id); if (!s) return;
+  S._svDetail = s; S._svQty = 1; S._svItem = s.items[0];
+  renderServiceDetail();
+  $('#serviceDetailOverlay').classList.add('open');
+  if (serviceDetailOverlay.parentElement !== app) app.appendChild(serviceDetailOverlay);
+}
+function closeServiceDetail() { $('#serviceDetailOverlay').classList.remove('open'); }
+function renderServiceDetail() {
+  const s = S._svDetail;
+  $('#serviceDetailBody').innerHTML = `
+    <div class="sd-hero"><span class="sd-icon">${s.icon}</span><div class="sd-name">${s.name}</div><div style="font-size:12px;color:var(--c-text-light);margin-top:4px">📍 ${s.addr} · ${s.rating}</div><div class="sv-tags" style="justify-content:center;margin-top:6px">${s.tags.map(t=>`<span class="sv-tag">${t}</span>`).join(' ')}</div></div>
+    <div class="sd-info">
+      <div style="font-size:13px;color:var(--c-text-mid);line-height:1.7;margin-bottom:12px">${s.desc}</div>
+      <div style="font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:8px">💼 服务项目</div>
+      ${s.items.map(i => `<div class="service-item-row ${S._svItem===i?'selected':''}" onclick="S._svItem={n:'${i.n}',d:'${i.d}',p:${i.p}};renderServiceDetail()" style="${S._svItem&&S._svItem.n===i.n?'border:2px solid var(--c-primary);background:#FFF5EC':''}"><div><div class="sr-name">${i.n}</div><div class="sr-desc">${i.d}</div></div><span class="sr-price">¥${i.p}</span></div>`).join('')}
+      ${S._svItem ? `<div class="tool-card" style="margin-top:12px"><div class="tc-row"><span style="font-size:13px;color:var(--c-text)">📅 预约日期</span><input type="date" id="svDate" style="flex:1"></div><div class="tc-row" style="margin-top:8px"><span style="font-size:13px;color:var(--c-text)">⏰ 时间段</span><select id="svTime" style="flex:1"><option>上午 9:00-10:00</option><option>上午 10:30-11:30</option><option>下午 14:00-15:00</option><option>下午 15:30-16:30</option></select></div><button class="auth-submit" style="margin-top:12px" onclick="bookService(${s.id})">📅 预约 ${S._svItem.n} ¥${S._svItem.p}</button></div>` : ''}
+      <div style="font-size:14px;font-weight:700;color:var(--c-text);margin:16px 0 8px">💬 用户评价 (${s.reviews.length})</div>
+      ${s.reviews.map(r => `<div class="review-item"><div class="rv-avatar">${r.a}</div><div class="rv-body"><div class="rv-user">${r.u}</div><div class="rv-stars">${'⭐'.repeat(r.s)}</div><div class="rv-text">${r.t}</div><div class="rv-date">${r.d}</div></div></div>`).join('')}
+    </div>`;
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+  const dateEl = document.getElementById('svDate'); if (dateEl) dateEl.value = tomorrow.toISOString().slice(0,10);
+}
+function bookService(id) {
+  const s = SERVICES.find(x => x.id === id); if (!s || !S._svItem) return;
+  const date = $('#svDate').value, time = $('#svTime').value;
+  if (!date) { showToast('请选择预约日期'); return; }
+  const order = {id:'SVC'+Date.now(), shop:s.name, item:S._svItem.n, price:S._svItem.p, date, time, status:'confirmed'};
+  const orders = JSON.parse(localStorage.getItem('petplanet_svcOrders')||'[]');
+  orders.unshift(order); localStorage.setItem('petplanet_svcOrders', JSON.stringify(orders));
+  showToast('✅ 预约成功！'+s.name+' - '+S._svItem.n+' - '+date+' '+time);
+  S._svItem = null; renderServiceDetail();
 }
 
 // ==================== INIT ====================
