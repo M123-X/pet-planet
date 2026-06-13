@@ -3684,6 +3684,8 @@ function init() {
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
   navigateTo('square'); updateProfilePage();
   updateNotifBadge(); updateHomePage(); startHomeClock();
+  // 首次访问/未登录 → 自动弹出登录界面
+  if (!isLoggedIn()) { setTimeout(() => openLogin(), 600); }
   console.log('🐾 萌宠星球已就绪！');
 }
 init();
