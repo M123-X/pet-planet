@@ -474,6 +474,48 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .meal-slot .ms-food{font-size:13px;color:var(--c-text);flex:1}
 .meal-slot .ms-amount{font-size:12px;color:var(--c-text-light);font-weight:600}
 
+/* ============ MEDICAL HEALTH ============ */
+.medical-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.medical-overlay.open{transform:translateX(0)}
+/* Chat-style consultation */
+.consult-chat{display:flex;flex-direction:column;gap:10px;padding:12px 0}
+.consult-msg{max-width:85%;padding:12px 14px;border-radius:16px;font-size:13px;line-height:1.6}
+.consult-msg.doctor{align-self:flex-start;background:var(--c-card);color:var(--c-text);border-bottom-left-radius:4px;box-shadow:var(--c-shadow)}
+.consult-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--c-primary),var(--c-primary-light));color:#FFF;border-bottom-right-radius:4px}
+.consult-quick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.consult-quick-btn{padding:8px 14px;border-radius:var(--radius-xl);background:var(--c-card);border:1.5px solid var(--c-border);font-size:12px;cursor:pointer;font-family:var(--font);color:var(--c-text);transition:all var(--transition);white-space:nowrap}
+.consult-quick-btn:active{background:var(--c-primary);color:#FFF;border-color:var(--c-primary)}
+/* Hospital card */
+.hosp-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition)}
+.hosp-card:active{transform:scale(0.98)}
+.hosp-card .ho-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.hosp-card .ho-info{font-size:11px;color:var(--c-text-light);margin:4px 0;line-height:1.6}
+.hosp-card .ho-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.ho-tag{font-size:10px;padding:3px 8px;border-radius:var(--radius-xl);font-weight:600}
+.ho-tag.hot{background:#FFEBEE;color:#E53935}.phone-frame.dark .ho-tag.hot{background:#3A1A1A;color:#FF6B6B}
+.ho-tag.spec{background:#E3F2FD;color:#1E88E5}.phone-frame.dark .ho-tag.spec{background:#1A2A3A;color:#64B5F6}
+.ho-tag.open{background:#E8F5E9;color:#388E3C}.phone-frame.dark .ho-tag.open{background:#1B3A1B;color:#6BCB77}
+/* Appointment form */
+.apt-form{padding:0}
+.apt-form label{display:block;font-size:12px;font-weight:600;color:var(--c-text-mid);margin:12px 0 4px}
+.apt-form select,.apt-form input{width:100%;padding:10px 14px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);font-size:13px;font-family:var(--font);color:var(--c-text);background:var(--c-card);outline:none}
+.apt-form select:focus,.apt-form input:focus{border-color:var(--c-primary)}
+.apt-confirm{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-top:12px;box-shadow:var(--c-shadow);text-align:center}
+.apt-confirm .ac-icon{font-size:40px;display:block;margin-bottom:6px}
+/* Medicine card */
+.med-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;box-shadow:var(--c-shadow);display:flex;gap:12px;align-items:flex-start}
+.med-card .md-icon{font-size:28px;flex-shrink:0}
+.med-card .md-info{flex:1}
+.med-card .md-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.med-card .md-use{font-size:12px;color:var(--c-text-mid);margin:4px 0;line-height:1.5}
+.med-card .md-dose{font-size:11px;color:var(--c-primary);font-weight:600}
+/* Record card */
+.record-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;box-shadow:var(--c-shadow)}
+.record-card .rc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.record-card .rc-title{font-size:14px;font-weight:700;color:var(--c-text)}
+.record-card .rc-date{font-size:11px;color:var(--c-text-light)}
+.record-card .rc-detail{font-size:12px;color:var(--c-text-mid);line-height:1.6}
+
 /* Quick tool buttons on home */
 .quick-tools-bar{display:flex;gap:6px;padding:4px 16px;margin-bottom:6px;overflow-x:auto}
 .quick-tool-btn{flex-shrink:0;padding:7px 14px;border-radius:var(--radius-xl);background:var(--c-card);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-border);font-family:var(--font);white-space:nowrap;transition:all var(--transition)}
@@ -729,6 +771,7 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
         <button class="quick-tool-btn" onclick="openBadges()">🏅 成就徽章</button>
         <button class="quick-tool-btn" onclick="openGame()">🎮 逗猫游戏</button>
         <button class="quick-tool-btn" onclick="openStats()">📊 社区数据</button>
+        <button class="quick-tool-btn" onclick="openMedical()">🏥 医疗健康</button>
       </div>
       <div class="featured-strip">
         <div class="fs-title">🌟 今日推荐铲屎官</div>
@@ -974,6 +1017,19 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
     <span class="nf-title">⭐ 我的收藏</span>
   </div>
   <div class="collections-body" id="collectionsBody"></div>
+</div>
+
+<!-- ============ MEDICAL HEALTH ============ -->
+<div class="medical-overlay" id="medicalOverlay">
+  <div class="tools-header"><button class="tl-back" onclick="closeMedical()">←</button><span class="nf-title">🏥 宠物医疗健康</span></div>
+  <div class="tools-tabs" id="medicalTabs">
+    <button class="tools-tab-btn active" data-mt="consult" onclick="switchMedTab('consult')">💬 在线问诊</button>
+    <button class="tools-tab-btn" data-mt="hospital" onclick="switchMedTab('hospital')">🏥 医院查询</button>
+    <button class="tools-tab-btn" data-mt="appointment" onclick="switchMedTab('appointment')">📅 预约挂号</button>
+    <button class="tools-tab-btn" data-mt="medicine" onclick="switchMedTab('medicine')">💊 药品指南</button>
+    <button class="tools-tab-btn" data-mt="records" onclick="switchMedTab('records')">📋 就诊记录</button>
+  </div>
+  <div class="tools-body" id="medicalBody"></div>
 </div>
 
 <!-- ============ CARE TOOLS ============ -->
@@ -2899,6 +2955,153 @@ function openStats() {
 }
 function closeStats() { $('#statsOverlay').classList.remove('open'); }
 
+// ==================== MEDICAL HEALTH ====================
+function openMedical(tab) {
+  S._medTab = tab || 'consult';
+  renderMedTabs();
+  renderMedContent(S._medTab);
+  $('#medicalOverlay').classList.add('open');
+  if (medicalOverlay.parentElement !== app) app.appendChild(medicalOverlay);
+}
+function closeMedical() { $('#medicalOverlay').classList.remove('open'); }
+function switchMedTab(tab) { S._medTab = tab; renderMedTabs(); renderMedContent(tab); }
+function renderMedTabs() { $$('#medicalTabs .tools-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.mt === S._medTab)); }
+function renderMedContent(tab) {
+  if (tab==='consult') renderConsultTab();
+  else if (tab==='hospital') renderHospitalTab();
+  else if (tab==='appointment') renderAppointmentTab();
+  else if (tab==='medicine') renderMedicineTab();
+  else if (tab==='records') renderRecordsTab();
+}
+
+// ===== ONLINE CONSULTATION =====
+const CONSULT_QA = {
+  '猫呕吐': {a:'猫咪偶尔呕吐毛球是正常的（通常每月1-2次）。但如果频繁呕吐（一天多次）、呕吐物带血或黄绿色胆汁、伴随精神萎靡或拒食，需立即就医。可能原因包括：毛球症、肠胃炎、胰腺炎、异物梗阻、肾病。建议：禁食4-6小时观察，提供充足饮水，如持续呕吐请尽快就医。',f:['猫软便怎么办','狗不吃东西','猫打喷嚏']},
+  '猫软便': {a:'软便可能由饮食突然更换、食物不耐受、寄生虫或应激引起。建议：1) 暂停新食物，回到原来的饮食；2) 喂益生菌调理肠胃；3) 观察24小时。如软便持续超过2天、带血、或伴有呕吐发热，请就医做便检。',f:['猫咪疫苗时间','狗皮肤病','驱虫药怎么用']},
+  '狗不吃东西': {a:'狗狗突然拒食可能是：挑食（最近零食吃多了）、天气太热、换牙期不适、肠胃不适或更严重的健康问题。建议：1) 检查口腔有无红肿溃疡；2) 停零食，定时定量喂食；3) 如超过24小时完全不进食+精神萎靡，需就医排查胰腺炎/肾病等。',f:['狗拉肚子','狗狗疫苗','猫吐毛球']},
+  '猫打喷嚏': {a:'偶尔打喷嚏可能是灰尘或气味刺激。如果频繁打喷嚏+流鼻涕/眼分泌物，可能是上呼吸道感染（猫鼻支）。建议：保持环境清洁通风，观察是否有其他症状。如持续超过3天或有黄绿色鼻涕、眼肿、精神差，需就医。',f:['猫软便','狗皮肤病','驱虫频率']},
+  '狗皮肤病': {a:'常见皮肤病包括：真菌感染（圆形脱毛斑）、细菌感染（红肿脓疱）、螨虫（剧烈瘙痒）、过敏性皮炎（舔脚/蹭脸）。建议：1) 检查全身有无脱毛/红疹/皮屑；2) 定期体外驱虫；3) 不要自行涂人用药膏。确诊需兽医做皮肤刮片检查。',f:['狗拉肚子','猫打喷嚏','体外驱虫']},
+  '狗拉肚子': {a:'偶尔软便可能只是吃坏肚子。但如果水样腹泻超过24小时、带血、或伴呕吐发热，需立即就医（可能细小病毒/胰腺炎）。建议：禁食12小时但不限饮水，之后喂白水煮鸡胸肉+白粥调理。补充益生菌。',f:['狗不吃东西','猫呕吐','体内驱虫']},
+};
+function renderConsultTab() {
+  S._consultHistory = S._consultHistory || [];
+  let html = '<div style="font-size:12px;color:var(--c-text-light);margin-bottom:10px;text-align:center">🤖 AI宠物健康助手 · 仅供参考，紧急情况请立即就医</div>';
+  html += '<div class="consult-chat" id="consultChat">';
+  html += '<div class="consult-msg doctor">👋 你好！我是宠物健康助手。请描述你家宠物的症状，或点击下方快捷问题～</div>';
+  S._consultHistory.forEach(h => {
+    html += `<div class="consult-msg user">${h.q}</div>`;
+    html += `<div class="consult-msg doctor">${h.a}</div>`;
+  });
+  html += '</div>';
+  html += '<div class="consult-quick" id="consultQuick">';
+  const shown = new Set(S._consultHistory.map(h=>h.q));
+  const allQuestions = ['猫呕吐','猫软便','狗不吃东西','猫打喷嚏','狗皮肤病','狗拉肚子'];
+  const available = allQuestions.filter(q => !shown.has(q));
+  const questions = available.length ? available : allQuestions;
+  questions.forEach(q => { html += `<button class="consult-quick-btn" onclick="askConsult('${q}')">${q}</button>`; });
+  html += '</div>';
+  $('#medicalBody').innerHTML = html;
+}
+function askConsult(q) {
+  S._consultHistory = S._consultHistory || [];
+  const qa = CONSULT_QA[q];
+  if (qa) { S._consultHistory.push({q, a:qa.a, f:qa.f}); }
+  renderConsultTab();
+  const chat = document.getElementById('consultChat');
+  if (chat) chat.scrollTop = chat.scrollHeight;
+}
+
+// ===== HOSPITAL DIRECTORY =====
+const HOSPITALS = [
+  {name:'瑞鹏宠物医院（总院）',addr:'深圳市南山区科技园南路8号',tel:'0755-8888-6666',spec:'综合全科',tags:['24小时急诊','手术中心','CT/MRI'],rating:'4.8⭐(1024评)'},
+  {name:'芭比堂宠物医院',addr:'北京市海淀区中关村大街55号',tel:'010-6666-8888',spec:'眼科专科',tags:['眼科专科','牙科','体检中心'],rating:'4.8⭐(892评)'},
+  {name:'美联众合动物医院',addr:'上海市徐汇区漕溪北路222号',tel:'021-5555-7777',spec:'综合全科',tags:['猫专科','异宠专科','24小时'],rating:'4.7⭐(756评)'},
+  {name:'宠爱国际动物医院',addr:'成都市武侯区天府大道888号',tel:'028-7777-9999',spec:'综合全科',tags:['24小时急诊','康复理疗','中医'],rating:'4.7⭐(634评)'},
+  {name:'爱诺动物医院',addr:'广州市天河区体育西路100号',tel:'020-8888-3333',spec:'心脏专科',tags:['心脏专科','内科','老年病'],rating:'4.6⭐(512评)'},
+  {name:'派特宠物医院',addr:'杭州市西湖区文三路168号',tel:'0571-6666-5555',spec:'皮肤专科',tags:['皮肤专科','过敏检测','药浴'],rating:'4.5⭐(389评)'},
+];
+function renderHospitalTab() {
+  S._hospFilter = S._hospFilter || 'all';
+  const filters = [{k:'all',l:'全部'},{k:'24小时急诊',l:'🚨 急诊'},{k:'猫专科',l:'🐱 猫科'},{k:'眼科专科',l:'👁️ 眼科'},{k:'皮肤专科',l:'🔬 皮肤'},{k:'异宠专科',l:'🦎 异宠'}];
+  let html = `<div class="tc-row" style="margin-bottom:10px">${filters.map(f=>`<button class="consult-quick-btn" style="font-size:11px" onclick="S._hospFilter='${f.k}';renderHospitalTab()">${f.l}</button>`).join('')}</div>`;
+  let list = HOSPITALS;
+  if (S._hospFilter !== 'all') list = list.filter(h => h.tags.some(t => t.includes(S._hospFilter)));
+  html += list.map(h => `<div class="hosp-card"><div class="ho-name">${h.name}</div><div class="ho-info">📍 ${h.addr}<br>📞 ${h.tel} · ${h.spec}</div><div class="ho-tags">${h.tags.map(t=>`<span class="ho-tag ${t.includes('24小时')||t.includes('急诊')?'hot':t.includes('专科')?'spec':'open'}">${t}</span>`).join(' ')}</div><div style="font-size:12px;color:var(--c-star);margin-top:4px">${h.rating}</div></div>`).join('');
+  $('#medicalBody').innerHTML = html;
+}
+
+// ===== APPOINTMENT =====
+function renderAppointmentTab() {
+  $('#medicalBody').innerHTML = `
+    <div class="apt-form">
+      <label>🏥 选择医院</label><select id="aptHosp"><option>瑞鹏宠物医院（总院）</option><option>芭比堂宠物医院</option><option>美联众合动物医院</option><option>宠爱国际动物医院</option></select>
+      <label>🐾 就诊宠物</label><select id="aptPet"><option value="orange">🐱 橘座</option><option value="wangcai">🐶 旺财</option><option value="tuantuan">🐰 团团</option></select>
+      <label>🩺 科室</label><select id="aptDept"><option>内科</option><option>外科</option><option>皮肤科</option><option>眼科</option><option>牙科</option><option>体检科</option><option>疫苗接种</option></select>
+      <label>📅 就诊日期</label><input type="date" id="aptDate">
+      <label>⏰ 时间段</label><select id="aptTime"><option>上午 9:00-9:30</option><option>上午 10:00-10:30</option><option>下午 14:00-14:30</option><option>下午 15:30-16:00</option><option>下午 17:00-17:30</option></select>
+      <label>📝 病情描述</label><input type="text" id="aptDesc" placeholder="简单描述症状...">
+      <button class="auth-submit" style="margin-top:16px" onclick="submitAppointment()">📅 确认预约</button>
+    </div>
+    <div class="apt-confirm" id="aptConfirm" style="display:none"></div>`;
+  // Set default date to tomorrow
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+  $('#aptDate').value = tomorrow.toISOString().slice(0,10);
+}
+function submitAppointment() {
+  const hosp = $('#aptHosp').value, pet = $('#aptPet').value, dept = $('#aptDept').value;
+  const date = $('#aptDate').value, time = $('#aptTime').value, desc = $('#aptDesc').value;
+  if (!date) { showToast('请选择就诊日期'); return; }
+  const petNames = {orange:'橘座',wangcai:'旺财',tuantuan:'团团'};
+  const apt = {id:Date.now(),hosp,pet,petName:petNames[pet]||pet,dept,date,time,desc,status:'已预约'};
+  const apts = JSON.parse(localStorage.getItem('petplanet_apts')||'[]');
+  apts.unshift(apt); localStorage.setItem('petplanet_apts', JSON.stringify(apts));
+  $('#aptConfirm').style.display = 'block';
+  $('#aptConfirm').innerHTML = `<span class="ac-icon">✅</span><div style="font-size:15px;font-weight:700;color:var(--c-text)">预约成功！</div><div style="font-size:12px;color:var(--c-text-light);margin-top:4px">${hosp}<br>${date} ${time}<br>${dept} · ${petNames[pet]}</div>`;
+  showToast('✅ 预约成功！');
+}
+
+// ===== MEDICINE GUIDE =====
+const MEDICINES = [
+  {icon:'💊',name:'大宠爱（Selamectin）',use:'猫狗通用体内外驱虫药。驱除心丝虫幼虫、跳蚤、耳螨、蛔虫、钩虫。',dose:'每月一次，滴于后颈部皮肤。猫：6周龄以上；狗：6周龄以上。按体重选规格。'},
+  {icon:'💉',name:'拜耳驱虫片（Drontal）',use:'猫用/狗用体内驱虫。驱除蛔虫、钩虫、绦虫。',dose:'猫：每3月一次；狗：每3月一次。按体重服用，空腹喂效果更好。'},
+  {icon:'🧴',name:'福来恩（Frontline）',use:'猫狗外用体外驱虫。杀灭跳蚤、蜱虫。',dose:'每月一次，滴于后颈部皮肤。洗澡前后48小时避免使用。'},
+  {icon:'💊',name:'益生菌（Probiotics）',use:'调节肠道菌群，缓解腹泻/软便/便秘，增强免疫力。换粮/应激/抗生素后使用。',dose:'猫：每日半包混入食物；狗：每日1包。用温水（不超过40°C）冲服。'},
+  {icon:'🩹',name:'耳肤灵（Otoderm）',use:'治疗犬猫外耳炎、耳螨感染。抗菌消炎止痒。',dose:'每日1-2次，清洁耳道后滴入2-3滴，按摩耳根部。连用5-7天。'},
+  {icon:'💊',name:'速诺（Clavamox）',use:'广谱抗生素，治疗呼吸道/泌尿道/皮肤/牙科感染。',dose:'需兽医处方！猫狗：每12小时一次，按体重计算剂量。务必完成整个疗程。'},
+  {icon:'🧪',name:'维克耳漂（Epi-Otic）',use:'犬猫耳道清洁液。去除耳垢、分泌物，预防耳部感染。',dose:'日常护理每周1-2次。灌满耳道→按摩耳根→让宠物甩出→棉球擦净外耳。'},
+  {icon:'💊',name:'关节康（Joint Guard）',use:'犬猫关节保健品。含葡萄糖胺+软骨素，保护关节软骨，缓解关节炎。',dose:'长期服用。犬：按体重每日1-2片；猫：每日半片-1片。'},
+];
+function renderMedicineTab() {
+  S._medSpecies = S._medSpecies || 'all';
+  const filters = [{k:'all',l:'全部'},{k:'驱虫',l:'🔬 驱虫'},{k:'抗生素',l:'💊 抗生素'},{k:'保健',l:'🌿 保健'},{k:'耳部',l:'👂 耳部'}];
+  let html = `<div class="tc-row" style="margin-bottom:10px">${filters.map(f=>`<button class="consult-quick-btn" style="font-size:11px" onclick="S._medSpecies='${f.k}';renderMedicineTab()">${f.l}</button>`).join('')}</div>`;
+  let list = MEDICINES;
+  if (S._medSpecies !== 'all') list = list.filter(m => m.use.includes(S._medSpecies));
+  html += list.map(m => `<div class="med-card"><span class="md-icon">${m.icon}</span><div class="md-info"><div class="md-name">${m.name}</div><div class="md-use">${m.use}</div><div class="md-dose">💡 ${m.dose}</div></div></div>`).join('');
+  html += '<div class="tc-note" style="margin:8px 0">⚠️ 以上信息仅供参考，所有药品请在兽医指导下使用。处方药必须凭兽医处方购买。</div>';
+  $('#medicalBody').innerHTML = html;
+}
+
+// ===== MEDICAL RECORDS =====
+function renderRecordsTab() {
+  const apts = JSON.parse(localStorage.getItem('petplanet_apts')||'[]');
+  // Demo records
+  const demoRecords = [
+    {title:'年度体检',date:'2024-03-15',hosp:'瑞鹏宠物医院',pet:'橘座',detail:'全面体检：血常规正常、生化指标正常、X光未见异常。医生建议控制体重，增加运动量。体重6.0kg（偏重）。'},
+    {title:'猫三联加强针',date:'2023-09-20',hosp:'美联众合动物医院',pet:'橘座',detail:'猫三联疫苗加强接种，抗体检测合格。下次接种时间：2024年9月。'},
+    {title:'洁牙治疗',date:'2023-11-10',hosp:'芭比堂宠物医院',pet:'橘座',detail:'牙结石轻度，全麻洁牙+抛光。术后恢复良好。建议每周刷牙2-3次维持口腔卫生。'},
+    {title:'初次体检+疫苗',date:'2024-05-15',hosp:'宠爱国际动物医院',pet:'团团',detail:'新宠到家体检：健康状况良好，体重1.0kg。兔瘟疫苗首免。建议每月体内驱虫。'},
+  ];
+  let html = '<div style="font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:8px">📋 就诊记录</div>';
+  if (apts.length) {
+    html += '<div style="font-size:13px;font-weight:600;color:var(--c-primary);margin:0 0 6px">📅 待就诊预约</div>';
+    html += apts.map(a => `<div class="record-card" style="border-left:3px solid var(--c-primary)"><div class="rc-header"><span class="rc-title">📅 ${a.dept} · ${a.petName}</span><span class="rc-date">${a.date} ${a.time}</span></div><div class="rc-detail">${a.hosp}<br>${a.desc||'未填写病情描述'}</div></div>`).join('');
+  }
+  html += '<div style="font-size:13px;font-weight:600;color:var(--c-text);margin:12px 0 6px">📜 历史记录</div>';
+  html += demoRecords.map(r => `<div class="record-card"><div class="rc-header"><span class="rc-title">${r.title}</span><span class="rc-date">${r.date}</span></div><div class="rc-detail">🏥 ${r.hosp} · 🐾 ${r.pet}<br>${r.detail}</div></div>`).join('');
+  $('#medicalBody').innerHTML = html;
+}
+
 // ==================== INIT ====================
 function init() {
   loadState();
@@ -2907,7 +3110,8 @@ function init() {
    petProfileOverlay, topicOverlay, collectionsOverlay, toolsOverlay,
    encycOverlay, breedDetailOverlay, placesOverlay, lfOverlay,
    checkinOverlay, badgesOverlay, gameOverlay, statsOverlay,
-   loginOverlay, registerOverlay, editProfileOverlay, settingsOverlay, memberOverlay].forEach(el => {
+   loginOverlay, registerOverlay, editProfileOverlay, settingsOverlay, memberOverlay,
+   medicalOverlay].forEach(el => {
     if (el && el.parentElement !== app) app.appendChild(el);
   });
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
