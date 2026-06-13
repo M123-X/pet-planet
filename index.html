@@ -1678,12 +1678,20 @@ function renderTimeline(petKey) {
             <button class="act-btn like-btn ${e.liked?'is-liked':''}" onclick="toggleDiaryLike('${petKey}',${e.id})"><span class="like-icon">${e.liked?'❤️':'🤍'}</span> <span class="like-count">${e.likes}</span></button>
             <button class="act-btn" onclick="openComments('diary',${e.id},'${petKey}')">💬 <span class="d-cmt-count">${e.comments}</span></button>
             <button class="act-btn coll-btn ${e.collected?'is-collected':''}" onclick="toggleDiaryCollect('${petKey}',${e.id})">${e.collected?'⭐':'☆'} <span class="coll-count">${e.collects}</span></button>
-          </div>`:`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--c-border);font-size:12px;color:var(--c-text-light)">🔒 仅自己可见</div>`}
+            <button class="act-btn" onclick="deleteDiary('${petKey}',${e.id})" style="color:var(--c-heart)">🗑️ 删除</button>
+          </div>`:`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--c-text-light)">🔒 仅自己可见</span><button class="act-btn" onclick="deleteDiary('${petKey}',${e.id})" style="color:var(--c-heart)">🗑️ 删除</button></div>`}
         </div>`;
       }).join('')}
     </div>`).join('');
 }
 
+function deleteDiary(petKey, entryId) {
+  if (!confirm('确定删除这条日记吗？此操作不可恢复。')) return;
+  const p = S.diaries[petKey]; if (!p) return;
+  p.entries = p.entries.filter(e => e.id !== entryId);
+  saveState(); renderTimeline(petKey);
+  showToast('🗑️ 日记已删除');
+}
 function toggleDiaryLike(petKey, entryId) {
   const p=S.diaries[petKey]; if(!p)return; const e=p.entries.find(x=>x.id===entryId); if(!e)return;
   e.liked=!e.liked; e.likes+=e.liked?1:-1;
