@@ -430,16 +430,49 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .tools-overlay.open{transform:translateX(0)}
 .tools-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
 .tools-header .tl-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.tools-tabs{display:flex;padding:6px 12px;gap:4px;overflow-x:auto;flex-shrink:0;border-bottom:1px solid var(--c-border);-ms-overflow-style:none;scrollbar-width:none}
+.tools-tabs::-webkit-scrollbar{display:none}
+.tools-tab-btn{flex-shrink:0;padding:7px 13px;border-radius:var(--radius-xl);font-size:12px;font-weight:600;color:var(--c-text-light);background:none;border:1.5px solid transparent;cursor:pointer;font-family:var(--font);transition:all var(--transition);white-space:nowrap}
+.tools-tab-btn.active{color:var(--c-primary);border-color:var(--c-primary);background:#FFF5EC}
 .tools-body{flex:1;overflow-y:auto;padding:16px}
 .tool-card{background:var(--c-card);border-radius:var(--radius-lg);padding:16px;margin-bottom:12px;box-shadow:var(--c-shadow)}
 .tool-card .tc-title{font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .tool-card .tc-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
-.tool-card select,.tool-card input{padding:8px 12px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);font-size:13px;font-family:var(--font);color:var(--c-text);background:#FFF;outline:none}
+.tool-card select,.tool-card input{padding:8px 12px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);font-size:13px;font-family:var(--font);color:var(--c-text);background:var(--c-card);outline:none}
 .tool-card select:focus,.tool-card input:focus{border-color:var(--c-primary)}
 .tool-card .tc-result{font-size:14px;font-weight:700;color:var(--c-primary);margin-top:8px;padding:10px;background:#FFF5EC;border-radius:var(--radius-md);text-align:center}
+.phone-frame.dark .tool-card .tc-result{background:#3A2A18}
 .tool-card .tc-btn{padding:10px 20px;border-radius:var(--radius-xl);background:var(--c-primary);color:#FFF;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);transition:all var(--transition)}
 .tool-card .tc-btn:active{transform:scale(0.96)}
 .tool-card .tc-note{font-size:11px;color:var(--c-text-light);margin-top:6px;line-height:1.5}
+/* Food safety list */
+.food-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--c-card);border-radius:var(--radius-md);margin-bottom:4px}
+.food-item .fi-icon{font-size:22px;flex-shrink:0}
+.food-item .fi-info{flex:1;min-width:0}
+.food-item .fi-name{font-size:13px;font-weight:600;color:var(--c-text)}
+.food-item .fi-desc{font-size:11px;color:var(--c-text-light);margin-top:1px}
+.food-safe{border-left:3px solid #4CAF50}.food-danger{border-left:3px solid #F44336}.food-caution{border-left:3px solid #FF9800}
+/* Symptom checker */
+.symptom-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition)}
+.symptom-card:active{transform:scale(0.98)}
+.symptom-card .sc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.symptom-card .sc-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.symptom-card .sc-level{font-size:11px;padding:3px 8px;border-radius:var(--radius-xl);font-weight:600}
+.sc-urgent{background:#FFEBEE;color:#E53935}.sc-attention{background:#FFF8E1;color:#F57C00}.sc-normal{background:#E8F5E9;color:#388E3C}
+.phone-frame.dark .sc-urgent{background:#3A1A1A;color:#FF6B6B}.phone-frame.dark .sc-attention{background:#3A2A10;color:#FFB347}.phone-frame.dark .sc-normal{background:#1B3A1B;color:#6BCB77}
+/* Behavior card */
+.behavior-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;box-shadow:var(--c-shadow)}
+.behavior-card .bh-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.behavior-card .bh-icon{font-size:28px}.behavior-card .bh-name{font-size:14px;font-weight:700;color:var(--c-text)}
+.behavior-card .bh-desc{font-size:13px;color:var(--c-text-mid);line-height:1.7}
+/* Meal plan */
+.meal-plan{background:var(--c-card);border-radius:var(--radius-lg);padding:16px;margin-bottom:12px;box-shadow:var(--c-shadow)}
+.meal-plan .mp-header{font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.meal-slot{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F5EDE4}
+.meal-slot:last-child{border-bottom:none}
+.meal-slot .ms-time{font-size:12px;font-weight:700;color:var(--c-primary);min-width:40px}
+.meal-slot .ms-food{font-size:13px;color:var(--c-text);flex:1}
+.meal-slot .ms-amount{font-size:12px;color:var(--c-text-light);font-weight:600}
 
 /* Quick tool buttons on home */
 .quick-tools-bar{display:flex;gap:6px;padding:4px 16px;margin-bottom:6px;overflow-x:auto}
@@ -948,6 +981,14 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
   <div class="tools-header">
     <button class="tl-back" onclick="closeTools()">←</button>
     <span class="nf-title">🧰 养护工具箱</span>
+  </div>
+  <div class="tools-tabs" id="toolsTabs">
+    <button class="tools-tab-btn active" data-tt="calc" onclick="switchToolTab('calc')">🔢 计算器</button>
+    <button class="tools-tab-btn" data-tt="meal" onclick="switchToolTab('meal')">🍽️ 食谱定制</button>
+    <button class="tools-tab-btn" data-tt="food" onclick="switchToolTab('food')">🚫 饮食禁忌</button>
+    <button class="tools-tab-btn" data-tt="behavior" onclick="switchToolTab('behavior')">🐾 行为解读</button>
+    <button class="tools-tab-btn" data-tt="symptom" onclick="switchToolTab('symptom')">🏥 病症自查</button>
+    <button class="tools-tab-btn" data-tt="care" onclick="switchToolTab('care')">✂️ 护理指南</button>
   </div>
   <div class="tools-body" id="toolsBody"></div>
 </div>
@@ -2309,96 +2350,149 @@ function openCollections() {
 function closeCollections() { $('#collectionsOverlay').classList.remove('open'); }
 
 // ==================== CARE TOOLS ====================
-function openTools() {
-  $('#toolsBody').innerHTML = `
-    <div class="tool-card">
-      <div class="tc-title">🍽️ 每日喂食量计算器</div>
-      <div class="tc-row">
-        <select id="feedSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option><option value="rabbit">🐰 兔</option></select>
-        <input type="number" id="feedWeight" placeholder="体重(kg)" value="5" style="width:80px" step="0.1" min="0.1">
-        <select id="feedActivity"><option value="low">安静型</option><option value="mid" selected>正常活动</option><option value="high">活跃型</option></select>
-      </div>
-      <button class="tc-btn" onclick="calcFeeding()">计算喂食量</button>
-      <div class="tc-result" id="feedResult">点击计算查看结果</div>
-      <div class="tc-note">💡 此为参考值，请根据宠物实际情况和粮食品种调整</div>
-    </div>
-
-    <div class="tool-card">
-      <div class="tc-title">💧 每日饮水量参考</div>
-      <div class="tc-row">
-        <select id="waterSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option></select>
-        <input type="number" id="waterWeight" placeholder="体重(kg)" value="5" style="width:80px" step="0.1" min="0.1">
-      </div>
-      <button class="tc-btn" onclick="calcWater()">计算饮水量</button>
-      <div class="tc-result" id="waterResult">点击计算查看结果</div>
-      <div class="tc-note">💡 猫每日约50-70ml/kg，狗约40-60ml/kg</div>
-    </div>
-
-    <div class="tool-card">
-      <div class="tc-title">🧬 宠物年龄换算（相当于人类年龄）</div>
-      <div class="tc-row">
-        <select id="ageSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗（小型犬）</option><option value="dog_mid">🐶 狗（中型犬）</option><option value="dog_large">🐶 狗（大型犬）</option><option value="rabbit">🐰 兔</option></select>
-        <input type="number" id="ageYears" placeholder="实际年龄" value="3" style="width:60px" step="0.5" min="0">
-        <span style="font-size:13px;color:var(--c-text-light)">岁</span>
-      </div>
-      <button class="tc-btn" onclick="calcAge()">换算人类年龄</button>
-      <div class="tc-result" id="ageResult">点击计算查看结果</div>
-      <div class="tc-note">💡 猫1岁≈人15岁，2岁≈24岁，之后每年+4岁；狗按体型换算</div>
-    </div>
-
-    <div class="tool-card">
-      <div class="tc-title">💉 疫苗&驱虫时间表</div>
-      <div style="font-size:12px;line-height:2;color:var(--c-text)">
-        <b>🐱 猫：</b><br>
-        · 猫三联：8周龄首免→12周龄加强→每年1次<br>
-        · 狂犬疫苗：12周龄以上→每年1次<br>
-        · 体内驱虫：幼猫每月→成猫每3月<br>
-        · 体外驱虫：每月1次<br><br>
-        <b>🐶 狗：</b><br>
-        · 多联疫苗：6周龄首免→每3-4周加强→每年1次<br>
-        · 狂犬疫苗：12周龄以上→每年1次<br>
-        · 体内驱虫：幼犬每月→成犬每3月<br>
-        · 体外驱虫：每月1次
-      </div>
-    </div>
-  `;
+function openTools(tab) {
+  S._toolTab = tab || 'calc';
+  renderToolTabs();
+  renderToolContent(S._toolTab);
   $('#toolsOverlay').classList.add('open');
   if (toolsOverlay.parentElement !== app) app.appendChild(toolsOverlay);
 }
 function closeTools() { $('#toolsOverlay').classList.remove('open'); }
+function switchToolTab(tab) {
+  S._toolTab = tab;
+  renderToolTabs();
+  renderToolContent(tab);
+}
+function renderToolTabs() {
+  $$('.tools-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tt === S._toolTab));
+}
 
+function renderToolContent(tab) {
+  if (tab === 'calc') renderCalcTab();
+  else if (tab === 'meal') renderMealTab();
+  else if (tab === 'food') renderFoodTab();
+  else if (tab === 'behavior') renderBehaviorTab();
+  else if (tab === 'symptom') renderSymptomTab();
+  else if (tab === 'care') renderCareTab();
+}
+
+// ===== CALC TAB =====
+function renderCalcTab() {
+  $('#toolsBody').innerHTML = `
+    <div class="tool-card"><div class="tc-title">🍽️ 每日喂食量计算器</div>
+      <div class="tc-row"><select id="feedSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option><option value="rabbit">🐰 兔</option></select><input type="number" id="feedWeight" placeholder="体重(kg)" value="5" style="width:80px" step="0.1"><select id="feedActivity"><option value="low">安静型</option><option value="mid" selected>正常活动</option><option value="high">活跃型</option></select></div>
+      <button class="tc-btn" onclick="calcFeeding()">计算喂食量</button><div class="tc-result" id="feedResult">点击计算查看结果</div>
+      <div class="tc-note">💡 此为参考值，请根据宠物实际情况和粮食品种调整</div></div>
+    <div class="tool-card"><div class="tc-title">💧 每日饮水量参考</div>
+      <div class="tc-row"><select id="waterSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option></select><input type="number" id="waterWeight" placeholder="体重(kg)" value="5" style="width:80px" step="0.1"></div>
+      <button class="tc-btn" onclick="calcWater()">计算饮水量</button><div class="tc-result" id="waterResult">点击计算查看结果</div>
+      <div class="tc-note">💡 猫每日约50-70ml/kg，狗约40-60ml/kg</div></div>
+    <div class="tool-card"><div class="tc-title">🧬 宠物年龄换算</div>
+      <div class="tc-row"><select id="ageSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 小型犬</option><option value="dog_mid">🐶 中型犬</option><option value="dog_large">🐶 大型犬</option><option value="rabbit">🐰 兔</option></select><input type="number" id="ageYears" placeholder="年龄" value="3" style="width:60px" step="0.5"><span style="font-size:13px;color:var(--c-text-light)">岁</span></div>
+      <button class="tc-btn" onclick="calcAge()">换算人类年龄</button><div class="tc-result" id="ageResult">点击计算查看结果</div>
+      <div class="tc-note">💡 猫1岁≈15岁，2岁≈24岁，之后每年+4岁；狗按体型换算</div></div>
+    <div class="tool-card"><div class="tc-title">💉 疫苗&驱虫时间表</div>
+      <div style="font-size:12px;line-height:2;color:var(--c-text)"><b>🐱 猫：</b><br>· 猫三联：8周首免→12周加强→每年1次<br>· 狂犬疫苗：12周龄以上→每年1次<br>· 体内驱虫：幼猫每月→成猫每3月<br>· 体外驱虫：每月1次<br><br><b>🐶 狗：</b><br>· 多联疫苗：6周首免→每3-4周加强→每年1次<br>· 狂犬疫苗：12周龄以上→每年1次<br>· 体内驱虫：幼犬每月→成犬每3月<br>· 体外驱虫：每月1次</div></div>`;
+}
 function calcFeeding() {
-  const species = $('#feedSpecies').value;
-  const weight = parseFloat($('#feedWeight').value) || 5;
-  const activity = $('#feedActivity').value;
-  let rate = species==='cat' ? 1.2 : species==='dog' ? 1.5 : 0.8;
-  if (activity==='low') rate *= 0.85; else if (activity==='high') rate *= 1.2;
-  const grams = Math.round(weight * rate * 10);
-  $('#feedResult').innerHTML = `🍽️ 建议每日喂食 <b>${grams}g</b>（分2-3餐）<br><span style="font-size:11px;color:var(--c-text-light)">约 ${Math.round(grams/10)} 勺（以10g/勺计）</span>`;
+  const s=$('#feedSpecies').value, w=parseFloat($('#feedWeight').value)||5, a=$('#feedActivity').value;
+  let r=s==='cat'?1.2:s==='dog'?1.5:0.8; if(a==='low')r*=0.85; else if(a==='high')r*=1.2;
+  const g=Math.round(w*r*10); $('#feedResult').innerHTML=`🍽️ 建议每日喂食 <b>${g}g</b>（分2-3餐）<br><span style="font-size:11px;color:var(--c-text-light)">约 ${Math.round(g/10)} 勺（10g/勺）</span>`;
 }
 function calcWater() {
-  const species = $('#waterSpecies').value;
-  const weight = parseFloat($('#waterWeight').value) || 5;
-  const rate = species==='cat' ? 60 : 50;
-  const ml = Math.round(weight * rate);
-  $('#waterResult').innerHTML = `💧 建议每日饮水 <b>${ml}ml</b><br><span style="font-size:11px;color:var(--c-text-light)">约 ${Math.round(ml/200)} 杯（200ml/杯）</span>`;
+  const s=$('#waterSpecies').value, w=parseFloat($('#waterWeight').value)||5, r=s==='cat'?60:50;
+  const ml=Math.round(w*r); $('#waterResult').innerHTML=`💧 建议每日饮水 <b>${ml}ml</b><br><span style="font-size:11px;color:var(--c-text-light)">约 ${Math.round(ml/200)} 杯（200ml/杯）</span>`;
 }
 function calcAge() {
-  const species = $('#ageSpecies').value;
-  const years = parseFloat($('#ageYears').value) || 1;
-  let humanAge;
-  if (species==='cat') {
-    if (years<=1) humanAge=15; else if (years<=2) humanAge=24; else humanAge=24+(years-2)*4;
-  } else if (species==='dog') {
-    humanAge = Math.round(years*15); // small dog simplified
-  } else if (species==='dog_mid') {
-    humanAge = Math.round(years*12.5);
-  } else if (species==='dog_large') {
-    humanAge = Math.round(years*10.5);
-  } else {
-    humanAge = Math.round(years*8);
-  }
-  $('#ageResult').innerHTML = `🧬 相当于人类的 <b>${Math.round(humanAge)} 岁</b><br><span style="font-size:11px;color:var(--c-text-light)">实际年龄：${years} 岁</span>`;
+  const s=$('#ageSpecies').value, y=parseFloat($('#ageYears').value)||1; let h;
+  if(s==='cat'){if(y<=1)h=15;else if(y<=2)h=24;else h=24+(y-2)*4;}
+  else if(s==='dog')h=Math.round(y*15); else if(s==='dog_mid')h=Math.round(y*12.5); else if(s==='dog_large')h=Math.round(y*10.5); else h=Math.round(y*8);
+  $('#ageResult').innerHTML=`🧬 相当于人类 <b>${Math.round(h)} 岁</b><br><span style="font-size:11px">实际年龄：${y} 岁</span>`;
+}
+
+// ===== MEAL PLAN TAB =====
+function renderMealTab() {
+  $('#toolsBody').innerHTML = `
+    <div class="tool-card"><div class="tc-title">🐾 定制每日食谱</div>
+      <div class="tc-row"><select id="mealSpecies" onchange="genMealPlan()"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option><option value="rabbit">🐰 兔</option></select><select id="mealAge" onchange="genMealPlan()"><option value="young">幼年</option><option value="adult" selected>成年</option><option value="senior">老年</option></select><input type="number" id="mealWeight" placeholder="体重kg" value="5" style="width:70px" onchange="genMealPlan()"></div>
+      <div id="mealPlanResult"></div></div>
+    <div class="tc-note" style="margin:0 4px">💡 食谱仅供参考，请根据宠物体质和兽医建议调整</div>`;
+  genMealPlan();
+}
+function genMealPlan() {
+  const s=$('#mealSpecies').value, a=$('#mealAge').value, w=parseFloat($('#mealWeight').value)||5;
+  const plans={
+    cat:{adult:[{t:'🌅 早餐',f:'主食猫粮+少量湿粮',a:w*10+'g'},{t:'☀️ 午餐',f:'主食猫粮',a:w*8+'g'},{t:'🌙 晚餐',f:'主食猫粮+水煮鸡胸肉',a:w*10+'g+20g鸡胸肉'}],young:[{t:'🌅 早餐',f:'幼猫粮+羊奶粉',a:w*12+'g+30ml'},{t:'☀️ 午餐',f:'幼猫粮',a:w*10+'g'},{t:'🌙 晚餐',f:'幼猫粮+湿粮',a:w*12+'g+半包'}],senior:[{t:'🌅 早餐',f:'老年猫粮+温水',a:w*8+'g'},{t:'☀️ 午餐',f:'老年猫粮',a:w*6+'g'},{t:'🌙 晚餐',f:'老年猫粮+易消化湿粮',a:w*8+'g+半包'}]},
+    dog:{adult:[{t:'🌅 早餐',f:'成犬粮+温水泡软',a:w*15+'g'},{t:'☀️ 午餐',f:'成犬粮+蔬菜泥',a:w*15+'g+30g'},{t:'🌙 晚餐',f:'成犬粮+水煮肉',a:w*20+'g+50g肉'}],young:[{t:'🌅 早餐',f:'幼犬粮+羊奶粉',a:w*18+'g+50ml'},{t:'☀️ 午餐',f:'幼犬粮+钙粉',a:w*15+'g'},{t:'🌙 晚餐',f:'幼犬粮+肉泥',a:w*18+'g+30g'}],senior:[{t:'🌅 早餐',f:'老年犬粮+关节保健品',a:w*12+'g'},{t:'☀️ 午餐',f:'老年犬粮',a:w*10+'g'},{t:'🌙 晚餐',f:'老年犬粮+易消化肉',a:w*12+'g+30g'}]},
+    rabbit:{adult:[{t:'🌅 早餐',f:'提摩西草（无限量）',a:'一大把'},{t:'☀️ 午餐',f:'兔粮+蔬菜沙拉',a:w*5+'g+少量'},{t:'🌙 晚餐',f:'提摩西草+少量水果',a:'一大把+1小片'}],young:[{t:'🌅 早餐',f:'苜蓿草+幼兔粮',a:'一把+'+w*6+'g'},{t:'☀️ 午餐',f:'提摩西草',a:'少量'},{t:'🌙 晚餐',f:'苜蓿草+幼兔粮',a:'一把+'+w*6+'g'}],senior:[{t:'🌅 早餐',f:'提摩西草+老年兔粮',a:'一大把+'+w*4+'g'},{t:'☀️ 午餐',f:'蔬菜（少钙）',a:'少量'},{t:'🌙 晚餐',f:'提摩西草',a:'一大把'}]}
+  };
+  const p=(plans[s]||plans.cat)[a]||plans.cat.adult;
+  $('#mealPlanResult').innerHTML=p.map(m=>`<div class="meal-slot"><span class="ms-time">${m.t}</span><span class="ms-food">${m.f}</span><span class="ms-amount">${m.a}</span></div>`).join('');
+}
+
+// ===== FOOD SAFETY TAB =====
+function renderFoodTab() {
+  const foods={cat:[{n:'煮鸡蛋',i:'🥚',d:'优质蛋白，每周1-2次',s:'safe'},{n:'三文鱼',i:'🐟',d:'富含Omega-3，对皮毛好',s:'safe'},{n:'南瓜',i:'🎃',d:'帮助消化，缓解便秘',s:'safe'},{n:'蓝莓',i:'🫐',d:'抗氧化，少量作为零食',s:'safe'},{n:'巧克力',i:'🍫',d:'剧毒！含可可碱，可致命',s:'danger'},{n:'洋葱/大蒜',i:'🧅',d:'破坏红细胞，导致贫血',s:'danger'},{n:'葡萄/葡萄干',i:'🍇',d:'可导致肾衰竭',s:'danger'},{n:'牛奶',i:'🥛',d:'多数猫乳糖不耐受，易腹泻',s:'caution'},{n:'生鸡蛋',i:'🥚',d:'可能含沙门氏菌，影响维生素吸收',s:'caution'},{n:'金枪鱼罐头',i:'🥫',d:'盐分高，长期食用会导致营养不良',s:'caution'}],
+    dog:[{n:'胡萝卜',i:'🥕',d:'富含维生素A，对眼睛好',s:'safe'},{n:'苹果（去核）',i:'🍎',d:'清新口气，补充维生素',s:'safe'},{n:'鸡胸肉',i:'🍗',d:'优质蛋白，煮熟喂食',s:'safe'},{n:'蓝莓',i:'🫐',d:'抗氧化，训练用零食',s:'safe'},{n:'巧克力',i:'🍫',d:'剧毒！比猫更敏感',s:'danger'},{n:'木糖醇',i:'🍬',d:'极毒！导致血糖骤降肝衰竭',s:'danger'},{n:'葡萄',i:'🍇',d:'急性肾衰竭，几颗就可能致命',s:'danger'},{n:'澳洲坚果',i:'🥜',d:'导致虚弱/呕吐/体温升高',s:'danger'},{n:'牛油果',i:'🥑',d:'含Persin，可能导致呕吐',s:'caution'},{n:'煮骨头',i:'🦴',d:'易碎刺伤消化道，用专用咬胶替代',s:'caution'}],
+    rabbit:[{n:'提摩西草',i:'🌿',d:'主食，无限量供应',s:'safe'},{n:'胡萝卜（少量）',i:'🥕',d:'糖分高，当零食偶尔给',s:'safe'},{n:'罗马生菜',i:'🥬',d:'安全蔬菜，适量喂食',s:'safe'},{n:'苹果（去核）',i:'🍎',d:'偶尔作为零食',s:'safe'},{n:'巧克力',i:'🍫',d:'剧毒！绝对禁止',s:'danger'},{n:' iceberg生菜',i:'🥗',d:'营养低且可能导致腹泻',s:'danger'},{n:'面包/谷物',i:'🍞',d:'兔无法消化高淀粉食物',s:'danger'},{n:'洋葱/大蒜',i:'🧅',d:'破坏红细胞',s:'danger'},{n:'玉米',i:'🌽',d:'难以消化，可能导致肠梗阻',s:'caution'},{n:'香蕉',i:'🍌',d:'糖分极高，极少量作为零食',s:'caution'}]
+  };
+  S._foodSpecies=S._foodSpecies||'cat';
+  let html=`<div class="tc-row" style="margin-bottom:12px"><select id="foodSpecies" onchange="S._foodSpecies=this.value;renderFoodTab()"><option value="cat" ${S._foodSpecies==='cat'?'selected':''}>🐱 猫</option><option value="dog" ${S._foodSpecies==='dog'?'selected':''}>🐶 狗</option><option value="rabbit" ${S._foodSpecies==='rabbit'?'selected':''}>🐰 兔</option></select></div>`;
+  const list=foods[S._foodSpecies]||foods.cat;
+  const label={safe:'✅ 安全',caution:'⚠️ 注意',danger:'🚫 危险'}, cls={safe:'food-safe',caution:'food-caution',danger:'food-danger'};
+  html+=list.map(f=>`<div class="food-item ${cls[f.s]}"><span class="fi-icon">${f.i}</span><div class="fi-info"><div class="fi-name">${f.n} <span style="font-size:10px;color:var(--c-text-light)">${label[f.s]}</span></div><div class="fi-desc">${f.d}</div></div></div>`).join('');
+  $('#toolsBody').innerHTML=html;
+}
+
+// ===== BEHAVIOR TAB =====
+function renderBehaviorTab() {
+  S._bhSpecies=S._bhSpecies||'cat';
+  const behaviors={cat:[{i:'😽',n:'呼噜声',d:'猫咪发出咕噜咕噜的声音通常表示满足和放松。但有时在疼痛或紧张时也会呼噜——这是它们自我安抚的方式。如果伴随进食减少或躲藏行为，建议就医。'},{i:'🐾',n:'踩奶',d:'猫咪用前爪交替按压柔软表面（如毯子、你的肚子），这是幼猫时期吸奶时刺激乳汁分泌的本能残留。成年猫踩奶表示极度舒适和安全感，它把你当妈妈了！'},{i:'🙀',n:'炸毛/弓背',d:'猫受到惊吓或感到威胁时的防御姿态——毛发竖立让身体看起来更大以威慑敌人。此时不要强行靠近，给它空间冷静，等它主动来找你。'},{i:'😾',n:'尾巴快速甩动',d:'与狗不同，猫快速甩尾巴表示不耐烦或烦躁。如果正在撸猫时尾巴开始拍打，说明它已经受够了——立即停手，否则可能被咬或抓。'},{i:'🎁',n:'送"礼物"（死老鼠/鸟）',d:'猫把猎物带回家不是捣乱，而是把你当成不会捕猎的家人。它们在分享食物！这是猫表达爱和关心的方式，请别惩罚它。'}],
+    dog:[{i:'🐕',n:'摇尾巴',d:'狗狗摇尾巴不只是开心——尾巴高举快速摇动表示兴奋，低垂慢摇表示紧张或不确定，僵硬摇动可能表示警惕。要结合全身姿态判断。'},{i:'😛',n:'舔脸/舔手',d:'舔主人是表达亲密和信任，同时也能获取你皮肤上的盐分和信息素。过度舔舐可能表示焦虑，需关注是否有分离焦虑或压力源。'},{i:'🔄',n:'追尾巴转圈',d:'偶尔追尾巴是正常的游戏行为。但如果频繁长时间追尾，可能是无聊、焦虑的表现，也可能是皮肤病或肛门腺问题，建议咨询兽医。'},{i:'😴',n:'蜷缩成一团睡',d:'狗狗蜷成甜甜圈状睡觉是祖先在野外保护腹部要害的本能。如果同时发抖，可能是冷；如果呼吸急促，可能在做梦。'},{i:'🗣️',n:'嚎叫/狼嚎',d:'狗狗嚎叫可能是在回应高音（如警笛、乐器），也可能是分离焦虑的信号。某些品种（如哈士奇）天生更爱嚎叫。如果突然开始频繁嚎叫，需排查是否有身体不适。'}],
+  };
+  let html=`<div class="tc-row" style="margin-bottom:12px"><select id="bhSpecies" onchange="S._bhSpecies=this.value;renderBehaviorTab()"><option value="cat" ${S._bhSpecies==='cat'?'selected':''}>🐱 猫咪行为</option><option value="dog" ${S._bhSpecies==='dog'?'selected':''}>🐶 狗狗行为</option></select></div>`;
+  const list=behaviors[S._bhSpecies]||behaviors.cat;
+  html+=list.map(b=>`<div class="behavior-card"><div class="bh-header"><span class="bh-icon">${b.i}</span><span class="bh-name">${b.n}</span></div><div class="bh-desc">${b.d}</div></div>`).join('');
+  $('#toolsBody').innerHTML=html;
+}
+
+// ===== SYMPTOM CHECKER =====
+function renderSymptomTab() {
+  const symptoms=[{n:'频繁呕吐',l:'urgent',d:'可能原因：食物中毒、肠胃炎、胰腺炎、异物梗阻',a:'禁食4-6小时观察，如持续呕吐或呕吐物带血，立即就医。猫频繁呕吐需警惕毛球症或肾衰竭。'},{n:'腹泻（持续超过24h）',l:'attention',d:'可能原因：饮食不当、寄生虫、细菌感染、应激',a:'暂停喂食12小时，提供充足饮水防脱水。如便血或伴有呕吐发热，立即就医。'},{n:'食欲突然下降',l:'attention',d:'可能原因：口腔疾病、消化不良、应激、内脏疾病',a:'检查口腔有无溃疡/牙结石。观察24小时，如完全不进食+精神萎靡，及时就医。猫超过48小时不进食可能导致脂肪肝。'},{n:'频繁抓挠/舔舐',l:'normal',d:'可能原因：皮肤病、过敏、寄生虫、焦虑',a:'检查皮肤有无红肿/脱毛/跳蚤。定期驱虫，更换低敏粮。持续不改善需做皮肤刮片检查。'},{n:'眼睛有分泌物',l:'normal',d:'可能原因：结膜炎、泪管堵塞、过敏、上呼吸道感染',a:'用温水棉球从内向外擦拭。黄绿色脓性分泌物+眼红肿需就医，可能需抗生素眼药水。'},{n:'跛行/不愿走动',l:'urgent',d:'可能原因：骨折、关节炎、韧带损伤、趾间炎',a:'检查脚掌有无异物/伤口。限制活动，如明显肿胀或无法承重，立即拍X光检查。老犬持续跛行需排查髋关节发育不良。'},{n:'精神萎靡/嗜睡',l:'urgent',d:'可能原因：感染、贫血、代谢疾病、中毒',a:'测量体温（猫狗正常38-39.2°C）。如伴有牙龈苍白/呼吸急促/拒绝进食，立即急诊。'},{n:'频繁挠耳朵/甩头',l:'normal',d:'可能原因：耳螨、外耳炎、真菌感染、异物入耳',a:'观察耳道有无黑色分泌物/红肿/异味。勿用棉签深入，用专用洗耳液清洁。症状持续需就医。'}];
+  const label={urgent:'🚨 紧急',attention:'⚠️ 关注',normal:'💡 观察'},cls={urgent:'sc-urgent',attention:'sc-attention',normal:'sc-normal'};
+  $('#toolsBody').innerHTML=symptoms.map(s=>`<div class="symptom-card"><div class="sc-header"><span class="sc-name">${s.n}</span><span class="sc-level ${cls[s.l]}">${label[s.l]}</span></div><div style="font-size:12px;color:var(--c-text-mid);line-height:1.6;margin-bottom:4px">${s.d}</div><div style="font-size:12px;color:var(--c-text);line-height:1.6;padding:8px;background:var(--c-bg-warm);border-radius:8px">💡 ${s.a}</div></div>`).join('');
+}
+
+// ===== CARE GUIDE TAB =====
+function renderCareTab() {
+  $('#toolsBody').innerHTML=`
+    <div class="tool-card"><div class="tc-title">🐱 猫咪日常护理</div><div style="font-size:13px;line-height:2;color:var(--c-text)">
+      <b>✂️ 梳毛：</b>短毛猫每周1-2次，长毛猫每日梳理，减少毛球<br>
+      <b>🦷 刷牙：</b>每周2-3次，用宠物专用牙膏，预防牙结石<br>
+      <b>✂️ 剪指甲：</b>每2-3周一次，注意避开血线（粉红色部分）<br>
+      <b>🛁 洗澡：</b>猫一般不需频繁洗澡，3-6月一次即可<br>
+      <b>👂 清洁耳朵：</b>每月检查，无异味无污垢为正常<br>
+      <b>🐾 猫砂盆：</b>每日清理，每周彻底换砂消毒</div></div>
+    <div class="tool-card"><div class="tc-title">🐶 狗狗日常护理</div><div style="font-size:13px;line-height:2;color:var(--c-text)">
+      <b>✂️ 梳毛：</b>短毛犬每周2-3次，长毛犬每日梳理<br>
+      <b>🛁 洗澡：</b>每2-4周一次，用狗狗专用沐浴露<br>
+      <b>🦷 刷牙：</b>每周2-3次，配合洁齿骨使用<br>
+      <b>✂️ 剪指甲：</b>每2-3周一次，遛狗多的磨得快可延长<br>
+      <b>👂 清洁耳朵：</b>垂耳犬种每周检查清洁，立耳犬每月<br>
+      <b>🏃 运动：</b>每日至少30-60分钟遛狗，大型犬需更多</div></div>
+    <div class="tool-card"><div class="tc-title">🐰 兔兔日常护理</div><div style="font-size:13px;line-height:2;color:var(--c-text)">
+      <b>🌿 主食：</b>提摩西草无限量，占饮食80%以上<br>
+      <b>✂️ 梳毛：</b>换毛期每日梳理，平时每周2-3次<br>
+      <b>🦷 牙齿：</b>提供磨牙玩具，牙齿持续生长需磨损<br>
+      <b>✂️ 剪指甲：</b>每月一次，注意血管线<br>
+      <b>🧹 笼舍：</b>每日清理粪便，每周彻底消毒<br>
+      <b>🏃 放风：</b>每日至少2小时笼外活动</div></div>
+    <div class="tool-card"><div class="tc-title">🦎 爬宠日常护理</div><div style="font-size:13px;line-height:2;color:var(--c-text)">
+      <b>🌡️ 温度：</b>严格控温，热点32-35°C，冷区24-26°C<br>
+      <b>💡 UVB灯：</b>每日开启10-12小时，每6个月更换灯管<br>
+      <b>💧 湿度：</b>根据品种维持40-80%，每日喷水<br>
+      <b>🍽️ 喂食：</b>豹纹守宫2-3天一次，幼体需每天喂<br>
+      <b>🧹 垫材：</b>定期更换，保持清洁防病菌</div></div>`;
 }
 
 // ==================== DARK MODE ====================
