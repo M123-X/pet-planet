@@ -582,6 +582,75 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .stat-bar-label{display:flex;justify-content:space-between;font-size:12px;color:var(--c-text-mid);margin-bottom:4px}
 .stat-bar-track{height:8px;border-radius:4px;background:var(--c-border);overflow:hidden}
 .stat-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--c-primary),var(--c-primary-light));transition:width .8s cubic-bezier(0.34,1.56,0.64,1)}
+
+/* ============ ACCOUNT SYSTEM ============ */
+.auth-overlay{position:absolute;inset:0;z-index:95;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.auth-overlay.open{transform:translateX(0)}
+.auth-header{display:flex;align-items:center;padding:8px;border-bottom:1px solid var(--c-border);flex-shrink:0}
+.auth-header .ah-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px;color:var(--c-text)}
+.auth-body{flex:1;overflow-y:auto;padding:24px 20px}
+.auth-logo{text-align:center;margin-bottom:24px}
+.auth-logo .al-icon{font-size:56px;display:block;margin-bottom:8px}
+.auth-logo .al-title{font-size:22px;font-weight:800;color:var(--c-text)}
+.auth-method-tabs{display:flex;margin-bottom:20px}
+.auth-method-tab{flex:1;padding:10px;text-align:center;font-size:14px;font-weight:600;color:var(--c-text-light);background:none;border:none;border-bottom:2px solid var(--c-border);cursor:pointer;font-family:var(--font);transition:all var(--transition)}
+.auth-method-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.auth-input-group{margin-bottom:14px}
+.auth-input-group label{display:block;font-size:12px;font-weight:600;color:var(--c-text-mid);margin-bottom:4px}
+.auth-input{width:100%;padding:12px 14px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);font-size:14px;font-family:var(--font);color:var(--c-text);background:var(--c-card);outline:none;transition:all var(--transition)}
+.auth-input:focus{border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(255,140,66,0.1)}
+.auth-input::placeholder{color:var(--c-text-lighter)}
+.auth-sms-row{display:flex;gap:8px}.auth-sms-row .auth-input{flex:1}
+.auth-sms-btn{padding:12px 16px;border-radius:var(--radius-md);background:var(--c-primary);color:#FFF;font-size:13px;font-weight:700;border:none;cursor:pointer;white-space:nowrap;font-family:var(--font);flex-shrink:0}
+.auth-sms-btn:active{transform:scale(0.95)}.auth-sms-btn.counting{background:#B0B0B0;pointer-events:none}
+.auth-submit{width:100%;padding:14px;border-radius:var(--radius-xl);background:linear-gradient(135deg,var(--c-primary),var(--c-primary-light));color:#FFF;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);margin-top:8px;box-shadow:0 4px 20px rgba(255,140,66,0.35);transition:all var(--transition)}
+.auth-submit:active{transform:scale(0.97)}
+.auth-switch{text-align:center;margin-top:16px;font-size:13px;color:var(--c-text-light)}
+.auth-switch button{color:var(--c-primary);font-weight:700;cursor:pointer;border:none;background:none;font-family:var(--font);font-size:13px}
+
+.edit-profile-overlay{position:absolute;inset:0;z-index:95;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.edit-profile-overlay.open{transform:translateX(0)}
+.ep-avatar-section{text-align:center;padding:20px}
+.ep-avatar-options{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.ep-av-opt{width:44px;height:44px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;border:2px solid transparent;transition:all var(--transition);background:var(--c-card)}
+.ep-av-opt:active,.ep-av-opt.sel{border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(255,140,66,0.2)}
+.ep-form{padding:0 20px;margin-bottom:40px}
+.ep-form label{display:block;font-size:12px;font-weight:600;color:var(--c-text-mid);margin-bottom:4px;margin-top:14px}
+.ep-form input,.ep-form textarea{width:100%;padding:12px 14px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);font-size:14px;font-family:var(--font);color:var(--c-text);background:var(--c-card);outline:none;resize:none}
+.ep-form input:focus,.ep-form textarea:focus{border-color:var(--c-primary)}
+.ep-form .ep-gender-row{display:flex;gap:8px}
+.ep-gender-btn{flex:1;padding:10px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);background:var(--c-card);text-align:center;font-size:13px;cursor:pointer;font-family:var(--font);transition:all var(--transition);color:var(--c-text-light)}
+.ep-gender-btn.sel{border-color:var(--c-primary);background:#FFF5EC;color:var(--c-primary);font-weight:600}
+
+.settings-overlay{position:absolute;inset:0;z-index:95;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.settings-overlay.open{transform:translateX(0)}
+.settings-section{margin:12px 16px}
+.settings-section .ss-title{font-size:12px;font-weight:600;color:var(--c-text-light);padding:0 4px;margin-bottom:6px}
+.settings-item{display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--c-card);cursor:pointer;transition:all var(--transition);border:none;font-family:var(--font);width:100%;text-align:left;font-size:14px;color:var(--c-text)}
+.settings-item:first-of-type{border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.settings-item:last-of-type{border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.settings-item:active{background:#FFF5EC}
+.settings-item .si-left{display:flex;align-items:center;gap:10px}
+.settings-item .si-icon{font-size:18px;width:24px;text-align:center}
+.settings-item .si-right{color:var(--c-text-light);font-size:13px;display:flex;align-items:center;gap:4px}
+.toggle-switch{width:44px;height:26px;border-radius:13px;background:var(--c-border);position:relative;cursor:pointer;transition:all var(--transition);border:none;flex-shrink:0}
+.toggle-switch.on{background:var(--c-primary)}
+.toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#FFF;transition:all var(--transition);box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+.toggle-switch.on::after{left:21px}
+
+.member-overlay{position:absolute;inset:0;z-index:95;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.member-overlay.open{transform:translateX(0)}
+.member-hero{text-align:center;padding:24px 16px;background:linear-gradient(135deg,#FFF5EC,#FFE8D6);margin:16px;border-radius:var(--radius-lg)}
+.phone-frame.dark .member-hero{background:linear-gradient(135deg,#2A2018,#3A2A18)}
+.member-hero .mh-badge{font-size:48px;display:block;margin-bottom:6px}
+.member-hero .mh-level{font-size:20px;font-weight:800;color:var(--c-primary)}
+.member-hero .mh-progress{margin-top:8px}
+.member-perks{margin:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.member-perk{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;text-align:center;box-shadow:var(--c-shadow)}
+.member-perk .mp-icon{font-size:28px;display:block;margin-bottom:4px}
+.member-perk .mp-name{font-size:13px;font-weight:700;color:var(--c-text)}
+.member-perk .mp-desc{font-size:10px;color:var(--c-text-light);margin-top:2px}
+.member-perk.locked{opacity:.4;filter:grayscale(1)}
 </style>
 </head>
 <body>
@@ -682,25 +751,7 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
     <!-- PROFILE -->
     <div class="page" id="page-profile">
-      <div class="profile-header">
-        <div class="ph-avatar">🐱</div>
-        <div class="ph-name">铲屎官小橘</div>
-        <div class="ph-bio">🐾 橘座 · 旺财 · 团团的家长 | 养宠3年 | 记录每一个温暖瞬间</div>
-      </div>
-      <div class="profile-stats">
-        <button class="profile-stat"><span class="ps-num" id="myPostCount">0</span><span class="ps-label">动态</span></button>
-        <button class="profile-stat"><span class="ps-num" id="myDiaryCount">0</span><span class="ps-label">日记</span></button>
-        <button class="profile-stat"><span class="ps-num">128</span><span class="ps-label">粉丝</span></button>
-        <button class="profile-stat"><span class="ps-num">89</span><span class="ps-label">关注</span></button>
-      </div>
-      <div class="profile-menu">
-        <button class="profile-menu-item" onclick="openCollections()"><span class="pm-icon">⭐</span>我的收藏<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="openTools()"><span class="pm-icon">🧰</span>养护工具箱<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="navigateTo('diary')"><span class="pm-icon">📖</span>成长日记<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="openPetProfile(S.currentPet)"><span class="pm-icon">🐾</span>宠物档案<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="showToast('⚙️ 设置 — 功能开发中～')"><span class="pm-icon">⚙️</span>设置<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="showToast('ℹ️ 关于萌宠星球 v2.0')"><span class="pm-icon">ℹ️</span>关于<span class="pm-arrow">›</span></button>
-      </div>
+      <div id="profileContent"></div>
     </div>
   </div>
 
@@ -715,6 +766,91 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
 </div><!-- /phone-frame -->
 </div><!-- /app-wrapper -->
+
+<!-- ============ LOGIN ============ -->
+<div class="auth-overlay" id="loginOverlay">
+  <div class="auth-header"><button class="ah-back" onclick="closeLogin()">←</button></div>
+  <div class="auth-body">
+    <div class="auth-logo"><span class="al-icon">🐾</span><div class="al-title">欢迎回来</div></div>
+    <div class="auth-method-tabs">
+      <button class="auth-method-tab active" data-am="sms" onclick="switchLoginMethod('sms')">📱 验证码登录</button>
+      <button class="auth-method-tab" data-am="pwd" onclick="switchLoginMethod('pwd')">🔑 密码登录</button>
+    </div>
+    <div id="loginSmsForm">
+      <div class="auth-input-group"><label>手机号</label><input class="auth-input" id="loginPhone" type="tel" placeholder="请输入手机号" maxlength="11"></div>
+      <div class="auth-input-group"><label>验证码</label><div class="auth-sms-row"><input class="auth-input" id="loginSms" placeholder="请输入验证码" maxlength="6"><button class="auth-sms-btn" id="loginSmsBtn" onclick="sendSms('login')">获取验证码</button></div></div>
+    </div>
+    <div id="loginPwdForm" style="display:none">
+      <div class="auth-input-group"><label>手机号</label><input class="auth-input" id="loginPhonePwd" type="tel" placeholder="请输入手机号" maxlength="11"></div>
+      <div class="auth-input-group"><label>密码</label><input class="auth-input" id="loginPwd" type="password" placeholder="请输入密码"></div>
+    </div>
+    <button class="auth-submit" onclick="doLogin()">登 录</button>
+    <div class="auth-switch">还没有账号？<button onclick="closeLogin();openRegister()">立即注册</button></div>
+  </div>
+</div>
+
+<!-- ============ REGISTER ============ -->
+<div class="auth-overlay" id="registerOverlay">
+  <div class="auth-header"><button class="ah-back" onclick="closeRegister()">←</button></div>
+  <div class="auth-body">
+    <div class="auth-logo"><span class="al-icon">🐾</span><div class="al-title">创建账号</div></div>
+    <div class="auth-input-group"><label>手机号</label><input class="auth-input" id="regPhone" type="tel" placeholder="请输入手机号" maxlength="11"></div>
+    <div class="auth-input-group"><label>验证码</label><div class="auth-sms-row"><input class="auth-input" id="regSms" placeholder="请输入验证码" maxlength="6"><button class="auth-sms-btn" id="regSmsBtn" onclick="sendSms('reg')">获取验证码</button></div></div>
+    <div class="auth-input-group"><label>设置昵称</label><input class="auth-input" id="regNickname" placeholder="给自己起个名字吧" maxlength="12"></div>
+    <div class="auth-input-group"><label>设置密码</label><input class="auth-input" id="regPwd" type="password" placeholder="6-16位密码"></div>
+    <button class="auth-submit" onclick="doRegister()">注 册</button>
+    <div class="auth-switch">已有账号？<button onclick="closeRegister();openLogin()">立即登录</button></div>
+  </div>
+</div>
+
+<!-- ============ EDIT PROFILE ============ -->
+<div class="edit-profile-overlay" id="editProfileOverlay">
+  <div class="auth-header"><button class="ah-back" onclick="closeEditProfile()">←</button><span style="font-weight:700;font-size:16px">编辑资料</span><button class="auth-sms-btn" style="padding:8px 16px;font-size:12px" onclick="saveProfile()">保存</button></div>
+  <div style="flex:1;overflow-y:auto">
+    <div class="ep-avatar-section">
+      <div class="ep-av-opt" style="width:80px;height:80px;font-size:44px;border:2px solid var(--c-primary)" id="profileMainAvatar">🐱</div>
+      <div class="ep-avatar-options" id="avatarOptions"></div>
+    </div>
+    <div class="ep-form">
+      <label>昵称</label><input type="text" id="epNickname" placeholder="你的昵称" maxlength="12">
+      <label>个性签名</label><input type="text" id="epBio" placeholder="写一句话介绍自己..." maxlength="30">
+      <label>性别</label>
+      <div class="ep-gender-row">
+        <button class="ep-gender-btn sel" data-g="male" onclick="setGender('male')">♂ 男</button>
+        <button class="ep-gender-btn" data-g="female" onclick="setGender('female')">♀ 女</button>
+        <button class="ep-gender-btn" data-g="secret" onclick="setGender('secret')">🌙 保密</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SETTINGS ============ -->
+<div class="settings-overlay" id="settingsOverlay">
+  <div class="auth-header"><button class="ah-back" onclick="closeSettings()">←</button><span style="font-weight:700;font-size:16px">设置</span></div>
+  <div style="flex:1;overflow-y:auto;padding-top:8px">
+    <div class="settings-section"><div class="ss-title">账号安全</div>
+      <button class="settings-item" onclick="showPwdChange()"><span class="si-left"><span class="si-icon">🔑</span>修改密码</span><span class="si-right">›</span></button>
+    </div>
+    <div class="settings-section"><div class="ss-title">隐私</div>
+      <button class="settings-item" onclick="toggleSetting(this,'privacyDiary')"><span class="si-left"><span class="si-icon">📖</span>日记默认私密</span><span class="si-right"><span class="toggle-switch" id="toggleDiary"></span></span></button>
+      <button class="settings-item" onclick="toggleSetting(this,'privacyLocation')"><span class="si-left"><span class="si-icon">📍</span>隐藏位置信息</span><span class="si-right"><span class="toggle-switch on" id="toggleLocation"></span></span></button>
+    </div>
+    <div class="settings-section"><div class="ss-title">通知</div>
+      <button class="settings-item" onclick="toggleSetting(this,'notifLike')"><span class="si-left"><span class="si-icon">❤️</span>点赞通知</span><span class="si-right"><span class="toggle-switch on" id="toggleLikeNotif"></span></span></button>
+      <button class="settings-item" onclick="toggleSetting(this,'notifComment')"><span class="si-left"><span class="si-icon">💬</span>评论通知</span><span class="si-right"><span class="toggle-switch on" id="toggleCommentNotif"></span></span></button>
+    </div>
+    <div class="settings-section"><div class="ss-title">其他</div>
+      <button class="settings-item" onclick="showToast('📱 萌宠星球 v6.0')"><span class="si-left"><span class="si-icon">ℹ️</span>关于萌宠星球</span><span class="si-right">v6.0 ›</span></button>
+      <button class="settings-item" onclick="doLogout()"><span class="si-left"><span class="si-icon" style="color:var(--c-heart)">🚪</span>退出登录</span><span class="si-right">›</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MEMBER CENTER ============ -->
+<div class="member-overlay" id="memberOverlay">
+  <div class="auth-header"><button class="ah-back" onclick="closeMember()">←</button><span style="font-weight:700;font-size:16px">会员中心</span></div>
+  <div style="flex:1;overflow-y:auto" id="memberBody"></div>
+</div>
 
 <!-- ============ CHECK-IN ============ -->
 <div class="checkin-overlay" id="checkinOverlay">
@@ -1486,12 +1622,218 @@ function renderRankings(tab) {
   }).join('');
 }
 
-// ==================== PROFILE ====================
-function updateProfileStats() {
-  let postCount = S.feeds.filter(f=>f.user.name==='我').length;
-  let diaryCount = 0; Object.values(S.diaries).forEach(p=>{ diaryCount += p.entries.length; });
-  $('#myPostCount').textContent = postCount; $('#myDiaryCount').textContent = diaryCount;
+// ==================== ACCOUNT SYSTEM ====================
+function getAccount() {
+  try { return JSON.parse(localStorage.getItem('petplanet_account')||'null'); } catch(e) { return null; }
 }
+function saveAccount(acc) { localStorage.setItem('petplanet_account', JSON.stringify(acc)); }
+function isLoggedIn() { return !!getAccount(); }
+
+function openLogin() {
+  S._loginMethod = 'sms';
+  $$('.auth-method-tab').forEach(b => b.classList.toggle('active', b.dataset.am === 'sms'));
+  $('#loginSmsForm').style.display = ''; $('#loginPwdForm').style.display = 'none';
+  $('#loginOverlay').classList.add('open');
+  if (loginOverlay.parentElement !== app) app.appendChild(loginOverlay);
+}
+function closeLogin() { $('#loginOverlay').classList.remove('open'); }
+function switchLoginMethod(m) {
+  S._loginMethod = m;
+  $$('.auth-method-tab').forEach(b => b.classList.toggle('active', b.dataset.am === m));
+  $('#loginSmsForm').style.display = m === 'sms' ? '' : 'none';
+  $('#loginPwdForm').style.display = m === 'pwd' ? '' : 'none';
+}
+function sendSms(type) {
+  const btn = type === 'login' ? $('#loginSmsBtn') : $('#regSmsBtn');
+  let sec = 60; btn.textContent = sec + 's'; btn.classList.add('counting');
+  const timer = setInterval(() => { sec--; btn.textContent = sec + 's'; if (sec <= 0) { clearInterval(timer); btn.textContent = '获取验证码'; btn.classList.remove('counting'); } }, 1000);
+  showToast('📱 验证码已发送（模拟：123456）');
+}
+function doLogin() {
+  const phone = ($('#loginPhone').value || $('#loginPhonePwd').value || '').trim();
+  if (!phone || phone.length < 11) { showToast('📱 请输入正确的手机号'); return; }
+  if (S._loginMethod === 'sms') { if (!$('#loginSms').value.trim()) { showToast('请输入验证码'); return; } }
+  else { if (!$('#loginPwd').value.trim()) { showToast('请输入密码'); return; } }
+  // Auto-create account if not exists
+  let acc = getAccount();
+  if (!acc) { acc = { phone, nickname: '铲屎官' + phone.slice(-4), avatar: '🐱', bio: '新来的铲屎官～', gender: 'secret', level: 1, exp: 0, createdAt: new Date().toISOString() }; }
+  else { acc.phone = phone; }
+  saveAccount(acc);
+  closeLogin(); updateProfilePage(); updateNotifBadge();
+  showToast('✅ 登录成功！欢迎回来，' + acc.nickname);
+}
+
+function openRegister() {
+  $('#regPhone').value = ''; $('#regSms').value = ''; $('#regNickname').value = ''; $('#regPwd').value = '';
+  $('#registerOverlay').classList.add('open');
+  if (registerOverlay.parentElement !== app) app.appendChild(registerOverlay);
+}
+function closeRegister() { $('#registerOverlay').classList.remove('open'); }
+function doRegister() {
+  const phone = $('#regPhone').value.trim();
+  const sms = $('#regSms').value.trim();
+  const nickname = ($('#regNickname').value.trim() || '铲屎官' + phone.slice(-4));
+  const pwd = $('#regPwd').value.trim();
+  if (!phone || phone.length < 11) { showToast('📱 请输入正确的手机号'); return; }
+  if (!sms) { showToast('请输入验证码'); return; }
+  if (!pwd || pwd.length < 6) { showToast('🔑 密码至少6位'); return; }
+  if (getAccount()) { showToast('该设备已有账号，请直接登录'); return; }
+  const acc = { phone, nickname, avatar: '🐱', bio: '新来的铲屎官～', gender: 'secret', level: 1, exp: 0, pwd, createdAt: new Date().toISOString() };
+  saveAccount(acc);
+  closeRegister(); updateProfilePage();
+  showToast('🎉 注册成功！欢迎加入萌宠星球');
+}
+
+// ==================== PROFILE PAGE ====================
+function updateProfilePage() {
+  const acc = getAccount();
+  const container = document.getElementById('profileContent');
+  if (!container) return;
+
+  if (!acc) {
+    container.innerHTML = `
+      <div class="profile-header">
+        <div class="ph-avatar" style="background:linear-gradient(135deg,#E0E0E0,#BDBDBD)">👤</div>
+        <div class="ph-name">未登录</div>
+        <div class="ph-bio">登录后享受更多功能～</div>
+      </div>
+      <div style="padding:0 16px;display:flex;gap:10px">
+        <button class="auth-submit" style="flex:1" onclick="openLogin()">登 录</button>
+        <button class="auth-submit" style="flex:1;background:linear-gradient(135deg,#FFF,#FFF5EC);color:var(--c-primary);box-shadow:none;border:1.5px solid var(--c-primary)" onclick="openRegister()">注 册</button>
+      </div>
+      <div class="profile-menu" style="margin-top:16px">
+        <button class="profile-menu-item" onclick="navigateTo('square')"><span class="pm-icon">🌍</span>动态广场<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="navigateTo('diary')"><span class="pm-icon">📖</span>成长日记<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="openRankings()"><span class="pm-icon">🏆</span>萌宠榜单<span class="pm-arrow">›</span></button>
+      </div>`;
+    return;
+  }
+
+  let postCount = S.feeds.filter(f => f.user.name === acc.nickname || f.user.name === '我').length;
+  let diaryCount = 0; Object.values(S.diaries).forEach(p => { diaryCount += p.entries.length; });
+  const levelNames = ['','🥉 青铜铲屎官','🥈 白银铲屎官','🥇 黄金铲屎官','💎 钻石铲屎官','👑 王者铲屎官'];
+  const levelName = levelNames[Math.min(acc.level, 5)];
+
+  container.innerHTML = `
+    <div class="profile-header">
+      <div class="ph-avatar" style="cursor:pointer" onclick="openEditProfile()">${acc.avatar}</div>
+      <div class="ph-name">${acc.nickname} <span style="font-size:12px;color:var(--c-primary)">${levelName}</span></div>
+      <div class="ph-bio">${acc.bio}</div>
+    </div>
+    <div class="profile-stats">
+      <button class="profile-stat"><span class="ps-num">${postCount}</span><span class="ps-label">动态</span></button>
+      <button class="profile-stat"><span class="ps-num">${diaryCount}</span><span class="ps-label">日记</span></button>
+      <button class="profile-stat" onclick="openMember()"><span class="ps-num">Lv${acc.level}</span><span class="ps-label">会员</span></button>
+      <button class="profile-stat" onclick="getFollowData().length?openStats():showToast('👀 关注 '+getFollowData().length+' 人')"><span class="ps-num">${getFollowData().length}</span><span class="ps-label">关注</span></button>
+    </div>
+    <div class="profile-menu">
+      <button class="profile-menu-item" onclick="openEditProfile()"><span class="pm-icon">✏️</span>编辑资料<span class="pm-arrow">›</span></button>
+      <button class="profile-menu-item" onclick="openMember()"><span class="pm-icon">👑</span>会员中心<span class="pm-arrow">›</span></button>
+      <button class="profile-menu-item" onclick="openCollections()"><span class="pm-icon">⭐</span>我的收藏<span class="pm-arrow">›</span></button>
+      <button class="profile-menu-item" onclick="openTools()"><span class="pm-icon">🧰</span>养护工具箱<span class="pm-arrow">›</span></button>
+      <button class="profile-menu-item" onclick="navigateTo('diary')"><span class="pm-icon">📖</span>成长日记<span class="pm-arrow">›</span></button>
+      <button class="profile-menu-item" onclick="openPetProfile(S.currentPet)"><span class="pm-icon">🐾</span>宠物档案<span class="pm-arrow">›</span></button>
+      <button class="profile-menu-item" onclick="openSettings()"><span class="pm-icon">⚙️</span>设置<span class="pm-arrow">›</span></button>
+    </div>
+    <div style="text-align:center;padding:8px">
+      <button style="font-size:12px;color:var(--c-text-light);border:none;background:none;cursor:pointer;font-family:var(--font)" onclick="doLogout()">退出登录</button>
+    </div>`;
+}
+function updateProfileStats() { updateProfilePage(); }
+
+// ==================== EDIT PROFILE ====================
+const AVATAR_OPTIONS = ['🐱','🐶','🐰','🐼','🐨','🐯','🦊','🐸','🐵','🐮','🐷','🐹','🐻','🦁','🐔','🐙'];
+function openEditProfile() {
+  if (!isLoggedIn()) { showToast('请先登录'); openLogin(); return; }
+  const acc = getAccount();
+  $('#profileMainAvatar').textContent = acc.avatar;
+  $('#epNickname').value = acc.nickname || '';
+  $('#epBio').value = acc.bio || '';
+  $$('.ep-gender-btn').forEach(b => b.classList.toggle('sel', b.dataset.g === acc.gender));
+  S._editAvatar = acc.avatar;
+  $('#avatarOptions').innerHTML = AVATAR_OPTIONS.map(a => `<div class="ep-av-opt ${a===acc.avatar?'sel':''}" onclick="S._editAvatar='${a}';$$('.ep-av-opt').forEach(o=>o.classList.toggle('sel',o.textContent==='${a}'));$('#profileMainAvatar').textContent='${a}'">${a}</div>`).join('');
+  $('#editProfileOverlay').classList.add('open');
+  if (editProfileOverlay.parentElement !== app) app.appendChild(editProfileOverlay);
+}
+function closeEditProfile() { $('#editProfileOverlay').classList.remove('open'); }
+function setGender(g) { S._editGender = g; $$('.ep-gender-btn').forEach(b => b.classList.toggle('sel', b.dataset.g === g)); }
+function saveProfile() {
+  const acc = getAccount(); if (!acc) return;
+  acc.avatar = S._editAvatar || acc.avatar;
+  acc.nickname = $('#epNickname').value.trim() || acc.nickname;
+  acc.bio = $('#epBio').value.trim() || acc.bio;
+  acc.gender = S._editGender || acc.gender;
+  saveAccount(acc);
+  closeEditProfile(); updateProfilePage();
+  showToast('✅ 资料已保存');
+}
+
+// ==================== SETTINGS ====================
+function openSettings() {
+  if (!isLoggedIn()) { showToast('请先登录'); openLogin(); return; }
+  const s = getSettings();
+  $('#toggleDiary').classList.toggle('on', s.privacyDiary);
+  $('#toggleLocation').classList.toggle('on', s.privacyLocation);
+  $('#toggleLikeNotif').classList.toggle('on', s.notifLike);
+  $('#toggleCommentNotif').classList.toggle('on', s.notifComment);
+  $('#settingsOverlay').classList.add('open');
+  if (settingsOverlay.parentElement !== app) app.appendChild(settingsOverlay);
+}
+function closeSettings() { $('#settingsOverlay').classList.remove('open'); }
+function getSettings() {
+  try { return JSON.parse(localStorage.getItem('petplanet_settings')||'{"privacyDiary":false,"privacyLocation":true,"notifLike":true,"notifComment":true}'); }
+  catch(e) { return {privacyDiary:false,privacyLocation:true,notifLike:true,notifComment:true}; }
+}
+function toggleSetting(el, key) {
+  const s = getSettings(); s[key] = !s[key];
+  localStorage.setItem('petplanet_settings', JSON.stringify(s));
+  el.querySelector('.toggle-switch').classList.toggle('on', s[key]);
+  showToast(s[key] ? '已开启' : '已关闭');
+}
+function showPwdChange() {
+  const pwd = prompt('请输入新密码（6-16位）：');
+  if (pwd && pwd.length >= 6) {
+    const acc = getAccount(); if (acc) { acc.pwd = pwd; saveAccount(acc); showToast('✅ 密码修改成功'); }
+  } else if (pwd) { showToast('密码至少6位'); }
+}
+function doLogout() {
+  if (confirm('确定退出登录吗？')) {
+    localStorage.removeItem('petplanet_account');
+    updateProfilePage();
+    showToast('👋 已退出登录');
+  }
+}
+
+// ==================== MEMBER CENTER ====================
+function openMember() {
+  if (!isLoggedIn()) { showToast('请先登录'); openLogin(); return; }
+  const acc = getAccount();
+  const perks = [
+    {icon:'📢',name:'发布动态',desc:'每日3条',locked:false},
+    {icon:'📖',name:'成长日记',desc:'无限使用',locked:false},
+    {icon:'🏅',name:'专属徽章',desc:'Lv3解锁',locked:acc.level<3},
+    {icon:'🎨',name:'主题皮肤',desc:'Lv4解锁',locked:acc.level<4},
+    {icon:'📊',name:'数据导出',desc:'Lv5解锁',locked:acc.level<5},
+    {icon:'👑',name:'优先推荐',desc:'Lv5解锁',locked:acc.level<5},
+  ];
+  const nextExp = acc.level * 100;
+  $('#memberBody').innerHTML = `
+    <div class="member-hero">
+      <span class="mh-badge">${acc.level>=5?'👑':acc.level>=4?'💎':acc.level>=3?'🥇':acc.level>=2?'🥈':'🥉'}</span>
+      <div class="mh-level">Lv.${acc.level} ${['','青铜铲屎官','白银铲屎官','黄金铲屎官','钻石铲屎官','王者铲屎官'][Math.min(acc.level,5)]}</div>
+      <div class="mh-progress"><div class="stat-bar-track" style="max-width:200px;margin:0 auto"><div class="stat-bar-fill" style="width:${Math.min(100,(acc.exp/nextExp)*100)}%"></div></div></div>
+      <div style="font-size:11px;color:var(--c-text-light);margin-top:4px">经验值 ${acc.exp}/${nextExp} 升级还需 ${nextExp-acc.exp}</div>
+    </div>
+    <div style="font-size:14px;font-weight:700;color:var(--c-text);padding:0 16px;margin:16px 0 8px">🎁 会员权益</div>
+    <div class="member-perks">
+      ${perks.map(p => `<div class="member-perk ${p.locked?'locked':''}"><span class="mp-icon">${p.icon}</span><div class="mp-name">${p.name}</div><div class="mp-desc">${p.desc}</div></div>`).join('')}
+    </div>
+    <div style="text-align:center;padding:20px;font-size:12px;color:var(--c-text-light)">发布动态和写日记可获得经验值，每次+10exp</div>
+  `;
+  $('#memberOverlay').classList.add('open');
+  if (memberOverlay.parentElement !== app) app.appendChild(memberOverlay);
+}
+function closeMember() { $('#memberOverlay').classList.remove('open'); }
 
 // ==================== PULL TO REFRESH ====================
 let pullStartY=0, pulling=false, pullDist=0;
@@ -2464,19 +2806,14 @@ function init() {
   [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail, notifOverlay,
    petProfileOverlay, topicOverlay, collectionsOverlay, toolsOverlay,
    encycOverlay, breedDetailOverlay, placesOverlay, lfOverlay,
-   checkinOverlay, badgesOverlay, gameOverlay, statsOverlay].forEach(el => {
-    if (el && el.parentElement !== app) app.appendChild(el);
-   encycOverlay, breedDetailOverlay, placesOverlay, lfOverlay].forEach(el => {
+   checkinOverlay, badgesOverlay, gameOverlay, statsOverlay,
+   loginOverlay, registerOverlay, editProfileOverlay, settingsOverlay, memberOverlay].forEach(el => {
     if (el && el.parentElement !== app) app.appendChild(el);
   });
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
-  navigateTo('square'); updateProfileStats();
+  navigateTo('square'); updateProfilePage();
   updateNotifBadge(); updateHomePage(); startHomeClock();
-  console.log('🐾 萌宠星球 v5.0 已就绪！');
-  console.log('  📚 品种百科 — 20个品种/类别筛选/搜索/养护知识');
-  console.log('  📍 友好场所 — 公园/咖啡馆/酒店/医院分类');
-  console.log('  🌙 暗色模式 — 一键切换暖夜主题');
-  console.log('  🔍 寻宠领养 — 走失/捡到/领养信息墙');
+  console.log('🐾 萌宠星球 v6.0 已就绪！点击试试吧~');
 }
 init();
 
