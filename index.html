@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🐾 萌宠星球 - 和千万铲屎官一起记录毛孩子的每一天</title>
+<meta name="description" content="萌宠星球 - 全品类宠物社区，动态广场、成长日记、萌宠榜单，记录毛孩子成长的每一个珍贵瞬间">
+<style>
+/* ============ CSS Variables ============ */
+:root {
+  --c-primary: #FF8C42;
+  --c-primary-dark: #E6732A;
+  --c-primary-light: #FFA86B;
+  --c-accent: #FFD4A8;
+  --c-bg: #FFF8F0;
+  --c-bg-warm: #FFF3E8;
+  --c-card: #FFFFFF;
+  --c-text: #4A3728;
+  --c-text-mid: #8B7355;
+  --c-text-light: #B8A090;
+  --c-text-lighter: #D4C8BB;
+  --c-border: #F0E0D0;
+  --c-heart: #FF6B6B;
+  --c-star: #FFB347;
+  --c-success: #6BCB77;
+  --c-shadow: 0 2px 12px rgba(74,55,40,0.07);
+  --c-shadow-md: 0 4px 20px rgba(74,55,40,0.10);
+  --c-shadow-lg: 0 8px 32px rgba(74,55,40,0.14);
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 50%;
+  --font: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',system-ui,-apple-system,sans-serif;
+  --nav-h: 64px;
+  --status-h: 40px;
+  --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============ Reset ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:var(--font);
+  background:#EDE4DA;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+/* ============ Phone Frame (Desktop) ============ */
+.app-wrapper{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.phone-frame{
+  width:400px;
+  height:860px;
+  max-height:100vh;
+  background:var(--c-bg);
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:
+    0 0 0 3px #3a3028,
+    0 0 0 7px #1a1815,
+    0 20px 60px rgba(0,0,0,0.35);
+  display:flex;
+  flex-direction:column;
+}
+@media(max-width:440px),(max-height:700px){
+  .phone-frame{
+    width:100%;
+    height:100%;
+    max-height:100vh;
+    border-radius:0;
+    box-shadow:none;
+  }
+}
+
+/* ============ Status Bar ============ */
+.status-bar{
+  height:var(--status-h);
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:700;
+  color:var(--c-text);
+  flex-shrink:0;
+  background:var(--c-bg);
+}
+.status-bar .time{font-size:13px}
+.status-icons{display:flex;gap:6px;font-size:11px;align-items:center}
+
+/* ============ Main Content ============ */
+.main-content{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  position:relative;
+}
+.main-content::-webkit-scrollbar{width:0}
+
+/* Page */
+.page{display:none;flex-direction:column;min-height:100%;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
+.page.active{display:flex;opacity:1;transform:translateY(0)}
+
+/* ============ Header ============ */
+.page-header{padding:12px 16px 6px;flex-shrink:0}
+.page-header .title{font-size:22px;font-weight:800;color:var(--c-text);letter-spacing:-0.3px}
+.page-header .subtitle{font-size:12px;color:var(--c-text-light);margin-top:2px}
+
+/* ============ Search ============ */
+.search-wrap{margin:8px 16px;position:relative;flex-shrink:0;z-index:30}
+.search-input{
+  width:100%;padding:11px 14px;border-radius:var(--radius-xl);
+  background:#FFF;border:2px solid transparent;outline:none;
+  font-size:13px;font-family:var(--font);color:var(--c-text);
+  box-shadow:0 1px 3px rgba(74,55,40,0.04);transition:all var(--transition);
+}
+.search-input:focus{border-color:var(--c-primary);box-shadow:0 2px 16px rgba(255,140,66,0.15)}
+.search-input::placeholder{color:var(--c-text-lighter)}
+.search-dropdown{
+  position:absolute;top:calc(100% + 4px);left:0;right:0;
+  background:#FFF;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+  max-height:320px;overflow-y:auto;display:none;
+}
+.search-dropdown.show{display:block;animation:fadeInUp .2s ease}
+.search-item{
+  padding:11px 14px;display:flex;align-items:center;gap:10px;
+  cursor:pointer;transition:background var(--transition);border-bottom:1px solid #FDF6EE;
+}
+.search-item:last-child{border-bottom:none}
+.search-item:hover,.search-item:active{background:#FFF8F0}
+.search-item .si-avatar{width:34px;height:34px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.search-item .si-info{flex:1;min-width:0}
+.search-item .si-name{font-size:13px;font-weight:600;color:var(--c-text)}
+.search-item .si-desc{font-size:11px;color:var(--c-text-light);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-item .si-tag{font-size:10px;padding:3px 8px;border-radius:var(--radius-xl);background:#FFF5EC;color:var(--c-primary);flex-shrink:0;font-weight:600}
+.search-empty{padding:28px;text-align:center;font-size:13px;color:var(--c-text-light)}
+
+/* ============ Channel Tabs ============ */
+.channel-row{display:flex;gap:6px;padding:8px 16px;overflow-x:auto;flex-shrink:0;-ms-overflow-style:none;scrollbar-width:none}
+.channel-row::-webkit-scrollbar{display:none}
+.channel-tab{
+  flex-shrink:0;padding:7px 15px;border-radius:var(--radius-xl);
+  font-size:13px;font-weight:500;color:var(--c-text-light);
+  background:transparent;cursor:pointer;transition:all var(--transition);white-space:nowrap;
+  border:none;font-family:var(--font);
+}
+.channel-tab.active{background:var(--c-primary);color:#FFF;font-weight:700;box-shadow:0 3px 14px rgba(255,140,66,0.35)}
+.channel-tab:active{transform:scale(0.95)}
+
+/* ============ Hot Topics ============ */
+.hot-topics-bar{
+  margin:4px 16px 8px;padding:10px 14px;
+  background:linear-gradient(135deg,#FFF5EC,#FFE8D6);
+  border-radius:var(--radius-lg);display:flex;align-items:center;gap:8px;
+  overflow-x:auto;flex-shrink:0;
+}
+.hot-topics-bar .ht-label{font-size:13px;font-weight:700;color:var(--c-primary);flex-shrink:0;white-space:nowrap}
+.hot-topic-chip{
+  flex-shrink:0;padding:5px 12px;background:#FFF;border-radius:var(--radius-xl);
+  font-size:12px;color:var(--c-text);cursor:pointer;transition:all var(--transition);white-space:nowrap;
+  border:none;font-family:var(--font);
+}
+.hot-topic-chip:active{background:var(--c-primary);color:#FFF}
+
+/* ============ Feed List ============ */
+.feed-list{padding:0 16px 120px;display:flex;flex-direction:column;gap:10px}
+
+/* Feed Card */
+.feed-card{
+  background:var(--c-card);border-radius:var(--radius-lg);padding:14px;
+  box-shadow:var(--c-shadow);transition:box-shadow var(--transition);position:relative;
+}
+.feed-card:active{box-shadow:var(--c-shadow-md)}
+.feed-card .card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.card-top .avatar{
+  width:40px;height:40px;border-radius:var(--radius-full);
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+}
+.avatar-cat{background:linear-gradient(135deg,#FFD4A8,#FFA86B)}
+.avatar-dog{background:linear-gradient(135deg,#FFE0B2,#FFAB40)}
+.avatar-reptile{background:linear-gradient(135deg,#A5D6A7,#66BB6A)}
+.avatar-fish{background:linear-gradient(135deg,#81D4FA,#29B6F6)}
+.avatar-bird{background:linear-gradient(135deg,#CE93D8,#AB47BC)}
+.avatar-small{background:linear-gradient(135deg,#FFCCBC,#FF8A65)}
+.avatar-other{background:linear-gradient(135deg,#FFD4A8,#FFB74D)}
+.card-top .user-info{flex:1;min-width:0}
+.user-info .nickname{font-size:14px;font-weight:700;color:var(--c-text)}
+.user-info .meta-row{font-size:11px;color:var(--c-text-light);display:flex;gap:8px;margin-top:1px}
+.card-body .content-text{font-size:14px;line-height:1.7;color:var(--c-text);margin-bottom:8px;word-break:break-word}
+.card-body .content-text .expand-btn{color:var(--c-primary);font-size:13px;cursor:pointer;font-weight:600;margin-left:2px}
+/* Images Grid */
+.img-grid{display:grid;gap:3px;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:6px}
+.img-grid.g-1{grid-template-columns:1fr}
+.img-grid.g-2{grid-template-columns:1fr 1fr}
+.img-grid.g-3{grid-template-columns:1fr 1fr 1fr}
+.img-grid.g-4{grid-template-columns:1fr 1fr}
+.img-grid.g-multi{grid-template-columns:1fr 1fr 1fr}
+.img-grid img{width:100%;aspect-ratio:1;object-fit:cover;background:linear-gradient(135deg,#FDF6EE,#FFF0E0);display:block;border:none}
+.img-grid img.loaded{background:none}
+/* Tags */
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.card-tag{font-size:12px;color:var(--c-primary);cursor:pointer;font-weight:500;border:none;background:none;font-family:var(--font);padding:0}
+.card-tag:active{opacity:.7}
+/* Actions */
+.card-actions{display:flex;justify-content:space-around;align-items:center;padding-top:8px;border-top:1px solid var(--c-border)}
+.act-btn{
+  display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--c-text-light);
+  cursor:pointer;padding:7px 12px;border-radius:var(--radius-xl);transition:all var(--transition);
+  border:none;background:none;font-family:var(--font);white-space:nowrap;
+}
+.act-btn:active{background:#FFF5EC;transform:scale(0.94)}
+.act-btn.is-liked{color:var(--c-heart);font-weight:700}
+.act-btn.is-collected{color:var(--c-star);font-weight:700}
+
+/* ============ Rank Entry ============ */
+.rank-entry{
+  margin:8px 16px 100px;background:var(--c-card);border-radius:var(--radius-lg);
+  padding:14px;box-shadow:var(--c-shadow);display:flex;justify-content:space-around;
+}
+.rank-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--c-text);cursor:pointer;padding:8px 12px;border-radius:var(--radius-md);transition:all var(--transition);border:none;background:none;font-family:var(--font)}
+.rank-item:active{background:#FFF5EC}
+.rank-item .ri-icon{font-size:22px}
+
+/* ============ Home Page ============ */
+.home-hero{padding:20px 16px;text-align:center}
+.home-hero .hero-emoji{font-size:64px;display:block;margin-bottom:8px}
+.home-hero .hero-title{font-size:20px;font-weight:800;color:var(--c-text);margin-bottom:4px}
+.home-hero .hero-sub{font-size:13px;color:var(--c-text-light);line-height:1.6}
+.home-cards{padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:100px}
+.home-card{
+  background:var(--c-card);border-radius:var(--radius-lg);padding:18px 14px;
+  box-shadow:var(--c-shadow);cursor:pointer;transition:all var(--transition);
+  text-align:center;border:none;font-family:var(--font);
+}
+.home-card:active{transform:scale(0.96);box-shadow:var(--c-shadow-md)}
+.home-card .hc-icon{font-size:36px;display:block;margin-bottom:6px}
+.home-card .hc-title{font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:4px}
+.home-card .hc-desc{font-size:11px;color:var(--c-text-light);line-height:1.5}
+
+/* ============ Diary Page ============ */
+.pet-switcher{
+  display:flex;gap:14px;padding:8px 16px;overflow-x:auto;flex-shrink:0;
+  -ms-overflow-style:none;scrollbar-width:none;
+}
+.pet-switcher::-webkit-scrollbar{display:none}
+.pet-card{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  cursor:pointer;flex-shrink:0;transition:all var(--transition);border:none;background:none;font-family:var(--font);
+}
+.pet-card .pet-av{
+  width:54px;height:54px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;
+  font-size:30px;border:3px solid transparent;transition:all var(--transition);
+}
+.pet-card.selected .pet-av{border-color:var(--c-primary);box-shadow:0 4px 16px rgba(255,140,66,0.35)}
+.pet-card .pet-nm{font-size:12px;font-weight:600;color:var(--c-text)}
+.pet-card .pet-age{font-size:10px;color:var(--c-text-light)}
+.pet-card.add-pet .pet-av{border:2px dashed var(--c-border);background:transparent!important;color:var(--c-text-lighter);font-size:22px}
+
+/* Timeline */
+.timeline-wrap{padding:12px 16px 100px;position:relative}
+.tl-month{margin-bottom:18px}
+.tl-month .tl-m-label{font-size:13px;font-weight:700;color:var(--c-primary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tl-m-label::after{content:'';flex:1;height:1px;background:var(--c-border)}
+.tl-date{font-size:12px;color:var(--c-text-light);margin-bottom:6px;padding-left:4px;display:flex;align-items:center;gap:6px}
+.tl-date .tl-badge{font-size:10px;background:#FFF0E0;color:var(--c-primary);padding:2px 8px;border-radius:var(--radius-xl);font-weight:700}
+/* Diary Card */
+.diary-card{
+  background:var(--c-card);border-radius:var(--radius-lg);padding:14px;
+  box-shadow:var(--c-shadow);margin-bottom:10px;margin-left:14px;position:relative;
+  transition:all var(--transition);
+}
+.diary-card .vis-badge{position:absolute;top:12px;right:12px;font-size:16px}
+.diary-card .diary-text{font-size:14px;line-height:1.7;color:var(--c-text);margin:4px 0;word-break:break-word}
+.diary-card .diary-imgs{display:grid;gap:3px;border-radius:var(--radius-sm);overflow:hidden;margin-top:8px}
+.diary-card .diary-imgs.d2{grid-template-columns:1fr 1fr}
+.diary-card .diary-imgs.d1{grid-template-columns:1fr}
+.diary-card .diary-imgs img{width:100%;aspect-ratio:1;object-fit:cover;background:linear-gradient(135deg,#FDF6EE,#FFF0E0)}
+.diary-card .diary-actions{display:flex;gap:12px;margin-top:10px;padding-top:8px;border-top:1px solid var(--c-border)}
+
+/* FAB */
+.diary-fab{
+  position:sticky;bottom:0;padding:12px 16px;
+  background:linear-gradient(180deg,transparent,var(--c-bg) 40%);
+}
+.diary-fab .fab-btn{
+  width:100%;padding:13px;border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,var(--c-primary),var(--c-primary-light));
+  color:#FFF;font-size:14px;font-weight:700;border:none;cursor:pointer;
+  box-shadow:0 4px 18px rgba(255,140,66,0.35);transition:all var(--transition);font-family:var(--font);
+}
+.diary-fab .fab-btn:active{transform:scale(0.97)}
+
+/* ============ Profile Page ============ */
+.profile-header{padding:24px 16px 16px;text-align:center}
+.profile-header .ph-avatar{
+  width:72px;height:72px;border-radius:var(--radius-full);
+  background:linear-gradient(135deg,var(--c-accent),var(--c-primary-light));
+  display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 10px;
+}
+.profile-header .ph-name{font-size:18px;font-weight:700;color:var(--c-text)}
+.profile-header .ph-bio{font-size:12px;color:var(--c-text-light);margin-top:4px}
+.profile-stats{display:flex;justify-content:space-around;padding:12px 16px;margin:0 16px;background:var(--c-card);border-radius:var(--radius-lg);box-shadow:var(--c-shadow)}
+.profile-stat{text-align:center;cursor:pointer;border:none;background:none;font-family:var(--font)}
+.profile-stat .ps-num{font-size:20px;font-weight:800;color:var(--c-primary);display:block}
+.profile-stat .ps-label{font-size:11px;color:var(--c-text-light);margin-top:2px}
+.profile-menu{margin:16px;display:flex;flex-direction:column;gap:2px}
+.profile-menu-item{
+  display:flex;align-items:center;gap:12px;padding:14px 16px;
+  background:var(--c-card);cursor:pointer;transition:all var(--transition);
+  font-size:14px;color:var(--c-text);border:none;font-family:var(--font);width:100%;text-align:left;
+}
+.profile-menu-item:first-child{border-radius:var(--radius-lg) var(--radius-lg) var(--radius-xs) var(--radius-xs)}
+.profile-menu-item:last-child{border-radius:var(--radius-xs) var(--radius-xs) var(--radius-lg) var(--radius-lg)}
+.profile-menu-item:only-child{border-radius:var(--radius-lg)}
+.profile-menu-item:active{background:#FFF5EC}
+.profile-menu-item .pm-icon{font-size:20px;width:28px;text-align:center}
+.profile-menu-item .pm-arrow{margin-left:auto;color:var(--c-text-lighter)}
+
+/* ============ Bottom Nav ============ */
+.bottom-nav{
+  height:var(--nav-h);background:#FFF;display:flex;align-items:center;justify-content:space-around;
+  border-top:1px solid var(--c-border);flex-shrink:0;padding:0 4px 6px;position:relative;z-index:20;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;font-size:20px;
+  color:var(--c-text-lighter);cursor:pointer;transition:all var(--transition);
+  padding:4px 14px;border:none;background:none;font-family:var(--font);
+}
+.nav-item .nv-label{font-size:10px;font-weight:500}
+.nav-item.active{color:var(--c-primary)}
+.nav-item.active .nv-label{font-weight:700}
+.nav-item.nav-post{margin-top:-20px}
+.nav-item.nav-post .post-circle{
+  width:48px;height:48px;border-radius:var(--radius-full);
+  background:linear-gradient(135deg,var(--c-primary),var(--c-primary-light));
+  display:flex;align-items:center;justify-content:center;font-size:26px;color:#FFF;
+  box-shadow:0 4px 22px rgba(255,140,66,0.42);transition:all var(--transition);
+}
+.nav-item.nav-post:active .post-circle{transform:scale(0.9)}
+
+/* ============ Modals (positioned inside phone frame) ============ */
+.modal-mask{
+  position:absolute;inset:0;background:rgba(74,55,40,0.45);
+  z-index:100;display:flex;align-items:flex-end;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-mask.open{opacity:1;pointer-events:auto}
+.modal-sheet{
+  width:100%;max-height:88%;background:#FFF;border-radius:22px 22px 0 0;
+  overflow-y:auto;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1);
+}
+.modal-mask.open .modal-sheet{transform:translateY(0)}
+.modal-sheet .ms-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;border-bottom:1px solid var(--c-border);
+  position:sticky;top:0;background:#FFF;z-index:2;flex-shrink:0;
+}
+.ms-header .ms-cancel{font-size:14px;color:var(--c-text-light);cursor:pointer;border:none;background:none;font-family:var(--font)}
+.ms-header .ms-title{font-size:16px;font-weight:700;color:var(--c-text)}
+.ms-header .ms-done{font-size:14px;font-weight:700;color:#FFF;background:var(--c-primary);border:none;padding:8px 20px;border-radius:var(--radius-xl);cursor:pointer;font-family:var(--font)}
+.ms-header .ms-done:active{background:var(--c-primary-dark)}
+.ms-body{padding:16px;flex:1;overflow-y:auto}
+
+/* Publish: type selector */
+.pub-type-row{display:flex;gap:8px;margin-bottom:14px}
+.pub-type-btn{
+  flex:1;padding:10px;border-radius:var(--radius-md);border:2px solid var(--c-border);
+  background:#FFF;text-align:center;font-size:13px;font-weight:600;cursor:pointer;
+  transition:all var(--transition);font-family:var(--font);color:var(--c-text-light);
+}
+.pub-type-btn.sel{border-color:var(--c-primary);background:#FFF5EC;color:var(--c-primary)}
+
+/* Publish: image area */
+.pub-imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.pub-imgs .pub-img-add{
+  aspect-ratio:1;border-radius:var(--radius-md);border:2px dashed var(--c-border);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  color:var(--c-text-lighter);cursor:pointer;transition:all var(--transition);background:#FDF6EE;
+}
+.pub-imgs .pub-img-add:active{border-color:var(--c-primary);color:var(--c-primary)}
+.pub-imgs .pub-img-thumb{
+  aspect-ratio:1;border-radius:var(--radius-md);overflow:hidden;position:relative;
+}
+.pub-imgs .pub-img-thumb img{width:100%;height:100%;object-fit:cover}
+.pub-imgs .pub-img-thumb .pub-img-del{
+  position:absolute;top:4px;right:4px;width:20px;height:20px;
+  border-radius:var(--radius-full);background:rgba(0,0,0,0.5);color:#FFF;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+  cursor:pointer;border:none;
+}
+
+/* Publish: textarea */
+.pub-textarea{
+  width:100%;min-height:100px;border:none;resize:none;font-size:14px;
+  font-family:var(--font);color:var(--c-text);line-height:1.7;outline:none;
+  background:transparent;
+}
+.pub-textarea::placeholder{color:var(--c-text-lighter)}
+
+/* Publish: options */
+.pub-opt{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 0;border-top:1px solid #F5EDE4;font-size:13px;cursor:pointer;
+  border:none;background:none;font-family:var(--font);width:100%;color:var(--c-text);
+}
+.pub-opt .po-label{display:flex;align-items:center;gap:8px}
+.pub-opt .po-val{color:var(--c-text-light);display:flex;align-items:center;gap:4px}
+
+/* ============ Comment Sheet ============ */
+.comment-body{padding:0;display:flex;flex-direction:column;max-height:55vh}
+.comment-list{flex:1;overflow-y:auto;padding:10px 16px}
+.comment-item{display:flex;gap:10px;margin-bottom:14px}
+.comment-item .cm-avatar{
+  width:32px;height:32px;border-radius:var(--radius-full);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  background:linear-gradient(135deg,#FFD4A8,#FFA86B);
+}
+.comment-item .cm-body{flex:1;min-width:0}
+.comment-item .cm-name{font-size:12px;font-weight:700;color:var(--c-text)}
+.comment-item .cm-text{font-size:13px;color:var(--c-text);margin-top:3px;line-height:1.5;word-break:break-word}
+.comment-item .cm-meta{font-size:10px;color:var(--c-text-light);margin-top:4px;display:flex;gap:12px;align-items:center}
+.comment-item .cm-reply-btn{font-size:11px;color:var(--c-primary);cursor:pointer;font-weight:600;border:none;background:none;font-family:var(--font)}
+.cm-replies{margin-top:8px;padding-left:14px;border-left:2px solid var(--c-border)}
+.cm-reply{display:flex;gap:8px;margin-bottom:8px}
+.cm-reply .cm-avatar{width:26px;height:26px;font-size:13px}
+.cm-reply .cm-name{font-size:11px}
+.cm-reply .cm-text{font-size:12px}
+
+.comment-input-row{display:flex;gap:8px;padding:10px 16px 14px;border-top:1px solid var(--c-border);flex-shrink:0}
+.reply-hint{font-size:11px;color:var(--c-primary);background:#FFF5EC;padding:4px 10px;border-radius:var(--radius-xl);display:inline-flex;align-items:center;gap:4px;margin-bottom:6px}
+.reply-hint .rh-clear{cursor:pointer;font-size:13px;border:none;background:none;color:var(--c-primary)}
+.comment-input-row input{
+  flex:1;padding:10px 14px;border-radius:var(--radius-xl);border:1.5px solid var(--c-border);
+  font-size:13px;outline:none;font-family:var(--font);color:var(--c-text);
+}
+.comment-input-row input:focus{border-color:var(--c-primary)}
+.comment-input-row .cm-send{
+  padding:10px 18px;border-radius:var(--radius-xl);background:var(--c-primary);color:#FFF;
+  font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);flex-shrink:0;
+}
+.comment-input-row .cm-send:active{background:var(--c-primary-dark)}
+
+/* ============ Toast ============ */
+.toast{
+  position:absolute;top:52px;left:50%;transform:translateX(-50%);
+  background:#4A3728;color:#FFF;padding:10px 22px;border-radius:var(--radius-xl);
+  font-size:13px;font-weight:600;z-index:200;opacity:0;pointer-events:none;
+  transition:opacity .3s;white-space:nowrap;
+}
+.toast.show{opacity:1}
+
+/* ============ Empty State ============ */
+.empty-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px;text-align:center}
+.empty-wrap .empty-emoji{font-size:60px;margin-bottom:12px}
+.empty-wrap .empty-text{font-size:14px;color:var(--c-text-light);line-height:1.7}
+
+/* ============ Animations ============ */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeInUp .35s ease forwards}
+@keyframes heartPop{0%{transform:scale(1)}30%{transform:scale(1.35)}60%{transform:scale(.9)}100%{transform:scale(1)}}
+.heart-pop{animation:heartPop .45s ease;display:inline-block}
+</style>
+</head>
+<body>
+
+<div class="app-wrapper">
+<div class="phone-frame" id="app">
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="time" id="statusTime">9:41</span>
+    <span class="status-icons">📶 🔋 <span id="batteryLevel">85</span>%</span>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ========== Main Content ========== -->
+  <div class="main-content" id="mainContent">
+
+    <!-- PAGE: Home -->
+    <div class="page active" id="page-home">
+      <div class="home-hero">
+        <span class="hero-emoji">🐾</span>
+        <div class="hero-title">欢迎来到萌宠星球</div>
+        <div class="hero-sub">和千万铲屎官一起<br>记录毛孩子的每一个珍贵瞬间</div>
+      </div>
+      <div class="home-cards">
+        <button class="home-card" onclick="navigateTo('square')">
+          <span class="hc-icon">🌍</span>
+          <div class="hc-title">动态广场</div>
+          <div class="hc-desc">发现萌宠的可爱日常</div>
+        </button>
+        <button class="home-card" onclick="navigateTo('diary')">
+          <span class="hc-icon">📖</span>
+          <div class="hc-title">成长日记</div>
+          <div class="hc-desc">记录毛孩子成长点滴</div>
+        </button>
+        <button class="home-card" onclick="openPublish('post')">
+          <span class="hc-icon">📢</span>
+          <div class="hc-title">发布动态</div>
+          <div class="hc-desc">分享此刻的美好</div>
+        </button>
+        <button class="home-card" onclick="openPublish('diary')">
+          <span class="hc-icon">✏️</span>
+          <div class="hc-title">写日记</div>
+          <div class="hc-desc">专属成长手账</div>
+        </button>
+        <button class="home-card" onclick="navigateTo('square');showToast('🏆 正在开发中，敬请期待～')">
+          <span class="hc-icon">🏆</span>
+          <div class="hc-title">萌宠榜单</div>
+          <div class="hc-desc">人气·颜值·趣味榜</div>
+        </button>
+        <button class="home-card" onclick="showToast('🔍 搜一搜功能在广场页面哦～')">
+          <span class="hc-icon">🔍</span>
+          <div class="hc-title">探索发现</div>
+          <div class="hc-desc">话题·用户·萌宠</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAGE: Square -->
+    <div class="page" id="page-square">
+      <div class="page-header">
+        <div class="title">🐾 萌宠星球</div>
+        <div class="subtitle">和千万铲屎官一起记录毛孩子的每一天</div>
+      </div>
+
+      <div class="search-wrap" id="searchWrap">
+        <input class="search-input" id="searchInput" placeholder="🔍 搜索动态、话题、铲屎官..." autocomplete="off">
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+
+      <div class="channel-row" id="channelRow">
+        <button class="channel-tab active" data-ch="all">推荐</button>
+        <button class="channel-tab" data-ch="cat">🐱 猫猫</button>
+        <button class="channel-tab" data-ch="dog">🐶 狗狗</button>
+        <button class="channel-tab" data-ch="reptile">🦎 爬宠</button>
+        <button class="channel-tab" data-ch="fish">🐠 水族</button>
+        <button class="channel-tab" data-ch="bird">🐦 鸟类</button>
+        <button class="channel-tab" data-ch="small">🐹 小宠</button>
+        <button class="channel-tab" data-ch="follow">👀 关注</button>
+      </div>
+
+      <div class="hot-topics-bar">
+        <span class="ht-label">🔥 热门话题</span>
+        <button class="hot-topic-chip" onclick="searchTopic('我家主子今天')">#我家主子今天</button>
+        <button class="hot-topic-chip" onclick="searchTopic('异宠大赏')">#异宠大赏</button>
+        <button class="hot-topic-chip" onclick="searchTopic('养宠冷知识')">#养宠冷知识</button>
+        <button class="hot-topic-chip" onclick="searchTopic('新手养宠')">#新手养宠</button>
+        <button class="hot-topic-chip" onclick="searchTopic('开箱测评')">#开箱测评</button>
+      </div>
+
+      <div class="feed-list" id="feedList"></div>
+
+      <div class="rank-entry">
+        <button class="rank-item" onclick="showToast('🏆 萌宠人气榜 — 正在开发中，敬请期待～')"><span class="ri-icon">🏆</span> 萌宠人气榜</button>
+        <button class="rank-item" onclick="showToast('💖 颜值担当榜 — 正在开发中，敬请期待～')"><span class="ri-icon">💖</span> 颜值担当榜</button>
+        <button class="rank-item" onclick="showToast('😂 趣味瞬间榜 — 正在开发中，敬请期待～')"><span class="ri-icon">😂</span> 趣味瞬间榜</button>
+      </div>
+    </div>
+
+    <!-- PAGE: Diary -->
+    <div class="page" id="page-diary">
+      <div class="page-header">
+        <div class="title">📖 成长日记</div>
+        <div class="subtitle">记录毛孩子成长的每一个珍贵瞬间</div>
+      </div>
+
+      <div class="pet-switcher" id="petSwitcher"></div>
+      <div class="timeline-wrap" id="timelineWrap"></div>
+      <div class="diary-fab">
+        <button class="fab-btn" onclick="openPublish('diary')">✏️ 写日记</button>
+      </div>
+    </div>
+
+    <!-- PAGE: Profile -->
+    <div class="page" id="page-profile">
+      <div class="profile-header">
+        <div class="ph-avatar">🐱</div>
+        <div class="ph-name">铲屎官小橘</div>
+        <div class="ph-bio">🐾 橘座 · 旺财 · 团团的家长 | 养宠3年 | 记录每一个温暖瞬间</div>
+      </div>
+      <div class="profile-stats">
+        <button class="profile-stat"><span class="ps-num" id="myPostCount">0</span><span class="ps-label">动态</span></button>
+        <button class="profile-stat"><span class="ps-num" id="myDiaryCount">0</span><span class="ps-label">日记</span></button>
+        <button class="profile-stat"><span class="ps-num">128</span><span class="ps-label">粉丝</span></button>
+        <button class="profile-stat"><span class="ps-num">89</span><span class="ps-label">关注</span></button>
+      </div>
+      <div class="profile-menu">
+        <button class="profile-menu-item" onclick="showToast('📋 我的动态 — 功能开发中～')"><span class="pm-icon">📋</span>我的动态<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="showToast('📖 我的日记 — 功能开发中～')"><span class="pm-icon">📖</span>我的日记<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="showToast('⭐ 我的收藏 — 功能开发中～')"><span class="pm-icon">⭐</span>我的收藏<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="showToast('⚙️ 设置 — 功能开发中～')"><span class="pm-icon">⚙️</span>设置<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="showToast('ℹ️ 关于萌宠星球 v1.0')"><span class="pm-icon">ℹ️</span>关于<span class="pm-arrow">›</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Bottom Nav ========== -->
+  <div class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-page="home">🏠<span class="nv-label">首页</span></button>
+    <button class="nav-item" data-page="square">🌍<span class="nv-label">广场</span></button>
+    <button class="nav-item nav-post" onclick="openPublish('post')">
+      <div class="post-circle">＋</div><span class="nv-label">发布</span>
+    </button>
+    <button class="nav-item" data-page="diary">📖<span class="nv-label">日记</span></button>
+    <button class="nav-item" data-page="profile">👤<span class="nv-label">我的</span></button>
+  </div>
+
+</div><!-- /phone-frame -->
+</div><!-- /app-wrapper -->
+
+<!-- ========== Publish Modal ========== -->
+<div class="modal-mask" id="publishModal" style="position:absolute;inset:0;z-index:100;">
+  <div class="modal-sheet">
+    <div class="ms-header">
+      <button class="ms-cancel" onclick="closePublish()">取消</button>
+      <span class="ms-title" id="pubTitle">发布动态</span>
+      <button class="ms-done" onclick="doPublish()">发布</button>
+    </div>
+    <div class="ms-body">
+      <div class="pub-type-row">
+        <button class="pub-type-btn sel" data-pt="post" onclick="setPubType('post')">📢 发动态</button>
+        <button class="pub-type-btn" data-pt="diary" onclick="setPubType('diary')">📖 写日记</button>
+      </div>
+      <div class="pub-imgs" id="pubImgs">
+        <div class="pub-img-add" onclick="triggerImgInput()">＋</div>
+      </div>
+      <input type="file" id="imgInput" accept="image/*" multiple style="display:none" onchange="handleImgSelect(event)">
+      <textarea class="pub-textarea" id="pubText" placeholder="说点什么吧..."></textarea>
+      <button class="pub-opt" id="pubOptPet">
+        <span class="po-label">🐱 关联宠物</span><span class="po-val">橘座 ›</span>
+      </button>
+      <button class="pub-opt">
+        <span class="po-label">#️⃣ 添加话题</span><span class="po-val">选择话题 ›</span>
+      </button>
+      <button class="pub-opt">
+        <span class="po-label">📍 添加位置</span><span class="po-val">上海 ›</span>
+      </button>
+      <button class="pub-opt" id="pubOptVis">
+        <span class="po-label">🔒 可见范围</span><span class="po-val" id="pubVisVal">仅自己 ›</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Comment Modal ========== -->
+<div class="modal-mask" id="commentModal" style="position:absolute;inset:0;z-index:100;">
+  <div class="modal-sheet">
+    <div class="ms-header">
+      <span></span>
+      <span class="ms-title">💬 评论</span>
+      <span style="font-size:20px;cursor:pointer" onclick="closeComments()">✕</span>
+    </div>
+    <div class="comment-body">
+      <div class="comment-list" id="commentList"></div>
+      <div class="comment-input-row">
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div class="reply-hint" id="replyHint" style="display:none">
+            回复 <span id="replyTarget"></span>
+            <button class="rh-clear" onclick="clearReply()">✕</button>
+          </div>
+          <input type="text" placeholder="写下你的评论..." id="commentInput" onkeydown="if(event.key==='Enter')addComment()">
+        </div>
+        <button class="cm-send" onclick="addComment()">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ==================== CONSTANTS ====================
+const STORAGE_KEY = 'petplanet_data';
+const CAT_IMG = (i) => `https://cataas.com/cat?width=400&height=400&position=center&t=${i}`;
+const DOG_IMG = (i) => `https://images.dog.ceo/breeds/shiba/shiba-${3+i}.jpg`;
+const PICSUM = (id) => `https://picsum.photos/id/${id}/400/400`;
+
+// ==================== INITIAL DATA ====================
+function createInitialData() {
+  return {
+    feeds: [
+      {
+        id: 101, user: { name: '橘座大人', avatar: '🐱', avClass: 'avatar-cat' },
+        time: '2小时前', location: '上海',
+        text: '今天给主子换了新猫抓板，开心到模糊！每次看到它满足的小表情，就觉得一切都值了～养猫的快乐就是这么简单 🐾',
+        images: [CAT_IMG(1), CAT_IMG(2), CAT_IMG(3)],
+        tags: ['橘猫日常', '猫抓板'], category: 'cat',
+        likes: 128, comments: 3, collects: 56,
+        liked: false, collected: false,
+        commentList: [
+          { user: '铲屎官小王', text: '同款猫抓板！我家猫也超爱 😍', time: '1小时前', replies: [
+            { user: '橘座大人', text: '性价比超高，推荐！', time: '45分钟前' }
+          ]},
+          { user: '猫奴日记', text: '橘座太可爱了吧！每天必看你的动态～', time: '30分钟前', replies: [] },
+          { user: '养猫小能手', text: '求链接！正要给我家主子换新的', time: '10分钟前', replies: [] },
+        ]
+      },
+      {
+        id: 102, user: { name: '爬宠小屋', avatar: '🦎', avClass: 'avatar-reptile' },
+        time: '5小时前', location: '北京',
+        text: '家里的豹纹守宫蜕皮啦！记录一下这个完美瞬间。蜕皮完整无残留，说明湿度控制得刚刚好 ✨ 养爬宠的乐趣就在于这些观察～',
+        images: [PICSUM(593), PICSUM(594)],
+        tags: ['守宫', '蜕皮记录', '异宠日常'], category: 'reptile',
+        likes: 356, comments: 2, collects: 89,
+        liked: true, collected: false,
+        commentList: [
+          { user: '爬友小李', text: '问一下湿度控制在多少比较合适？我家的一直蜕不完整', time: '3小时前', replies: [
+            { user: '爬宠小屋', text: '我控制在60-70%左右，蜕皮前稍微喷点水～', time: '2小时前' }
+          ]},
+          { user: '异宠医生', text: '蜕皮完美！说明饲养环境很棒 👍', time: '2小时前', replies: [] },
+        ]
+      },
+      {
+        id: 103, user: { name: '海底小纵队', avatar: '🐠', avClass: 'avatar-fish' },
+        time: '昨天', location: '广州',
+        text: '新开的草缸第一周，状态绝了！分享一下造景参数：60cm缸，CO₂ 2泡/秒，光照8小时，水温25°C。趴地矮珍珠已经开始爬了，期待成景的那一天～🌿',
+        images: [PICSUM(29), PICSUM(30)],
+        tags: ['草缸造景', '水族', '新手开缸'], category: 'fish',
+        likes: 892, comments: 3, collects: 203,
+        liked: false, collected: true,
+        commentList: [
+          { user: '水族达人', text: '参数记下来了，谢谢分享！准备照着开一个', time: '20小时前', replies: [] },
+          { user: '新手小张', text: '60缸这个配置大概花了多少钱啊？', time: '18小时前', replies: [
+            { user: '海底小纵队', text: '全部下来大概1500左右，不算太贵～', time: '17小时前' }
+          ]},
+          { user: '草缸爱好者', text: '趴地矮珍珠爬得真不错！光照用的什么灯？', time: '15小时前', replies: [] },
+        ]
+      },
+      {
+        id: 104, user: { name: '啾啾的日常', avatar: '🐦', avClass: 'avatar-bird' },
+        time: '3小时前', location: '成都',
+        text: '训练了两个月，我家玄凤终于学会吹口哨了！视频记录一下这历史性的一刻 🎵 接下来准备教它说"你好"～鸟类的智商真的超乎想象！',
+        images: [PICSUM(1024)],
+        tags: ['玄凤鹦鹉', '鸟类训练', '萌宠日常'], category: 'bird',
+        likes: 234, comments: 1, collects: 67,
+        liked: false, collected: false,
+        commentList: [
+          { user: '鹦鹉爱好者', text: '两个月就学会了！我家的一年还不会 😭 能分享一下训练方法吗？', time: '1小时前', replies: [] },
+        ]
+      },
+      {
+        id: 105, user: { name: '柴犬小丸', avatar: '🐶', avClass: 'avatar-dog' },
+        time: '刚刚', location: '杭州',
+        text: '今日遛狗打卡！西湖边的荷花开了，小丸兴奋到飞起～撒欢跑了5公里，估计今晚要睡成死狗了 😂 夏天的西湖真的太美了！',
+        images: [DOG_IMG(1), DOG_IMG(2), DOG_IMG(3)],
+        tags: ['柴犬', '遛狗日常', '西湖'], category: 'dog',
+        likes: 67, comments: 1, collects: 18,
+        liked: false, collected: false,
+        commentList: [
+          { user: '柴友阿花', text: '下次一起约遛狗呀！我家也有一只柴柴～', time: '5分钟前', replies: [] },
+        ]
+      },
+      {
+        id: 106, user: { name: '垂耳兔星球', avatar: '🐰', avClass: 'avatar-small' },
+        time: '1小时前', location: '深圳',
+        text: '团团来家里一个月啦！从最开始躲着不出来，到现在主动跳到我腿上求摸摸，小动物的信任真的让人心都化了 🥺 兔兔太治愈了！',
+        images: [PICSUM(219), PICSUM(300)],
+        tags: ['垂耳兔', '新宠到家', '小宠日常'], category: 'small',
+        likes: 189, comments: 2, collects: 45,
+        liked: false, collected: false,
+        commentList: [
+          { user: '兔友小美', text: '团团太可爱了！什么品种呀？好想养一只～', time: '30分钟前', replies: [
+            { user: '垂耳兔星球', text: '是荷兰垂耳兔哦，性格超好的！', time: '20分钟前' }
+          ]},
+          { user: '宠物医生老张', text: '适应得不错！记得定期带去做检查哦～', time: '15分钟前', replies: [] },
+        ]
+      },
+    ],
+    diaries: {
+      orange: {
+        name: '橘座', emoji: '🐱', avatarBg: 'linear-gradient(135deg,#FFD4A8,#FFA86B)',
+        entries: [
+          { id: 201, date: '2024-06-15', visibility: 'public', text: '橘座今天学会了握手！训练了一个月终于有成果，老父亲留下了欣慰的泪水 😭 用鸡肉冻干作为奖励，小家伙学得飞快～现在一说"手手"就知道伸爪子了！', images: [CAT_IMG(10), CAT_IMG(11)], likes: 45, comments: 2, collects: 8, liked: false, collected: false, milestone: null, commentList: [
+            { user: '铲屎官小王', text: '好聪明的橘座！怎么训练的求教程 🙏', time: '1小时前', replies: [] },
+            { user: '猫奴日记', text: '握手也太可爱了吧～我家猫只会用爪子打我 😂', time: '30分钟前', replies: [] },
+          ]},
+          { id: 202, date: '2024-06-10', visibility: 'private', text: '体重记录：6.2kg\n好像又胖了一点点...明天开始控制零食 🥲\n今天只喂了半个罐头，橘座一脸不情愿地看着我...', images: [], likes: 0, comments: 0, collects: 0, liked: false, collected: false, milestone: null, commentList: [] },
+          { id: 203, date: '2024-05-20', visibility: 'friends', text: '橘座4岁生日快乐！🎂\n4年前的今天来到我身边，从一只瘦小的小流浪变成了现在的大胖橘。感谢你每一天的陪伴和治愈，妈妈永远爱你 🧡\n准备了金枪鱼蛋糕给它～', images: [CAT_IMG(12)], likes: 23, comments: 1, collects: 15, liked: false, collected: false, milestone: '🎂 生日', commentList: [
+            { user: '宠物医生老张', text: '生日快乐！橘座一定要健健康康的～', time: '2小时前', replies: [] },
+          ]},
+          { id: 204, date: '2024-05-08', visibility: 'public', text: '今天带橘座去体检了，各项指标都正常！医生夸我们是个健康宝宝～就是体重有点超标，要减减肥了 😅 医生建议每天多玩15分钟激光笔增加运动量', images: [PICSUM(40)], likes: 67, comments: 1, collects: 22, liked: false, collected: false, milestone: null, commentList: [
+            { user: '养猫小能手', text: '我家猫也是，体重控制太难了 😂 一起加油减肥！', time: '5小时前', replies: [] },
+          ]},
+          { id: 205, date: '2024-04-15', visibility: 'public', text: '新买的猫爬架到了，橘座迫不及待地占领了最高处。果然猫都是高处控～组装花了2小时但它30秒就跳上去了，值得！', images: [PICSUM(237), PICSUM(200)], likes: 89, comments: 1, collects: 34, liked: false, collected: false, milestone: null, commentList: [
+            { user: '猫爬架爱好者', text: '求链接！质量怎么样？一直在找好用的爬架', time: '1天前', replies: [
+              { user: '橘座大人', text: '质量很好，橘座超喜欢！某宝搜"实木猫爬架"就有', time: '23小时前' }
+            ]},
+          ]},
+        ]
+      },
+      wangcai: {
+        name: '旺财', emoji: '🐶', avatarBg: 'linear-gradient(135deg,#FFE0B2,#FFAB40)',
+        entries: [
+          { id: 206, date: '2024-06-12', visibility: 'public', text: '旺财今天第一次去狗狗公园，交到了好多新朋友！尤其是那只金毛，两个追着跑了半小时 🐕 回到家直接瘫倒，喝了一整碗水', images: [DOG_IMG(4), DOG_IMG(5)], likes: 34, comments: 1, collects: 10, liked: false, collected: false, milestone: null, commentList: [
+            { user: '金毛主人', text: '下次一起约狗狗聚会呀！我家金毛超喜欢和柴犬玩', time: '2小时前', replies: [] },
+          ]},
+          { id: 207, date: '2024-05-01', visibility: 'public', text: '第一次洗澡全程不闹！旺财真的长大了～从第一次洗澡时满浴室跑，到现在乖乖站着让我搓泡泡，老母亲好感动 🧼 奖励了一根磨牙棒！', images: [DOG_IMG(6), DOG_IMG(7)], likes: 56, comments: 1, collects: 19, liked: false, collected: false, milestone: null, commentList: [
+            { user: '宠物美容师', text: '乖狗狗！洗澡配合太省心了，遇到不配合的真的要命 😅', time: '1天前', replies: [] },
+          ]},
+        ]
+      },
+      tuantuan: {
+        name: '团团', emoji: '🐰', avatarBg: 'linear-gradient(135deg,#FFCCBC,#FF8A65)',
+        entries: [
+          { id: 208, date: '2024-06-08', visibility: 'friends', text: '团团到家一周啦！已经完全适应了新环境，开始主动过来蹭手了。今天第一次尝试了提摩西草，吃得可欢了。兔兔真的太治愈了 🥰', images: [PICSUM(219), PICSUM(300)], likes: 12, comments: 1, collects: 5, liked: false, collected: false, milestone: null, commentList: [
+            { user: '兔友小美', text: '团团太可爱了！提摩西草在哪里买的？求推荐～', time: '3小时前', replies: [] },
+          ]},
+        ]
+      }
+    },
+    pets: [
+      { key: 'orange', name: '橘座', emoji: '🐱', age: '4岁', avatarBg: 'linear-gradient(135deg,#FFD4A8,#FFA86B)' },
+      { key: 'wangcai', name: '旺财', emoji: '🐶', age: '2岁', avatarBg: 'linear-gradient(135deg,#FFE0B2,#FFAB40)' },
+      { key: 'tuantuan', name: '团团', emoji: '🐰', age: '1岁', avatarBg: 'linear-gradient(135deg,#FFCCBC,#FF8A65)' },
+    ],
+    currentPet: 'orange',
+    publishType: 'post',
+    selectedImages: [],
+    currentComment: null, // {type:'feed'|'diary', feedId?, petKey?, entryId?}
+    replyTo: null,
+  };
+}
+
+// ==================== STATE ====================
+let S;
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      // Merge: use saved data, fall back to defaults for new fields
+      const def = createInitialData();
+      // Deep merge feeds - keep saved likes/collects/comments but use default feed list as base
+      S = def;
+      if (saved.feeds) {
+        saved.feeds.forEach(sf => {
+          const df = S.feeds.find(f => f.id === sf.id);
+          if (df) {
+            df.liked = sf.liked;
+            df.likes = sf.likes;
+            df.collected = sf.collected;
+            df.collects = sf.collects;
+            df.comments = sf.comments;
+            df.commentList = sf.commentList;
+          }
+        });
+        // Add new feeds (user-created) that don't exist in defaults
+        saved.feeds.forEach(sf => {
+          if (!S.feeds.find(f => f.id === sf.id)) {
+            S.feeds.unshift(sf);
+          }
+        });
+      }
+      if (saved.diaries) {
+        Object.keys(saved.diaries).forEach(pk => {
+          if (S.diaries[pk]) {
+            saved.diaries[pk].entries.forEach(se => {
+              const de = S.diaries[pk].entries.find(e => e.id === se.id);
+              if (de) {
+                de.liked = se.liked;
+                de.likes = se.likes;
+                de.collected = se.collected;
+                de.collects = se.collects;
+                de.comments = se.comments;
+                de.commentList = se.commentList;
+              }
+            });
+            // Add new entries
+            saved.diaries[pk].entries.forEach(se => {
+              if (!S.diaries[pk].entries.find(e => e.id === se.id)) {
+                S.diaries[pk].entries.unshift(se);
+              }
+            });
+          }
+        });
+      }
+      if (saved.currentPet) S.currentPet = saved.currentPet;
+    } else {
+      S = createInitialData();
+    }
+  } catch(e) {
+    S = createInitialData();
+  }
+}
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      feeds: S.feeds,
+      diaries: S.diaries,
+      currentPet: S.currentPet,
+    }));
+  } catch(e) {}
+}
+
+// ==================== DOM REFS ====================
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+const mainContent = $('#mainContent');
+const feedList = $('#feedList');
+const timelineWrap = $('#timelineWrap');
+const petSwitcher = $('#petSwitcher');
+const searchInput = $('#searchInput');
+const searchDropdown = $('#searchDropdown');
+const toast = $('#toast');
+const publishModal = $('#publishModal');
+const commentModal = $('#commentModal');
+
+// ==================== UTILS ====================
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+function updateStatusBar() {
+  const now = new Date();
+  const h = now.getHours().toString().padStart(2,'0');
+  const m = now.getMinutes().toString().padStart(2,'0');
+  $('#statusTime').textContent = h + ':' + m;
+  $('#batteryLevel').textContent = Math.floor(85 + Math.random() * 15);
+}
+setInterval(updateStatusBar, 30000);
+updateStatusBar();
+
+// ==================== NAVIGATION ====================
+function navigateTo(pageName) {
+  $$('.page').forEach(p => p.classList.remove('active'));
+  $$('.nav-item').forEach(n => n.classList.remove('active'));
+
+  const page = $('#page-' + pageName);
+  if (page) page.classList.add('active');
+
+  const nav = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+  if (nav) nav.classList.add('active');
+
+  mainContent.scrollTop = 0;
+
+  if (pageName === 'square') renderFeeds(getCurrentChannel());
+  if (pageName === 'diary') { renderPetSwitcher(); renderTimeline(S.currentPet); }
+  if (pageName === 'profile') updateProfileStats();
+}
+
+$('#bottomNav').addEventListener('click', function(e) {
+  const item = e.target.closest('.nav-item');
+  if (!item || item.classList.contains('nav-post')) return;
+  navigateTo(item.dataset.page);
+});
+
+// ==================== SEARCH ====================
+let searchTimer;
+searchInput.addEventListener('input', function() {
+  clearTimeout(searchTimer);
+  const q = this.value.trim();
+  if (!q) { searchDropdown.classList.remove('show'); return; }
+  searchTimer = setTimeout(() => doSearch(q), 200);
+});
+searchInput.addEventListener('focus', function() {
+  const q = this.value.trim();
+  if (q) doSearch(q);
+});
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-wrap')) searchDropdown.classList.remove('show');
+});
+
+function doSearch(q) {
+  const query = q.toLowerCase();
+  const results = [];
+
+  S.feeds.forEach(f => {
+    if (f.text.toLowerCase().includes(query) || f.user.name.toLowerCase().includes(query) || f.tags.some(t => t.toLowerCase().includes(query))) {
+      results.push({ type: '动态', name: f.user.name, desc: f.text.slice(0,50)+'...', avatar: f.user.avatar, avClass: f.avClass, feedId: f.id });
+    }
+  });
+
+  Object.entries(S.diaries).forEach(([pk, pet]) => {
+    pet.entries.forEach(e => {
+      if (e.text.toLowerCase().includes(query) && e.visibility !== 'private') {
+        results.push({ type: '日记', name: pet.name+'的日记', desc: e.text.slice(0,50)+'...', avatar: pet.emoji, avClass: 'avatar-cat', diaryPet: pk, entryId: e.id });
+      }
+    });
+  });
+
+  if (!results.length) {
+    searchDropdown.innerHTML = '<div class="search-empty">🔍 没有找到相关内容<br>换个关键词试试吧～</div>';
+  } else {
+    searchDropdown.innerHTML = results.slice(0, 10).map(r => `
+      <div class="search-item" data-type="${r.type}" data-feed="${r.feedId||''}" data-pet="${r.diaryPet||''}" data-entry="${r.entryId||''}">
+        <div class="si-avatar ${r.avClass||''}" style="background:linear-gradient(135deg,#FFD4A8,#FFA86B)">${r.avatar}</div>
+        <div class="si-info">
+          <div class="si-name">${r.name}</div>
+          <div class="si-desc">${r.desc}</div>
+        </div>
+        <span class="si-tag">${r.type}</span>
+      </div>
+    `).join('');
+  }
+  searchDropdown.classList.add('show');
+}
+
+searchDropdown.addEventListener('click', function(e) {
+  const item = e.target.closest('.search-item');
+  if (!item) return;
+  searchDropdown.classList.remove('show');
+  searchInput.value = '';
+
+  const type = item.dataset.type;
+  const feedId = parseInt(item.dataset.feed);
+  const petKey = item.dataset.pet;
+  const entryId = parseInt(item.dataset.entry);
+
+  if (type === '动态' && feedId) {
+    navigateTo('square');
+    highlightCard('feed', feedId);
+    showToast('🔍 找到相关动态～');
+  } else if (type === '日记' && petKey) {
+    navigateTo('diary');
+    S.currentPet = petKey;
+    renderPetSwitcher();
+    renderTimeline(petKey);
+    if (entryId) highlightCard('diary', entryId, petKey);
+    showToast('🔍 找到相关日记～');
+  }
+});
+
+function searchTopic(topic) {
+  searchInput.value = '#' + topic;
+  navigateTo('square');
+  doSearch(topic);
+  showToast('🔍 搜索话题：#' + topic);
+}
+
+function highlightCard(type, id, petKey) {
+  setTimeout(() => {
+    let card;
+    if (type === 'feed') card = document.querySelector(`.feed-card[data-fid="${id}"]`);
+    else card = document.querySelector(`.diary-card[data-did="${id}"][data-pet="${petKey}"]`);
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.style.boxShadow = '0 0 0 4px var(--c-primary)';
+      setTimeout(() => { card.style.boxShadow = ''; }, 2500);
+    }
+  }, 400);
+}
+
+// ==================== SQUARE: Feeds ====================
+function getCurrentChannel() {
+  const active = document.querySelector('.channel-tab.active');
+  return active ? active.dataset.ch : 'all';
+}
+
+function renderFeeds(channel) {
+  let feeds = S.feeds;
+
+  if (channel === 'follow') {
+    feedList.innerHTML = `<div class="empty-wrap"><div class="empty-emoji">👀</div><div class="empty-text">还没有关注任何人～<br>去推荐页发现有趣的铲屎官吧！</div></div>`;
+    return;
+  }
+
+  if (channel !== 'all') {
+    feeds = feeds.filter(f => f.category === channel);
+    if (!feeds.length) {
+      feedList.innerHTML = `<div class="empty-wrap"><div class="empty-emoji">🐾</div><div class="empty-text">这个频道还没有内容哦～<br>快去发布第一条吧！</div></div>`;
+      return;
+    }
+  }
+
+  feedList.innerHTML = feeds.map((f, i) => {
+    const n = f.images.length;
+    let gc = 'g-1';
+    if (n === 2) gc = 'g-2';
+    else if (n === 3) gc = 'g-3';
+    else if (n >= 4) gc = 'g-multi';
+
+    return `
+    <div class="feed-card fade-in" data-fid="${f.id}" style="animation-delay:${i*0.03}s">
+      <div class="card-top">
+        <div class="avatar ${f.avClass}">${f.user.avatar}</div>
+        <div class="user-info">
+          <div class="nickname">${f.user.name}</div>
+          <div class="meta-row"><span>${f.time}</span><span>📍 ${f.location}</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="content-text">${f.text}</div>
+        ${n ? `<div class="img-grid ${gc}">${f.images.map(img => `<img src="${img}" alt="" loading="lazy" onerror="this.parentElement.removeChild(this)">`).join('')}</div>` : ''}
+      </div>
+      <div class="card-tags">${f.tags.map(t => `<button class="card-tag">#${t}</button>`).join(' ')}</div>
+      <div class="card-actions">
+        <button class="act-btn like-btn ${f.liked?'is-liked':''}" data-fid="${f.id}" onclick="toggleLike(${f.id})"><span class="like-icon">${f.liked?'❤️':'🤍'}</span> <span class="like-count">${f.likes}</span></button>
+        <button class="act-btn cmt-btn" data-fid="${f.id}" onclick="openComments('feed', ${f.id})">💬 <span class="cmt-count">${f.comments}</span></button>
+        <button class="act-btn coll-btn ${f.collected?'is-collected':''}" data-fid="${f.id}" onclick="toggleCollect(${f.id})">${f.collected?'⭐':'☆'} <span class="coll-count">${f.collects}</span></button>
+        <button class="act-btn" onclick="sharePost(${f.id})">↗️ 分享</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+$('#channelRow').addEventListener('click', function(e) {
+  const tab = e.target.closest('.channel-tab');
+  if (!tab) return;
+  $$('.channel-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  renderFeeds(tab.dataset.ch);
+});
+
+// ==================== SQUARE: Like ====================
+function toggleLike(feedId) {
+  const feed = S.feeds.find(f => f.id === feedId);
+  if (!feed) return;
+  feed.liked = !feed.liked;
+  feed.likes += feed.liked ? 1 : -1;
+
+  // Inline DOM update — no re-render, no jump!
+  const card = document.querySelector(`.feed-card[data-fid="${feedId}"]`);
+  if (!card) return;
+  const btn = card.querySelector('.like-btn');
+  const icon = card.querySelector('.like-icon');
+  if (btn) {
+    btn.classList.toggle('is-liked', feed.liked);
+    if (icon) { icon.textContent = feed.liked ? '❤️' : '🤍'; icon.classList.add('heart-pop'); setTimeout(() => icon.classList.remove('heart-pop'), 450); }
+    const count = btn.querySelector('.like-count');
+    if (count) count.textContent = feed.likes;
+  }
+  saveState();
+}
+
+function toggleCollect(feedId) {
+  const feed = S.feeds.find(f => f.id === feedId);
+  if (!feed) return;
+  feed.collected = !feed.collected;
+  feed.collects += feed.collected ? 1 : -1;
+
+  const card = document.querySelector(`.feed-card[data-fid="${feedId}"]`);
+  if (!card) return;
+  const btn = card.querySelector('.coll-btn');
+  if (btn) {
+    btn.classList.toggle('is-collected', feed.collected);
+    btn.innerHTML = (feed.collected ? '⭐' : '☆') + ' <span class="coll-count">' + feed.collects + '</span>';
+  }
+  showToast(feed.collected ? '⭐ 已收藏' : '已取消收藏');
+  saveState();
+}
+
+function sharePost(feedId) {
+  showToast('🔗 链接已复制，快去分享给朋友吧～');
+}
+
+// ==================== COMMENTS ====================
+function openComments(type, id, petKey) {
+  S.currentComment = { type, feedId: type === 'feed' ? id : undefined, petKey: petKey || id, entryId: type === 'diary' ? id : undefined };
+  S.replyTo = null;
+  $('#replyHint').style.display = 'none';
+  $('#commentInput').placeholder = '写下你的评论...';
+  $('#commentInput').value = '';
+
+  let commentList;
+  if (type === 'feed') {
+    const feed = S.feeds.find(f => f.id === id);
+    commentList = feed ? feed.commentList : [];
+  } else {
+    const pet = S.diaries[petKey || id];
+    const entry = pet ? pet.entries.find(e => e.id === id) : null;
+    commentList = entry ? entry.commentList : [];
+  }
+
+  renderCommentList(commentList);
+  commentModal.classList.add('open');
+  setTimeout(() => $('#commentInput').focus(), 350);
+}
+
+function renderCommentList(list) {
+  $('#commentList').innerHTML = list.map(c => `
+    <div class="comment-item">
+      <div class="cm-avatar">🐾</div>
+      <div class="cm-body">
+        <div class="cm-name">${c.user}</div>
+        <div class="cm-text">${c.text}</div>
+        <div class="cm-meta">
+          <span>${c.time}</span>
+          <button class="cm-reply-btn" onclick="setReply('${c.user}')">回复</button>
+        </div>
+        ${(c.replies && c.replies.length) ? `
+        <div class="cm-replies">
+          ${c.replies.map(r => `
+          <div class="cm-reply">
+            <div class="cm-avatar" style="font-size:13px">🐾</div>
+            <div class="cm-body">
+              <div class="cm-name">${r.user}</div>
+              <div class="cm-text">${r.text}</div>
+              <div class="cm-meta">
+                <span>${r.time}</span>
+                <button class="cm-reply-btn" onclick="setReply('${r.user}')">回复</button>
+              </div>
+            </div>
+          </div>`).join('')}
+        </div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function setReply(username) {
+  S.replyTo = username;
+  $('#replyTarget').textContent = '@' + username;
+  $('#replyHint').style.display = 'inline-flex';
+  $('#commentInput').placeholder = '回复 @' + username + '...';
+  $('#commentInput').focus();
+}
+
+function clearReply() {
+  S.replyTo = null;
+  $('#replyHint').style.display = 'none';
+  $('#commentInput').placeholder = '写下你的评论...';
+  $('#commentInput').focus();
+}
+
+function addComment() {
+  const input = $('#commentInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const cc = S.currentComment;
+  if (!cc) return;
+
+  let commentList;
+  if (cc.type === 'feed') {
+    const feed = S.feeds.find(f => f.id === cc.feedId);
+    if (!feed) return;
+    commentList = feed.commentList;
+  } else {
+    const pet = S.diaries[cc.petKey];
+    const entry = pet ? pet.entries.find(e => e.id === cc.entryId) : null;
+    if (!entry) return;
+    commentList = entry.commentList;
+  }
+
+  if (S.replyTo) {
+    const parent = commentList.find(c => c.user === S.replyTo);
+    if (parent) {
+      if (!parent.replies) parent.replies = [];
+      parent.replies.push({ user: '我', text, time: '刚刚' });
+    }
+    S.replyTo = null;
+    $('#replyHint').style.display = 'none';
+    $('#commentInput').placeholder = '写下你的评论...';
+    showToast('💬 回复成功');
+  } else {
+    commentList.push({ user: '我', text, time: '刚刚', replies: [] });
+    showToast('💬 评论成功');
+  }
+
+  // Update comment count
+  if (cc.type === 'feed') {
+    const feed = S.feeds.find(f => f.id === cc.feedId);
+    if (feed) feed.comments = commentList.reduce((s, c) => s + 1 + (c.replies ? c.replies.length : 0), 0);
+  } else {
+    const pet = S.diaries[cc.petKey];
+    const entry = pet ? pet.entries.find(e => e.id === cc.entryId) : null;
+    if (entry) entry.comments = commentList.reduce((s, c) => s + 1 + (c.replies ? c.replies.length : 0), 0);
+  }
+
+  saveState();
+  renderCommentList(commentList);
+  input.value = '';
+
+  // Update inline comment count
+  if (cc.type === 'feed') {
+    const feed = S.feeds.find(f => f.id === cc.feedId);
+    const card = document.querySelector(`.feed-card[data-fid="${cc.feedId}"]`);
+    if (card) {
+      const cnt = card.querySelector('.cmt-count');
+      if (cnt) cnt.textContent = feed.comments;
+    }
+  } else {
+    const card = document.querySelector(`.diary-card[data-did="${cc.entryId}"][data-pet="${cc.petKey}"]`);
+    if (card) {
+      const cnt = card.querySelector('.d-cmt-count');
+      if (cnt) {
+        const pet = S.diaries[cc.petKey];
+        const entry = pet ? pet.entries.find(e => e.id === cc.entryId) : null;
+        if (entry && cnt) cnt.textContent = entry.comments;
+      }
+    }
+  }
+}
+
+function closeComments() {
+  commentModal.classList.remove('open');
+  S.replyTo = null;
+  $('#replyHint').style.display = 'none';
+}
+
+commentModal.addEventListener('click', function(e) { if (e.target === this) closeComments(); });
+
+// ==================== DIARY ====================
+function renderPetSwitcher() {
+  petSwitcher.innerHTML = S.pets.map(p => `
+    <button class="pet-card ${p.key === S.currentPet ? 'selected' : ''}" data-pet="${p.key}" onclick="switchPet('${p.key}')">
+      <div class="pet-av" style="background:${p.avatarBg}">${p.emoji}</div>
+      <div class="pet-nm">${p.name}</div>
+      <div class="pet-age">${p.age}</div>
+    </button>
+  `).join('') + `
+    <button class="pet-card add-pet" onclick="showToast('➕ 添加宠物 — 功能开发中～')">
+      <div class="pet-av">＋</div>
+      <div class="pet-nm">新增</div>
+    </button>`;
+}
+
+function switchPet(petKey) {
+  S.currentPet = petKey;
+  saveState();
+  renderPetSwitcher();
+  renderTimeline(petKey);
+}
+
+function renderTimeline(petKey) {
+  const pet = S.diaries[petKey];
+  if (!pet) { timelineWrap.innerHTML = ''; return; }
+
+  const entries = pet.entries;
+  const grouped = {};
+  entries.forEach(e => {
+    const m = e.date.slice(0, 7);
+    if (!grouped[m]) grouped[m] = [];
+    grouped[m].push(e);
+  });
+
+  const mn = {
+    '2024-06': '2024年6月', '2024-05': '2024年5月', '2024-04': '2024年4月',
+    '2024-03': '2024年3月', '2024-02': '2024年2月', '2024-01': '2024年1月',
+  };
+  // Handle future months
+  Object.keys(grouped).forEach(k => {
+    if (!mn[k]) mn[k] = k.slice(0,4) + '年' + parseInt(k.slice(5,7)) + '月';
+  });
+
+  timelineWrap.innerHTML = Object.keys(grouped).sort().reverse().map(month => `
+    <div class="tl-month">
+      <div class="tl-m-label">● ${mn[month] || month}</div>
+      ${grouped[month].map(e => {
+        const vi = { public: '🌍', friends: '⭐', private: '🔒' };
+        const vl = { public: '公开', friends: '好友可见', private: '仅自己' };
+        const ni = e.images.length;
+        const dc = ni >= 2 ? 'd2' : 'd1';
+
+        return `
+        <div class="tl-date">
+          ${e.date.slice(8)}日
+          ${e.milestone ? `<span class="tl-badge">${e.milestone}</span>` : ''}
+        </div>
+        <div class="diary-card fade-in" data-did="${e.id}" data-pet="${petKey}">
+          <span class="vis-badge" title="${vl[e.visibility]}">${vi[e.visibility]}</span>
+          <div class="diary-text">${e.text.replace(/\n/g,'<br>')}</div>
+          ${ni ? `<div class="diary-imgs ${dc}">${e.images.map(img => `<img src="${img}" alt="" loading="lazy" onerror="this.parentElement.removeChild(this)">`).join('')}</div>` : ''}
+          ${e.visibility !== 'private' ? `
+          <div class="diary-actions">
+            <button class="act-btn like-btn ${e.liked?'is-liked':''}" onclick="toggleDiaryLike('${petKey}',${e.id})"><span class="like-icon">${e.liked?'❤️':'🤍'}</span> <span class="like-count">${e.likes}</span></button>
+            <button class="act-btn" onclick="openComments('diary',${e.id},'${petKey}')">💬 <span class="d-cmt-count">${e.comments}</span></button>
+            <button class="act-btn coll-btn ${e.collected?'is-collected':''}" onclick="toggleDiaryCollect('${petKey}',${e.id})">${e.collected?'⭐':'☆'} <span class="coll-count">${e.collects}</span></button>
+          </div>` : '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--c-border);font-size:12px;color:var(--c-text-light)">🔒 仅自己可见</div>'}
+        </div>`;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
+function toggleDiaryLike(petKey, entryId) {
+  const pet = S.diaries[petKey];
+  if (!pet) return;
+  const entry = pet.entries.find(e => e.id === entryId);
+  if (!entry) return;
+  entry.liked = !entry.liked;
+  entry.likes += entry.liked ? 1 : -1;
+
+  const card = document.querySelector(`.diary-card[data-did="${entryId}"][data-pet="${petKey}"]`);
+  if (!card) return;
+  const btn = card.querySelector('.like-btn');
+  const icon = card.querySelector('.like-icon');
+  if (btn) {
+    btn.classList.toggle('is-liked', entry.liked);
+    if (icon) { icon.textContent = entry.liked ? '❤️' : '🤍'; icon.classList.add('heart-pop'); setTimeout(() => icon.classList.remove('heart-pop'), 450); }
+    const count = btn.querySelector('.like-count');
+    if (count) count.textContent = entry.likes;
+  }
+  saveState();
+}
+
+function toggleDiaryCollect(petKey, entryId) {
+  const pet = S.diaries[petKey];
+  if (!pet) return;
+  const entry = pet.entries.find(e => e.id === entryId);
+  if (!entry) return;
+  entry.collected = !entry.collected;
+  entry.collects += entry.collected ? 1 : -1;
+
+  const card = document.querySelector(`.diary-card[data-did="${entryId}"][data-pet="${petKey}"]`);
+  if (!card) return;
+  const btn = card.querySelector('.coll-btn');
+  if (btn) {
+    btn.classList.toggle('is-collected', entry.collected);
+    btn.innerHTML = (entry.collected ? '⭐' : '☆') + ' <span class="coll-count">' + entry.collects + '</span>';
+  }
+  showToast(entry.collected ? '⭐ 已收藏' : '已取消收藏');
+  saveState();
+}
+
+// ==================== PUBLISH ====================
+function openPublish(type) {
+  S.publishType = type;
+  S.selectedImages = [];
+  S.currentComment = null;
+
+  $('#pubTitle').textContent = type === 'post' ? '发布动态' : '写日记';
+  $('#pubVisVal').textContent = '仅自己 ›';
+  $('#pubOptVis').style.display = type === 'diary' ? 'flex' : 'none';
+  $('#pubOptPet').style.display = type === 'diary' ? 'none' : 'flex';
+  $('#pubText').value = '';
+
+  $$('.pub-type-btn').forEach(b => b.classList.toggle('sel', b.dataset.pt === type));
+  resetPubImgs();
+
+  publishModal.classList.add('open');
+  // Position modal within phone frame
+  const app = document.getElementById('app');
+  if (!publishModal.parentElement || publishModal.parentElement !== app) {
+    app.appendChild(publishModal);
+  }
+  setTimeout(() => $('#pubText').focus(), 400);
+}
+
+function closePublish() {
+  publishModal.classList.remove('open');
+}
+
+function setPubType(type) {
+  S.publishType = type;
+  $('#pubTitle').textContent = type === 'post' ? '发布动态' : '写日记';
+  $('#pubOptVis').style.display = type === 'diary' ? 'flex' : 'none';
+  $('#pubOptPet').style.display = type === 'diary' ? 'none' : 'flex';
+  $$('.pub-type-btn').forEach(b => b.classList.toggle('sel', b.dataset.pt === type));
+}
+
+function triggerImgInput() { $('#imgInput').click(); }
+
+function handleImgSelect(event) {
+  const files = Array.from(event.target.files);
+  const remaining = 9 - S.selectedImages.length;
+  files.slice(0, remaining).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function(e) { S.selectedImages.push(e.target.result); renderPubImgs(); };
+    reader.readAsDataURL(file);
+  });
+  event.target.value = '';
+}
+
+function renderPubImgs() {
+  const area = $('#pubImgs');
+  area.innerHTML = S.selectedImages.map((img, i) => `
+    <div class="pub-img-thumb">
+      <img src="${img}" alt="">
+      <button class="pub-img-del" onclick="removePubImg(${i})">✕</button>
+    </div>
+  `).join('');
+  if (S.selectedImages.length < 9) {
+    area.innerHTML += '<div class="pub-img-add" onclick="triggerImgInput()">＋</div>';
+  }
+}
+
+function removePubImg(i) {
+  S.selectedImages.splice(i, 1);
+  renderPubImgs();
+}
+
+function resetPubImgs() {
+  $('#pubImgs').innerHTML = '<div class="pub-img-add" onclick="triggerImgInput()">＋</div>';
+}
+
+function doPublish() {
+  const text = $('#pubText').value.trim();
+  if (!text && !S.selectedImages.length) { showToast('😺 请写点什么或添加图片吧～'); return; }
+
+  const type = S.publishType;
+
+  if (type === 'post') {
+    const catMap = { cat: 'avatar-cat', dog: 'avatar-dog', reptile: 'avatar-reptile', fish: 'avatar-fish', bird: 'avatar-bird', small: 'avatar-small' };
+    S.feeds.unshift({
+      id: Date.now(),
+      user: { name: '我', avatar: '🐱', avClass: 'avatar-cat' },
+      time: '刚刚', location: '上海',
+      text: text,
+      images: S.selectedImages.slice(),
+      tags: [], category: 'cat',
+      likes: 0, comments: 0, collects: 0,
+      liked: false, collected: false,
+      commentList: [],
+    });
+    showToast('✅ 发布成功！');
+  } else {
+    const pet = S.diaries[S.currentPet];
+    const today = new Date().toISOString().slice(0, 10);
+    pet.entries.unshift({
+      id: Date.now(),
+      date: today,
+      visibility: 'public',
+      text: text,
+      images: S.selectedImages.slice(),
+      likes: 0, comments: 0, collects: 0,
+      liked: false, collected: false,
+      milestone: null,
+      commentList: [],
+    });
+    showToast('✅ 日记发布成功！');
+  }
+
+  saveState();
+  closePublish();
+  resetPubImgs();
+
+  if (type === 'post') { navigateTo('square'); renderFeeds(getCurrentChannel()); }
+  else { navigateTo('diary'); renderPetSwitcher(); renderTimeline(S.currentPet); }
+  mainContent.scrollTop = 0;
+}
+
+publishModal.addEventListener('click', function(e) { if (e.target === this) closePublish(); });
+
+// ==================== PROFILE ====================
+function updateProfileStats() {
+  let postCount = S.feeds.filter(f => f.user.name === '我').length;
+  let diaryCount = 0;
+  Object.values(S.diaries).forEach(p => {
+    diaryCount += p.entries.filter(e => true).length;
+  });
+  $('#myPostCount').textContent = postCount;
+  $('#myDiaryCount').textContent = diaryCount;
+}
+
+// ==================== INIT ====================
+function init() {
+  loadState();
+  // Move modals into app for proper positioning
+  const app = document.getElementById('app');
+  if (publishModal.parentElement !== app) app.appendChild(publishModal);
+  if (commentModal.parentElement !== app) app.appendChild(commentModal);
+
+  renderFeeds('all');
+  renderPetSwitcher();
+  renderTimeline(S.currentPet);
+  navigateTo('square');
+  updateProfileStats();
+
+  console.log('🐾 萌宠星球 v1.0 已就绪！');
+  console.log('  🌍 动态广场 — 图文混排信息流 · 点赞评论收藏');
+  console.log('  📖 成长日记 — 宠物时间线手账 · 里程碑标记');
+  console.log('  ✏️ 创作发布 — 发动态/写日记 · 多图上传');
+  console.log('  🔍 智能搜索 — 动态/日记/用户一站式查找');
+  console.log('  💾 数据持久化 — localStorage自动保存');
+  console.log('  🎨 暖色调 · 可爱温馨风 · 响应式适配');
+}
+
+init();
+
+// Handle window resize for responsive
+window.addEventListener('resize', () => {
+  const frame = document.querySelector('.phone-frame');
+  if (window.innerWidth <= 440 || window.innerHeight <= 700) {
+    frame.style.width = '100%';
+    frame.style.height = '100%';
+    frame.style.borderRadius = '0';
+    frame.style.boxShadow = 'none';
+  } else {
+    frame.style.width = '400px';
+    frame.style.height = '860px';
+    frame.style.borderRadius = '28px';
+    frame.style.boxShadow = '0 0 0 3px #3a3028, 0 0 0 7px #1a1815, 0 20px 60px rgba(0,0,0,0.35)';
+  }
+});
+</script>
+</body>
+</html>
