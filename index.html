@@ -1622,6 +1622,12 @@ function renderRankings(tab) {
   }).join('');
 }
 
+// ==================== FOLLOW (basic for profile) ====================
+function getFollowData() {
+  try { return JSON.parse(localStorage.getItem('petplanet_follows')||'[]'); } catch(e) { return []; }
+}
+function saveFollowData(d) { localStorage.setItem('petplanet_follows', JSON.stringify(d)); }
+
 // ==================== ACCOUNT SYSTEM ====================
 function getAccount() {
   try { return JSON.parse(localStorage.getItem('petplanet_account')||'null'); } catch(e) { return null; }
