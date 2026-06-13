@@ -388,6 +388,63 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 /* ============ Notification toast (in-app) ============ */
 @keyframes slideInRight{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 .slide-in-right{animation:slideInRight .35s cubic-bezier(0.32,0.72,0,1) forwards}
+
+/* ============ PET PROFILE ============ */
+.pet-profile-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.pet-profile-overlay.open{transform:translateX(0)}
+.pet-profile-hero{text-align:center;padding:24px 16px 16px;background:linear-gradient(180deg,var(--c-bg-warm) 0%,var(--c-bg) 100%)}
+.pet-profile-hero .pp-avatar{width:80px;height:80px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto 10px;box-shadow:0 6px 24px rgba(255,140,66,0.2)}
+.pet-profile-hero .pp-name{font-size:22px;font-weight:800;color:var(--c-text)}
+.pet-profile-hero .pp-breed{font-size:13px;color:var(--c-text-mid);margin-top:2px}
+.pet-profile-tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.pp-tag{font-size:11px;padding:4px 10px;border-radius:var(--radius-xl);background:var(--c-accent);color:var(--c-primary);font-weight:600}
+.pet-profile-info{margin:12px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.pp-info-card{background:var(--c-card);border-radius:var(--radius-lg);padding:12px;text-align:center;box-shadow:var(--c-shadow)}
+.pp-info-card .pp-ic-val{font-size:20px;font-weight:800;color:var(--c-primary)}
+.pp-info-card .pp-ic-lbl{font-size:10px;color:var(--c-text-light);margin-top:2px}
+.pet-profile-section{margin:0 16px 8px}
+.pet-profile-section .pps-title{font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.pp-med-item{display:flex;gap:10px;padding:10px 12px;background:var(--c-card);border-radius:var(--radius-md);margin-bottom:6px;box-shadow:var(--c-shadow)}
+.pp-med-item .ppm-date{font-size:11px;color:var(--c-text-light);flex-shrink:0;min-width:50px}
+.pp-med-item .ppm-text{font-size:13px;color:var(--c-text);line-height:1.5}
+.pp-med-item .ppm-icon{font-size:18px;flex-shrink:0}
+
+/* ============ TOPIC PAGE ============ */
+.topic-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.topic-overlay.open{transform:translateX(0)}
+.topic-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
+.topic-header .th-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.topic-header .th-title{font-size:16px;font-weight:700;color:var(--c-text)}
+.topic-header .th-count{font-size:12px;color:var(--c-text-light)}
+.topic-feed-list{flex:1;overflow-y:auto;padding:12px 16px 80px;display:flex;flex-direction:column;gap:10px}
+
+/* ============ COLLECTIONS PAGE ============ */
+.collections-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.collections-overlay.open{transform:translateX(0)}
+.collections-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
+.collections-header .ch-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.collections-body{flex:1;overflow-y:auto;padding:12px 16px 80px}
+
+/* ============ CARE TOOLS ============ */
+.tools-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.tools-overlay.open{transform:translateX(0)}
+.tools-header{display:flex;align-items:center;gap:12px;padding:4px 8px;border-bottom:1px solid var(--c-border);flex-shrink:0;background:var(--c-bg)}
+.tools-header .tl-back{font-size:22px;cursor:pointer;border:none;background:none;font-family:var(--font);padding:8px}
+.tools-body{flex:1;overflow-y:auto;padding:16px}
+.tool-card{background:var(--c-card);border-radius:var(--radius-lg);padding:16px;margin-bottom:12px;box-shadow:var(--c-shadow)}
+.tool-card .tc-title{font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tool-card .tc-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.tool-card select,.tool-card input{padding:8px 12px;border-radius:var(--radius-md);border:1.5px solid var(--c-border);font-size:13px;font-family:var(--font);color:var(--c-text);background:#FFF;outline:none}
+.tool-card select:focus,.tool-card input:focus{border-color:var(--c-primary)}
+.tool-card .tc-result{font-size:14px;font-weight:700;color:var(--c-primary);margin-top:8px;padding:10px;background:#FFF5EC;border-radius:var(--radius-md);text-align:center}
+.tool-card .tc-btn{padding:10px 20px;border-radius:var(--radius-xl);background:var(--c-primary);color:#FFF;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);transition:all var(--transition)}
+.tool-card .tc-btn:active{transform:scale(0.96)}
+.tool-card .tc-note{font-size:11px;color:var(--c-text-light);margin-top:6px;line-height:1.5}
+
+/* Quick tool buttons on home */
+.quick-tools-bar{display:flex;gap:6px;padding:4px 16px;margin-bottom:6px;overflow-x:auto}
+.quick-tool-btn{flex-shrink:0;padding:7px 14px;border-radius:var(--radius-xl);background:var(--c-card);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-border);font-family:var(--font);white-space:nowrap;transition:all var(--transition)}
+.quick-tool-btn:active{background:var(--c-primary);color:#FFF;border-color:var(--c-primary)}
 </style>
 </head>
 <body>
@@ -419,6 +476,13 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
         <button class="home-stat-card" onclick="navigateTo('square')"><span class="hs-icon">🌍</span><span class="hs-num" id="hsPosts">0</span><span class="hs-label">今日动态</span></button>
         <button class="home-stat-card" onclick="navigateTo('diary')"><span class="hs-icon">📖</span><span class="hs-num" id="hsDiaries">0</span><span class="hs-label">成长日记</span></button>
         <button class="home-stat-card" onclick="openRankings()"><span class="hs-icon">🏆</span><span class="hs-num" id="hsRanked">0</span><span class="hs-label">上榜萌宠</span></button>
+      </div>
+      <div class="quick-tools-bar">
+        <button class="quick-tool-btn" onclick="openTools()">🧰 养护工具箱</button>
+        <button class="quick-tool-btn" onclick="openPetProfile('orange')">🐱 橘座档案</button>
+        <button class="quick-tool-btn" onclick="openPetProfile('wangcai')">🐶 旺财档案</button>
+        <button class="quick-tool-btn" onclick="openPetProfile('tuantuan')">🐰 团团档案</button>
+        <button class="quick-tool-btn" onclick="openCollections()">⭐ 我的收藏</button>
       </div>
       <div class="featured-strip">
         <div class="fs-title">🌟 今日推荐铲屎官</div>
@@ -486,10 +550,11 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
         <button class="profile-stat"><span class="ps-num">89</span><span class="ps-label">关注</span></button>
       </div>
       <div class="profile-menu">
-        <button class="profile-menu-item" onclick="showToast('📋 功能开发中～')"><span class="pm-icon">📋</span>我的动态<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="showToast('📖 功能开发中～')"><span class="pm-icon">📖</span>我的日记<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="showToast('⭐ 功能开发中～')"><span class="pm-icon">⭐</span>我的收藏<span class="pm-arrow">›</span></button>
-        <button class="profile-menu-item" onclick="showToast('⚙️ 功能开发中～')"><span class="pm-icon">⚙️</span>设置<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="openCollections()"><span class="pm-icon">⭐</span>我的收藏<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="openTools()"><span class="pm-icon">🧰</span>养护工具箱<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="navigateTo('diary')"><span class="pm-icon">📖</span>成长日记<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="openPetProfile(S.currentPet)"><span class="pm-icon">🐾</span>宠物档案<span class="pm-arrow">›</span></button>
+        <button class="profile-menu-item" onclick="showToast('⚙️ 设置 — 功能开发中～')"><span class="pm-icon">⚙️</span>设置<span class="pm-arrow">›</span></button>
         <button class="profile-menu-item" onclick="showToast('ℹ️ 关于萌宠星球 v2.0')"><span class="pm-icon">ℹ️</span>关于<span class="pm-arrow">›</span></button>
       </div>
     </div>
@@ -506,6 +571,43 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 
 </div><!-- /phone-frame -->
 </div><!-- /app-wrapper -->
+
+<!-- ============ PET PROFILE ============ -->
+<div class="pet-profile-overlay" id="petProfileOverlay">
+  <div class="notif-header">
+    <button class="nf-back" onclick="closePetProfile()">←</button>
+    <span class="nf-title">🐾 宠物档案</span>
+  </div>
+  <div style="flex:1;overflow-y:auto" id="petProfileBody"></div>
+</div>
+
+<!-- ============ TOPIC PAGE ============ -->
+<div class="topic-overlay" id="topicOverlay">
+  <div class="topic-header">
+    <button class="th-back" onclick="closeTopic()">←</button>
+    <span class="th-title" id="topicTitle">#话题</span>
+    <span class="th-count" id="topicCount"></span>
+  </div>
+  <div class="topic-feed-list" id="topicFeedList"></div>
+</div>
+
+<!-- ============ COLLECTIONS ============ -->
+<div class="collections-overlay" id="collectionsOverlay">
+  <div class="collections-header">
+    <button class="ch-back" onclick="closeCollections()">←</button>
+    <span class="nf-title">⭐ 我的收藏</span>
+  </div>
+  <div class="collections-body" id="collectionsBody"></div>
+</div>
+
+<!-- ============ CARE TOOLS ============ -->
+<div class="tools-overlay" id="toolsOverlay">
+  <div class="tools-header">
+    <button class="tl-back" onclick="closeTools()">←</button>
+    <span class="nf-title">🧰 养护工具箱</span>
+  </div>
+  <div class="tools-body" id="toolsBody"></div>
+</div>
 
 <!-- ============ NOTIFICATIONS ============ -->
 <div class="notif-overlay" id="notifOverlay">
@@ -1488,25 +1590,278 @@ renderTimeline = function(petKey) {
   }
 };
 
+// ==================== PET PROFILE ====================
+const PET_DATA = {
+  orange: {
+    name:'橘座',emoji:'🐱',breed:'中华田园橘猫',gender:'公',age:'4岁',birthday:'2020-05-20',weight:'6.2kg',color:'橘白相间',
+    avatarBg:'linear-gradient(135deg,#FFD4A8,#FFA86B)',
+    tags:['贪吃','爱睡觉','黏人','话痨','纸箱控'],
+    medical: [
+      {icon:'💉',date:'2024-03',text:'年度体检 — 各项指标正常，建议控制体重'},
+      {icon:'💊',date:'2024-01',text:'体内外驱虫 — 大宠爱+海乐宠'},
+      {icon:'🦷',date:'2023-11',text:'洗牙 — 牙结石轻度，已清洁'},
+      {icon:'💉',date:'2023-09',text:'猫三联加强针 — 抗体检测合格'},
+      {icon:'🏥',date:'2023-05',text:'年度体检 — 体重超标警告 ⚠️'},
+    ],
+  },
+  wangcai: {
+    name:'旺财',emoji:'🐶',breed:'柴犬',gender:'公',age:'2岁',birthday:'2022-01-10',weight:'10.5kg',color:'赤色',
+    avatarBg:'linear-gradient(135deg,#FFE0B2,#FFAB40)',
+    tags:['活泼','忠诚','爱运动','贪吃','社交达人'],
+    medical: [
+      {icon:'💉',date:'2024-04',text:'狂犬疫苗 — 已接种'},
+      {icon:'💊',date:'2024-02',text:'体内外驱虫 — 拜耳+福来恩'},
+      {icon:'🏥',date:'2023-12',text:'年度体检 — 健康，髋关节发育良好'},
+      {icon:'💉',date:'2023-08',text:'八联疫苗加强 — 抗体合格'},
+      {icon:'🦷',date:'2023-06',text:'洁齿 — 轻微牙垢，已处理'},
+    ],
+  },
+  tuantuan: {
+    name:'团团',emoji:'🐰',breed:'荷兰垂耳兔',gender:'母',age:'1岁',birthday:'2024-02-28',weight:'1.4kg',color:'灰白',
+    avatarBg:'linear-gradient(135deg,#FFCCBC,#FF8A65)',
+    tags:['温柔','好奇','爱干净','小吃货','喜欢被摸'],
+    medical: [
+      {icon:'💉',date:'2024-06',text:'兔瘟疫苗 — 已接种'},
+      {icon:'🏥',date:'2024-05',text:'初次体检 — 健康状况良好'},
+      {icon:'💊',date:'2024-04',text:'体内驱虫 — 适合幼兔剂量'},
+    ],
+  },
+};
+
+function openPetProfile(petKey) {
+  const pet = PET_DATA[petKey];
+  if (!pet) return;
+  const diaryPet = S.diaries[petKey];
+  const diaryCount = diaryPet ? diaryPet.entries.length : 0;
+  const publicDiaries = diaryPet ? diaryPet.entries.filter(e=>e.visibility==='public').length : 0;
+
+  $('#petProfileBody').innerHTML = `
+    <div class="pet-profile-hero">
+      <div class="pp-avatar" style="background:${pet.avatarBg}">${pet.emoji}</div>
+      <div class="pp-name">${pet.name}</div>
+      <div class="pp-breed">${pet.breed} · ${pet.gender} · ${pet.age}</div>
+      <div class="pet-profile-tags">${pet.tags.map(t=>`<span class="pp-tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="pet-profile-info">
+      <div class="pp-info-card"><div class="pp-ic-val">🎂</div><div class="pp-ic-lbl">${pet.birthday}</div></div>
+      <div class="pp-info-card"><div class="pp-ic-val">${pet.weight}</div><div class="pp-ic-lbl">当前体重</div></div>
+      <div class="pp-info-card"><div class="pp-ic-val">${pet.color}</div><div class="pp-ic-lbl">毛色</div></div>
+    </div>
+    <div class="pet-profile-info">
+      <div class="pp-info-card"><div class="pp-ic-val">${diaryCount}</div><div class="pp-ic-lbl">日记总数</div></div>
+      <div class="pp-info-card"><div class="pp-ic-val">${publicDiaries}</div><div class="pp-ic-lbl">公开日记</div></div>
+      <div class="pp-info-card"><div class="pp-ic-val">${pet.age}</div><div class="pp-ic-lbl">年龄</div></div>
+    </div>
+    ${renderWeightChart(petKey)}
+    ${renderCountdownCards(petKey)}
+    <div class="pet-profile-section" style="margin-top:12px">
+      <div class="pps-title">🏥 医疗记录</div>
+      ${pet.medical.map(m=>`<div class="pp-med-item"><span class="ppm-icon">${m.icon}</span><span class="ppm-date">${m.date}</span><span class="ppm-text">${m.text}</span></div>`).join('')}
+    </div>
+    <div class="pet-profile-section" style="margin-bottom:60px">
+      <div class="pps-title">📖 最近日记</div>
+      ${diaryPet ? diaryPet.entries.slice(0,3).map(e=>`<div class="pp-med-item" style="cursor:pointer" onclick="closePetProfile();navigateTo('diary');S.currentPet='${petKey}';renderPetSwitcher();renderTimeline('${petKey}');setTimeout(()=>highlightCard('diary',${e.id},'${petKey}'),400)"><span class="ppm-icon">${e.visibility==='private'?'🔒':e.visibility==='friends'?'⭐':'🌍'}</span><span class="ppm-date">${e.date.slice(5)}</span><span class="ppm-text">${e.text.slice(0,50)}...</span></div>`).join('') : '<div style="font-size:12px;color:var(--c-text-light);padding:12px">暂无日记记录</div>'}
+    </div>
+  `;
+  $('#petProfileOverlay').classList.add('open');
+  if (petProfileOverlay.parentElement !== app) app.appendChild(petProfileOverlay);
+}
+function closePetProfile() { $('#petProfileOverlay').classList.remove('open'); }
+// Wire pet switcher avatars
+const origRenderPetSwitcher = renderPetSwitcher;
+renderPetSwitcher = function() {
+  origRenderPetSwitcher();
+  // Add click handler to pet cards to open profile on long press hint
+  $$('.pet-card:not(.add-pet)').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Only open profile if already selected (second click)
+      if (card.classList.contains('selected') && S._lastPetClick === card.dataset.pet) {
+        openPetProfile(card.dataset.pet);
+        S._lastPetClick = null;
+      } else {
+        S._lastPetClick = card.dataset.pet;
+        setTimeout(() => { S._lastPetClick = null; }, 600);
+      }
+    });
+  });
+};
+
+// ==================== TOPIC PAGE ====================
+function openTopic(topic) {
+  const feeds = S.feeds.filter(f => f.tags.some(t => t === topic));
+  $('#topicTitle').textContent = '#' + topic;
+  $('#topicCount').textContent = feeds.length + '条动态';
+  $('#topicFeedList').innerHTML = feeds.length ? feeds.map(f => `
+    <div class="feed-card fade-in" data-fid="${f.id}" onclick="openPostDetail(${f.id})">
+      <div class="card-top"><div class="avatar ${f.avClass}">${f.user.avatar}</div><div class="user-info"><div class="nickname">${f.user.name}</div><div class="meta-row"><span>${f.time}</span><span>📍 ${f.location}</span></div></div></div>
+      <div class="card-body"><div class="content-text">${f.text.slice(0,100)}...</div></div>
+      <div class="card-tags">${f.tags.map(t=>`<button class="card-tag" onclick="event.stopPropagation();openTopic('${t}')">#${t}</button>`).join(' ')}</div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        <button class="act-btn like-btn ${f.liked?'is-liked':''}" onclick="toggleLike(${f.id})"><span class="like-icon">${f.liked?'❤️':'🤍'}</span> <span>${f.likes}</span></button>
+        <button class="act-btn" onclick="openComments('feed',${f.id})">💬 ${f.comments}</button>
+        <button class="act-btn coll-btn ${f.collected?'is-collected':''}" onclick="toggleCollect(${f.id})">${f.collected?'⭐':'☆'} ${f.collects}</button>
+      </div>
+    </div>
+  `).join('') : '<div class="empty-wrap"><div class="empty-emoji">🏷️</div><div class="empty-text">该话题下暂无动态<br>快去发布第一条吧～</div></div>';
+  $('#topicOverlay').classList.add('open');
+  if (topicOverlay.parentElement !== app) app.appendChild(topicOverlay);
+}
+function closeTopic() { $('#topicOverlay').classList.remove('open'); }
+// Wire card-tag clicks to open topic page
+document.addEventListener('click', function(e) {
+  const tag = e.target.closest('.card-tag');
+  if (tag && !e.target.closest('.topic-overlay')) {
+    const topic = tag.textContent.replace(/^#/,'');
+    openTopic(topic);
+  }
+});
+
+// ==================== COLLECTIONS ====================
+function openCollections() {
+  const collected = S.feeds.filter(f => f.collected);
+  // Also check diary entries
+  let diaryCollected = [];
+  Object.entries(S.diaries).forEach(([pk, pet]) => {
+    pet.entries.forEach(e => { if (e.collected) diaryCollected.push({...e, petKey:pk, petName:pet.name, petEmoji:pet.emoji}); });
+  });
+
+  $('#collectionsBody').innerHTML = `
+    <div style="font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:10px">⭐ 已收藏动态 (${collected.length})</div>
+    ${collected.length ? collected.map(f => `
+      <div class="feed-card" style="margin-bottom:8px;cursor:pointer" onclick="openPostDetail(${f.id})">
+        <div class="card-top"><div class="avatar ${f.avClass}">${f.user.avatar}</div><div class="user-info"><div class="nickname">${f.user.name}</div><div class="meta-row"><span>${f.time}</span></div></div></div>
+        <div class="card-body"><div class="content-text">${f.text.slice(0,80)}...</div></div>
+        <div class="card-actions" onclick="event.stopPropagation()">
+          <button class="act-btn coll-btn is-collected" onclick="toggleCollect(${f.id});openCollections()">⭐ <span>${f.collects}</span></button>
+        </div>
+      </div>
+    `).join('') : '<div class="empty-wrap" style="padding:30px"><div class="empty-emoji">⭐</div><div class="empty-text">还没有收藏任何动态<br>去广场发现精彩内容吧～</div></div>'}
+    ${diaryCollected.length ? `<div style="font-size:14px;font-weight:700;color:var(--c-text);margin:16px 0 10px">📖 已收藏日记 (${diaryCollected.length})</div>` : ''}
+    ${diaryCollected.map(e => `
+      <div class="diary-card" style="margin-bottom:8px;margin-left:0;cursor:pointer" onclick="closeCollections();navigateTo('diary');S.currentPet='${e.petKey}';renderPetSwitcher();renderTimeline('${e.petKey}');setTimeout(()=>highlightCard('diary',${e.id},'${e.petKey}'),400)">
+        <span class="vis-badge">${e.petEmoji}</span>
+        <div style="font-size:11px;color:var(--c-text-light);margin-bottom:4px">${e.petName} · ${e.date}</div>
+        <div class="diary-text">${e.text.slice(0,80)}...</div>
+        <div class="diary-actions" onclick="event.stopPropagation()">
+          <button class="act-btn coll-btn is-collected" onclick="toggleDiaryCollect('${e.petKey}',${e.id});openCollections()">⭐ ${e.collects}</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+  $('#collectionsOverlay').classList.add('open');
+  if (collectionsOverlay.parentElement !== app) app.appendChild(collectionsOverlay);
+}
+function closeCollections() { $('#collectionsOverlay').classList.remove('open'); }
+
+// ==================== CARE TOOLS ====================
+function openTools() {
+  $('#toolsBody').innerHTML = `
+    <div class="tool-card">
+      <div class="tc-title">🍽️ 每日喂食量计算器</div>
+      <div class="tc-row">
+        <select id="feedSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option><option value="rabbit">🐰 兔</option></select>
+        <input type="number" id="feedWeight" placeholder="体重(kg)" value="5" style="width:80px" step="0.1" min="0.1">
+        <select id="feedActivity"><option value="low">安静型</option><option value="mid" selected>正常活动</option><option value="high">活跃型</option></select>
+      </div>
+      <button class="tc-btn" onclick="calcFeeding()">计算喂食量</button>
+      <div class="tc-result" id="feedResult">点击计算查看结果</div>
+      <div class="tc-note">💡 此为参考值，请根据宠物实际情况和粮食品种调整</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tc-title">💧 每日饮水量参考</div>
+      <div class="tc-row">
+        <select id="waterSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗</option></select>
+        <input type="number" id="waterWeight" placeholder="体重(kg)" value="5" style="width:80px" step="0.1" min="0.1">
+      </div>
+      <button class="tc-btn" onclick="calcWater()">计算饮水量</button>
+      <div class="tc-result" id="waterResult">点击计算查看结果</div>
+      <div class="tc-note">💡 猫每日约50-70ml/kg，狗约40-60ml/kg</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tc-title">🧬 宠物年龄换算（相当于人类年龄）</div>
+      <div class="tc-row">
+        <select id="ageSpecies"><option value="cat">🐱 猫</option><option value="dog">🐶 狗（小型犬）</option><option value="dog_mid">🐶 狗（中型犬）</option><option value="dog_large">🐶 狗（大型犬）</option><option value="rabbit">🐰 兔</option></select>
+        <input type="number" id="ageYears" placeholder="实际年龄" value="3" style="width:60px" step="0.5" min="0">
+        <span style="font-size:13px;color:var(--c-text-light)">岁</span>
+      </div>
+      <button class="tc-btn" onclick="calcAge()">换算人类年龄</button>
+      <div class="tc-result" id="ageResult">点击计算查看结果</div>
+      <div class="tc-note">💡 猫1岁≈人15岁，2岁≈24岁，之后每年+4岁；狗按体型换算</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tc-title">💉 疫苗&驱虫时间表</div>
+      <div style="font-size:12px;line-height:2;color:var(--c-text)">
+        <b>🐱 猫：</b><br>
+        · 猫三联：8周龄首免→12周龄加强→每年1次<br>
+        · 狂犬疫苗：12周龄以上→每年1次<br>
+        · 体内驱虫：幼猫每月→成猫每3月<br>
+        · 体外驱虫：每月1次<br><br>
+        <b>🐶 狗：</b><br>
+        · 多联疫苗：6周龄首免→每3-4周加强→每年1次<br>
+        · 狂犬疫苗：12周龄以上→每年1次<br>
+        · 体内驱虫：幼犬每月→成犬每3月<br>
+        · 体外驱虫：每月1次
+      </div>
+    </div>
+  `;
+  $('#toolsOverlay').classList.add('open');
+  if (toolsOverlay.parentElement !== app) app.appendChild(toolsOverlay);
+}
+function closeTools() { $('#toolsOverlay').classList.remove('open'); }
+
+function calcFeeding() {
+  const species = $('#feedSpecies').value;
+  const weight = parseFloat($('#feedWeight').value) || 5;
+  const activity = $('#feedActivity').value;
+  let rate = species==='cat' ? 1.2 : species==='dog' ? 1.5 : 0.8;
+  if (activity==='low') rate *= 0.85; else if (activity==='high') rate *= 1.2;
+  const grams = Math.round(weight * rate * 10);
+  $('#feedResult').innerHTML = `🍽️ 建议每日喂食 <b>${grams}g</b>（分2-3餐）<br><span style="font-size:11px;color:var(--c-text-light)">约 ${Math.round(grams/10)} 勺（以10g/勺计）</span>`;
+}
+function calcWater() {
+  const species = $('#waterSpecies').value;
+  const weight = parseFloat($('#waterWeight').value) || 5;
+  const rate = species==='cat' ? 60 : 50;
+  const ml = Math.round(weight * rate);
+  $('#waterResult').innerHTML = `💧 建议每日饮水 <b>${ml}ml</b><br><span style="font-size:11px;color:var(--c-text-light)">约 ${Math.round(ml/200)} 杯（200ml/杯）</span>`;
+}
+function calcAge() {
+  const species = $('#ageSpecies').value;
+  const years = parseFloat($('#ageYears').value) || 1;
+  let humanAge;
+  if (species==='cat') {
+    if (years<=1) humanAge=15; else if (years<=2) humanAge=24; else humanAge=24+(years-2)*4;
+  } else if (species==='dog') {
+    humanAge = Math.round(years*15); // small dog simplified
+  } else if (species==='dog_mid') {
+    humanAge = Math.round(years*12.5);
+  } else if (species==='dog_large') {
+    humanAge = Math.round(years*10.5);
+  } else {
+    humanAge = Math.round(years*8);
+  }
+  $('#ageResult').innerHTML = `🧬 相当于人类的 <b>${Math.round(humanAge)} 岁</b><br><span style="font-size:11px;color:var(--c-text-light)">实际年龄：${years} 岁</span>`;
+}
+
 // ==================== INIT ====================
 function init() {
   loadState();
-  [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail, notifOverlay].forEach(el => {
+  [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail, notifOverlay,
+   petProfileOverlay, topicOverlay, collectionsOverlay, toolsOverlay].forEach(el => {
     if (el && el.parentElement !== app) app.appendChild(el);
   });
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
   navigateTo('square'); updateProfileStats();
   updateNotifBadge(); updateHomePage(); startHomeClock();
-  console.log('🐾 萌宠星球 v3.0 已就绪！');
-  console.log('  🖼️ 图片灯箱 — 点击查看大图 · 左右滑动');
-  console.log('  📝 发布面板 — 宠物选择 · 话题选择 · 可见范围');
-  console.log('  📄 动态详情 — 大图模式 · 完整评论区');
-  console.log('  🏆 萌宠榜单 — 人气榜 · 颜值榜 · 趣味榜');
-  console.log('  ⬇️ 下拉刷新 — 滑动刷新内容');
-  console.log('  📜 无限滚动 — 加载更多动态');
-  console.log('  🔔 消息通知 — 点赞/评论/系统通知');
-  console.log('  🏠 首页时钟 — 动态时间+推荐+活跃动态');
-  console.log('  📊 日记图表 — 体重曲线+纪念日倒计时');
+  console.log('🐾 萌宠星球 v4.0 已就绪！');
+  console.log('  🐾 宠物档案 — 品种/体重/医疗/性格标签');
+  console.log('  🏷️ 话题聚合 — 点击#标签浏览话题动态');
+  console.log('  🧰 养护工具 — 喂食/饮水/年龄换算/疫苗表');
+  console.log('  ⭐ 收藏页面 — 已收藏动态+日记集中查看');
+  console.log('  🏆 +前三版本全部功能');
 }
 init();
 
