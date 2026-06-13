@@ -3342,17 +3342,14 @@ function confirmReceive(oid) {
 function init() {
   loadState();
   initDarkMode();
-  [publishModal, commentModal, petPicker, topicPicker, visibilityPicker, rankOverlay, postDetail, notifOverlay,
-   petProfileOverlay, topicOverlay, collectionsOverlay, toolsOverlay,
-   encycOverlay, breedDetailOverlay, placesOverlay, lfOverlay,
-   checkinOverlay, badgesOverlay, gameOverlay, statsOverlay,
-   loginOverlay, registerOverlay, editProfileOverlay, settingsOverlay, memberOverlay,
-   medicalOverlay,
-   shopOverlay, productDetailOverlay].forEach(el => {
+  // 🔧 自动发现所有overlay/modal/picker — 不再手动维护列表
+  document.querySelectorAll('[id$="Overlay"], [id$="Modal"], [id$="Picker"], [id="postDetail"]').forEach(el => {
+    if (el.parentElement !== app) app.appendChild(el);
+  });
   renderFeeds('all'); renderPetSwitcher(); renderTimeline(S.currentPet);
   navigateTo('square'); updateProfilePage();
   updateNotifBadge(); updateHomePage(); startHomeClock();
-  console.log('🐾 萌宠星球 v6.0 已就绪！点击试试吧~');
+  console.log('🐾 萌宠星球已就绪！');
 }
 init();
 
