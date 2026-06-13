@@ -609,6 +609,38 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
 .review-item .rv-text{font-size:12px;color:var(--c-text-mid);margin-top:4px;line-height:1.5}
 .review-item .rv-date{font-size:10px;color:var(--c-text-light);margin-top:2px}
 
+/* ============ ADMIN ============ */
+.admin-overlay{position:absolute;inset:0;z-index:90;background:var(--c-bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(0.32,0.72,0,1)}
+.admin-overlay.open{transform:translateX(0)}
+.admin-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 16px}
+.admin-stat-card{background:var(--c-card);border-radius:var(--radius-lg);padding:14px;box-shadow:var(--c-shadow)}
+.admin-stat-card .as-num{font-size:24px;font-weight:800;color:var(--c-primary);display:block}
+.admin-stat-card .as-label{font-size:11px;color:var(--c-text-light);margin-top:2px}
+.admin-stat-card .as-change{font-size:10px;margin-top:2px}
+.as-up{color:var(--c-success)}.as-down{color:var(--c-heart)}
+/* Admin table-like list */
+.admin-list-item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--c-card);margin:0 16px 4px;border-radius:var(--radius-md);box-shadow:var(--c-shadow)}
+.admin-list-item .al-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.admin-list-item .al-info{flex:1;min-width:0}
+.admin-list-item .al-name{font-size:13px;font-weight:600;color:var(--c-text)}
+.admin-list-item .al-sub{font-size:11px;color:var(--c-text-light)}
+.admin-list-item .al-action{flex-shrink:0}
+.admin-btn-sm{padding:5px 12px;border-radius:var(--radius-xl);font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:var(--font);transition:all var(--transition)}
+.admin-btn-sm.ban{background:#FFEBEE;color:#E53935}.admin-btn-sm.ban:active{background:#E53935;color:#FFF}
+.admin-btn-sm.ok{background:#E8F5E9;color:#388E3C}.admin-btn-sm.ok:active{background:#388E3C;color:#FFF}
+.admin-btn-sm.warn{background:#FFF8E1;color:#F57C00}.admin-btn-sm.warn:active{background:#F57C00;color:#FFF}
+.phone-frame.dark .admin-btn-sm.ban{background:#3A1A1A;color:#FF6B6B}.phone-frame.dark .admin-btn-sm.ok{background:#1B3A1B;color:#6BCB77}.phone-frame.dark .admin-btn-sm.warn{background:#3A2A10;color:#FFB347}
+/* Status badge */
+.admin-status{font-size:10px;padding:2px 8px;border-radius:var(--radius-xl);font-weight:600}
+.admin-status.normal{background:#E8F5E9;color:#388E3C}.admin-status.warning{background:#FFF8E1;color:#F57C00}.admin-status.banned{background:#FFEBEE;color:#E53935}
+.phone-frame.dark .admin-status.normal{background:#1B3A1B;color:#6BCB77}.phone-frame.dark .admin-status.warning{background:#3A2A10;color:#FFB347}.phone-frame.dark .admin-status.banned{background:#3A1A1A;color:#FF6B6B}
+/* Chart bar in admin */
+.admin-chart-bar{display:flex;align-items:flex-end;gap:8px;height:100px;padding:0 16px}
+.admin-chart-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.admin-chart-fill{border-radius:4px 4px 0 0;width:100%;max-width:40px;transition:height .8s ease}
+.admin-chart-fill.c1{background:linear-gradient(180deg,#FF8C42,#FFA86B)}.admin-chart-fill.c2{background:linear-gradient(180deg,#6BCB77,#81C784)}.admin-chart-fill.c3{background:linear-gradient(180deg,#64B5F6,#90CAF9)}.admin-chart-fill.c4{background:linear-gradient(180deg,#CE93D8,#E1BEE7)}
+.admin-chart-label{font-size:10px;color:var(--c-text-light);margin-top:4px}
+
 /* Quick tool buttons on home */
 .quick-tools-bar{display:flex;gap:6px;padding:4px 16px;margin-bottom:6px;overflow-x:auto}
 .quick-tool-btn{flex-shrink:0;padding:7px 14px;border-radius:var(--radius-xl);background:var(--c-card);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--c-border);font-family:var(--font);white-space:nowrap;transition:all var(--transition)}
@@ -867,6 +899,7 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
         <button class="quick-tool-btn" onclick="openMedical()">🏥 医疗健康</button>
         <button class="quick-tool-btn" onclick="openShop()">🛒 萌宠商城</button>
         <button class="quick-tool-btn" onclick="openLocal()">📍 本地服务</button>
+        <button class="quick-tool-btn" onclick="openAdmin()">⚙️ 后台管理</button>
       </div>
       <div class="featured-strip">
         <div class="fs-title">🌟 今日推荐铲屎官</div>
@@ -1112,6 +1145,19 @@ body{font-family:var(--font);background:#EDE4DA;display:flex;align-items:center;
     <span class="nf-title">⭐ 我的收藏</span>
   </div>
   <div class="collections-body" id="collectionsBody"></div>
+</div>
+
+<!-- ============ ADMIN ============ -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="tools-header"><button class="tl-back" onclick="closeAdmin()">←</button><span class="nf-title">⚙️ 后台管理</span></div>
+  <div class="tools-tabs">
+    <button class="tools-tab-btn active" data-at="dashboard" onclick="switchAdminTab('dashboard')">📊 概览</button>
+    <button class="tools-tab-btn" data-at="users" onclick="switchAdminTab('users')">👥 用户</button>
+    <button class="tools-tab-btn" data-at="content" onclick="switchAdminTab('content')">📝 审核</button>
+    <button class="tools-tab-btn" data-at="shops" onclick="switchAdminTab('shops')">🏪 商家</button>
+    <button class="tools-tab-btn" data-at="report" onclick="switchAdminTab('report')">📈 报表</button>
+  </div>
+  <div style="flex:1;overflow-y:auto" id="adminBody"></div>
 </div>
 
 <!-- ============ LOCAL SERVICES ============ -->
@@ -3476,6 +3522,155 @@ function bookService(id) {
   orders.unshift(order); localStorage.setItem('petplanet_svcOrders', JSON.stringify(orders));
   showToast('✅ 预约成功！'+s.name+' - '+S._svItem.n+' - '+date+' '+time);
   S._svItem = null; renderServiceDetail();
+}
+
+// ==================== ADMIN ====================
+function openAdmin(tab) {
+  S._adminTab = tab || 'dashboard';
+  renderAdminTabs(); renderAdminContent();
+  $('#adminOverlay').classList.add('open');
+  if (adminOverlay.parentElement !== app) app.appendChild(adminOverlay);
+}
+function closeAdmin() { $('#adminOverlay').classList.remove('open'); }
+function switchAdminTab(tab) { S._adminTab = tab; renderAdminTabs(); renderAdminContent(); }
+function renderAdminTabs() { $$('#adminOverlay .tools-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.at === S._adminTab)); }
+function renderAdminContent() {
+  const t = S._adminTab;
+  if (t==='dashboard') renderAdminDashboard();
+  else if (t==='users') renderAdminUsers();
+  else if (t==='content') renderAdminContent_();
+  else if (t==='shops') renderAdminShops();
+  else if (t==='report') renderAdminReport();
+}
+
+// Dashboard
+function renderAdminDashboard() {
+  const totalUsers = 28, totalPosts = S.feeds.length, totalOrders = JSON.parse(localStorage.getItem('petplanet_orders')||'[]').length + JSON.parse(localStorage.getItem('petplanet_svcOrders')||'[]').length;
+  const todayPosts = S.feeds.filter(f => f.time.includes('刚刚')||f.time.includes('小时前')||f.time.includes('分钟前')).length;
+  $('#adminBody').innerHTML = `
+    <div class="admin-stat-grid">
+      <div class="admin-stat-card"><span class="as-num">${totalUsers}</span><span class="as-label">注册用户</span><span class="as-change as-up">↑ 12%</span></div>
+      <div class="admin-stat-card"><span class="as-num">${totalPosts}</span><span class="as-label">总动态数</span><span class="as-change as-up">↑ 8%</span></div>
+      <div class="admin-stat-card"><span class="as-num">${todayPosts}</span><span class="as-label">今日新增动态</span><span class="as-change as-up">↑ 3</span></div>
+      <div class="admin-stat-card"><span class="as-num">${totalOrders}</span><span class="as-label">总订单数</span><span class="as-change as-up">↑ 15%</span></div>
+    </div>
+    <div style="font-size:14px;font-weight:700;color:var(--c-text);padding:8px 16px">📊 近7日活跃趋势</div>
+    <div class="admin-chart-bar">
+      ${[45,62,51,78,66,89,95].map((v,i) => `<div class="admin-chart-col"><div class="admin-chart-fill c1" style="height:${v}px"></div><div class="admin-chart-label">${['一','二','三','四','五','六','日'][i]}</div></div>`).join('')}
+    </div>
+    <div style="font-size:14px;font-weight:700;color:var(--c-text);padding:16px 16px 8px">⚡ 快捷操作</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 20px">
+      <button class="auth-submit" style="font-size:12px" onclick="switchAdminTab('users')">👥 用户管理</button>
+      <button class="auth-submit" style="font-size:12px;background:linear-gradient(135deg,#FFF,#FFF5EC);color:var(--c-primary);box-shadow:none;border:1.5px solid var(--c-primary)" onclick="switchAdminTab('content')">📝 内容审核</button>
+      <button class="auth-submit" style="font-size:12px" onclick="switchAdminTab('shops')">🏪 商家管理</button>
+      <button class="auth-submit" style="font-size:12px;background:linear-gradient(135deg,#FFF,#FFF5EC);color:var(--c-primary);box-shadow:none;border:1.5px solid var(--c-primary)" onclick="switchAdminTab('report')">📈 数据报表</button>
+    </div>`;
+}
+
+// Users
+const ADMIN_USERS = [
+  {id:1,name:'橘座大人',avatar:'🐱',posts:15,status:'normal',regDate:'2024-01-15'},
+  {id:2,name:'爬宠小屋',avatar:'🦎',posts:8,status:'normal',regDate:'2024-02-20'},
+  {id:3,name:'海底小纵队',avatar:'🐠',posts:12,status:'normal',regDate:'2024-01-08'},
+  {id:4,name:'柴犬小丸',avatar:'🐶',posts:6,status:'normal',regDate:'2024-03-12'},
+  {id:5,name:'广告账号001',avatar:'🤖',posts:45,status:'banned',regDate:'2024-05-01'},
+  {id:6,name:'违规用户A',avatar:'😈',posts:23,status:'warning',regDate:'2024-04-18'},
+  {id:7,name:'垂耳兔星球',avatar:'🐰',posts:4,status:'normal',regDate:'2024-04-05'},
+  {id:8,name:'啾啾的日常',avatar:'🐦',posts:7,status:'normal',regDate:'2024-02-14'},
+];
+function renderAdminUsers() {
+  S._adminUsers = S._adminUsers || ADMIN_USERS.map(u=>({...u}));
+  let html = '<div style="padding:8px 16px"><input class="auth-input" id="adminUserSearch" placeholder="🔍 搜索用户..." oninput="renderAdminUsers()"></div>';
+  const q = ($('#adminUserSearch')?.value||'').toLowerCase();
+  let list = S._adminUsers;
+  if (q) list = list.filter(u => u.name.toLowerCase().includes(q));
+  const statusLabel = {normal:'正常',warning:'⚠️ 警告',banned:'🚫 封禁'};
+  html += list.map(u => `
+    <div class="admin-list-item">
+      <div class="al-avatar" style="background:linear-gradient(135deg,#FFD4A8,#FFA86B)">${u.avatar}</div>
+      <div class="al-info"><div class="al-name">${u.name}</div><div class="al-sub">${u.posts}条动态 · ${u.regDate} · <span class="admin-status ${u.status}">${statusLabel[u.status]}</span></div></div>
+      <div class="al-action">
+        ${u.status==='normal' ? `<button class="admin-btn-sm warn" onclick="adminWarnUser(${u.id})">⚠️</button><button class="admin-btn-sm ban" onclick="adminBanUser(${u.id})">封禁</button>` :
+          u.status==='warning' ? `<button class="admin-btn-sm ok" onclick="adminUnbanUser(${u.id})">解禁</button><button class="admin-btn-sm ban" onclick="adminBanUser(${u.id})">封禁</button>` :
+          `<button class="admin-btn-sm ok" onclick="adminUnbanUser(${u.id})">解封</button>`}
+      </div>
+    </div>`).join('');
+  $('#adminBody').innerHTML = html;
+}
+function adminWarnUser(id) { const u = S._adminUsers.find(x=>x.id===id); if(u){u.status='warning';renderAdminUsers();showToast('⚠️ 已警告用户');} }
+function adminBanUser(id) { const u = S._adminUsers.find(x=>x.id===id); if(u){u.status='banned';renderAdminUsers();showToast('🚫 已封禁用户');} }
+function adminUnbanUser(id) { const u = S._adminUsers.find(x=>x.id===id); if(u){u.status='normal';renderAdminUsers();showToast('✅ 已解禁用户');} }
+
+// Content review
+function renderAdminContent_() {
+  const pending = S.feeds.slice(0,5);
+  let html = '<div style="font-size:13px;font-weight:600;color:var(--c-text-mid);padding:8px 16px">待审核动态 ('+pending.length+')</div>';
+  html += pending.map((f,i) => `
+    <div class="admin-list-item">
+      <div class="al-avatar ${f.avClass}" style="background:linear-gradient(135deg,#FFD4A8,#FFA86B)">${f.user.avatar}</div>
+      <div class="al-info"><div class="al-name">${f.user.name}</div><div class="al-sub">${f.text.slice(0,50)}...</div></div>
+      <div class="al-action">
+        <button class="admin-btn-sm ok" onclick="adminApprove(${i})">✓</button>
+        <button class="admin-btn-sm ban" onclick="adminReject(${i})">✕</button>
+      </div>
+    </div>`).join('');
+  $('#adminBody').innerHTML = html + '<div style="text-align:center;padding:12px;font-size:12px;color:var(--c-text-light)">审核队列已清空 ✅</div>';
+}
+function adminApprove(i) { showToast('✅ 已通过审核'); }
+function adminReject(i) { showToast('🚫 已驳回'); }
+
+// Shops
+const ADMIN_SHOPS = [
+  {id:1,name:'泡泡宠物美容沙龙',cat:'洗护美容',status:'normal',orders:326},
+  {id:2,name:'汪星人宠物酒店',cat:'寄养托管',status:'normal',orders:452},
+  {id:3,name:'汪汪队宠物训练学校',cat:'训练学校',status:'normal',orders:276},
+  {id:4,name:'萌宠映像摄影工作室',cat:'宠物摄影',status:'normal',orders:534},
+  {id:5,name:'新入驻商家A',cat:'洗护美容',status:'pending',orders:0},
+  {id:6,name:'违规商家B',cat:'寄养托管',status:'banned',orders:12},
+];
+function renderAdminShops() {
+  S._adminShops = S._adminShops || ADMIN_SHOPS.map(s=>({...s}));
+  const statusLabel = {normal:'已认证',pending:'⏳ 待审核',banned:'已下架'};
+  let html = '';
+  S._adminShops.forEach(s => {
+    html += `<div class="admin-list-item">
+      <div style="font-size:28px;flex-shrink:0;width:36px;text-align:center">${s.cat==='洗护美容'?'🛁':s.cat==='寄养托管'?'🏨':s.cat==='训练学校'?'🎓':'📸'}</div>
+      <div class="al-info"><div class="al-name">${s.name}</div><div class="al-sub">${s.cat} · ${s.orders}单 · <span class="admin-status ${s.status==='normal'?'normal':s.status==='pending'?'warning':'banned'}">${statusLabel[s.status]}</span></div></div>
+      <div class="al-action">
+        ${s.status==='pending' ? `<button class="admin-btn-sm ok" onclick="adminApproveShop(${s.id})">通过</button><button class="admin-btn-sm ban" onclick="adminRejectShop(${s.id})">拒绝</button>` :
+          s.status==='normal' ? `<button class="admin-btn-sm warn" onclick="adminSuspendShop(${s.id})">下架</button>` :
+          `<button class="admin-btn-sm ok" onclick="adminRestoreShop(${s.id})">恢复</button>`}
+      </div></div>`;
+  });
+  $('#adminBody').innerHTML = html;
+}
+function adminApproveShop(id) { const s=S._adminShops.find(x=>x.id===id);if(s){s.status='normal';renderAdminShops();showToast('✅ 已通过审核');} }
+function adminRejectShop(id) { const s=S._adminShops.find(x=>x.id===id);if(s){s.status='banned';renderAdminShops();showToast('🚫 已拒绝');} }
+function adminSuspendShop(id) { const s=S._adminShops.find(x=>x.id===id);if(s){s.status='banned';renderAdminShops();showToast('⏸️ 已下架');} }
+function adminRestoreShop(id) { const s=S._adminShops.find(x=>x.id===id);if(s){s.status='normal';renderAdminShops();showToast('✅ 已恢复');} }
+
+// Report
+function renderAdminReport() {
+  const orders = JSON.parse(localStorage.getItem('petplanet_orders')||'[]');
+  const svcOrders = JSON.parse(localStorage.getItem('petplanet_svcOrders')||'[]');
+  const totalRevenue = orders.reduce((s,o)=>s+o.total,0);
+  const totalSvcRevenue = svcOrders.reduce((s,o)=>s+o.price,0);
+  const channelCounts = {cat:S.feeds.filter(f=>f.category==='cat').length,dog:S.feeds.filter(f=>f.category==='dog').length,reptile:S.feeds.filter(f=>f.category==='reptile').length,fish:S.feeds.filter(f=>f.category==='fish').length,bird:S.feeds.filter(f=>f.category==='bird').length,small:S.feeds.filter(f=>f.category==='small').length};
+  const maxChan = Math.max(...Object.values(channelCounts),1);
+  $('#adminBody').innerHTML = `
+    <div class="admin-stat-grid">
+      <div class="admin-stat-card"><span class="as-num">¥${totalRevenue.toLocaleString()}</span><span class="as-label">商城总交易额</span></div>
+      <div class="admin-stat-card"><span class="as-num">¥${totalSvcRevenue.toLocaleString()}</span><span class="as-label">服务预约总额</span></div>
+      <div class="admin-stat-card"><span class="as-num">${orders.length}</span><span class="as-label">商城订单</span></div>
+      <div class="admin-stat-card"><span class="as-num">${svcOrders.length}</span><span class="as-label">服务订单</span></div>
+    </div>
+    <div style="font-size:14px;font-weight:700;color:var(--c-text);padding:8px 16px">📊 频道内容分布</div>
+    ${Object.entries(channelCounts).map(([k,v]) => {
+      const names={cat:'🐱 猫猫',dog:'🐶 狗狗',reptile:'🦎 爬宠',fish:'🐠 水族',bird:'🐦 鸟类',small:'🐹 小宠'};
+      return `<div style="padding:4px 16px"><div class="stat-bar-label"><span>${names[k]}</span><span>${v}条</span></div><div class="stat-bar-track"><div class="stat-bar-fill c1" style="width:${(v/maxChan)*100}%"></div></div></div>`;
+    }).join('')}
+    <div style="text-align:center;padding:20px;font-size:12px;color:var(--c-text-light)">📊 数据更新时间：${new Date().toLocaleString('zh-CN')}</div>
+  `;
 }
 
 // ==================== INIT ====================
